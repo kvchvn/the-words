@@ -1,7 +1,7 @@
 import React from 'react';
 
-function AudiocallGamePage() {
-  return <h1>It`s AudiocallGame Page</h1>;
+function AudioCallGamePage() {
+  return <h1>It`s AudioCallGame Page</h1>;
 }
 
-export default AudiocallGamePage;
+export default AudioCallGamePage;

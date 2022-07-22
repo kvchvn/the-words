@@ -6,7 +6,7 @@ import MainPage from 'pages/MainPage';
 import AuthorizationPage from 'pages/AuthorizationPage';
 import TextbookPage from 'pages/TextbookPage';
 import SprintGamePage from 'pages/SprintGamePage';
-import AudiocallGamePage from 'pages/AudiocallGamePage';
+import AudioCallGamePage from 'pages/AudioCallGamePage';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route path={routerPaths.authorization} element={<AuthorizationPage />} />
         <Route path={routerPaths.textbook} element={<TextbookPage />} />
         <Route path={routerPaths.sprintGame} element={<SprintGamePage />} />
-        <Route path={routerPaths.audiocallGame} element={<AudiocallGamePage />} />
+        <Route path={routerPaths.audioCallGame} element={<AudioCallGamePage />} />
       </Route>
     </Routes>
   );

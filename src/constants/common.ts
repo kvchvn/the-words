@@ -5,5 +5,5 @@ export const routerPaths: RouterPaths = {
   authorization: 'auth',
   textbook: 'textbook',
   sprintGame: 'sprint',
-  audiocallGame: 'audiocall',
+  audioCallGame: 'audiocall',
 };

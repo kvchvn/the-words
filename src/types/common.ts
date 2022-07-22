@@ -9,5 +9,5 @@ export interface RouterPaths {
   authorization: string;
   textbook: string;
   sprintGame: string;
-  audiocallGame: string;
+  audioCallGame: string;
 }
