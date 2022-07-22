@@ -1,12 +1,14 @@
+import React, { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import Layout from 'components/Layout';
 import { routerPaths } from './constants';
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import MainPage from 'pages/MainPage';
-import AuthorizationPage from 'pages/AuthorizationPage';
-import TextbookPage from 'pages/TextbookPage';
-import SprintGamePage from 'pages/SprintGamePage';
-import AudioCallGamePage from 'pages/AudioCallGamePage';
+
+const MainPage = lazy(() => import('./pages/MainPage'));
+const AuthorizationPage = lazy(() => import('./pages/AuthorizationPage'));
+const TextbookPage = lazy(() => import('./pages/TextbookPage'));
+const SprintGamePage = lazy(() => import('./pages/SprintGamePage'));
+const AudioCallGamePage = lazy(() => import('./pages/AudioCallGamePage'));
 
 function App() {
   return (

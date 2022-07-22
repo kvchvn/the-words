@@ -1,4 +1,5 @@
-import React from 'react';
+import Loading from 'components/Loading';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -11,11 +12,13 @@ import './styles/index.scss';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider theme={baseTheme}>
-        <App />
-        <GlobalStyles />
-      </ThemeProvider>
-    </BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      <BrowserRouter>
+        <ThemeProvider theme={baseTheme}>
+          <App />
+          <GlobalStyles />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Suspense>
   </React.StrictMode>
 );
