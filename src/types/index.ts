@@ -1,3 +1,3 @@
-import { Theme } from './common';
+import { Theme, RouterPaths } from './common';
 
-export { Theme };
+export { Theme, RouterPaths };
