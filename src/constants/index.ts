@@ -1,3 +1,4 @@
 import { routerPaths } from './common';
+import { BASE_URL } from './api';
 
-export { routerPaths };
+export { routerPaths, BASE_URL };
