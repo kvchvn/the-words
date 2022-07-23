@@ -15,3 +15,6 @@ export const removeFromLocalStorage = (key: keyof typeof LOCAL_STORAGE_KEYS) =>
   localStorage.removeItem(key);
 
 export const clearLocalStorage = () => localStorage.clear();
+
+export const toUpperCaseFirstLetter = (value: string): string =>
+  `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
