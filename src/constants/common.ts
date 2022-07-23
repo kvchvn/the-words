@@ -1,6 +1,6 @@
 import { RouterPaths } from 'types';
 
-export const routerPaths: RouterPaths = {
+export const ROUTER_PATHS: RouterPaths = {
   main: '/',
   authorization: 'auth',
   textbook: 'textbook',

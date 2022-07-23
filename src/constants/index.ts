@@ -1,4 +1,4 @@
-import { routerPaths } from './common';
+import { ROUTER_PATHS } from './common';
 import { BASE_URL, ENDPOINTS } from './api';
 
-export { routerPaths, BASE_URL, ENDPOINTS };
+export { ROUTER_PATHS, BASE_URL, ENDPOINTS };
