@@ -7,3 +7,8 @@ export const ROUTER_PATHS: RouterPaths = {
   sprintGame: 'sprint',
   audioCallGame: 'audiocall',
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  token: 'token',
+  user: 'user',
+};
