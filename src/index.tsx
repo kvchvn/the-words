@@ -1,11 +1,12 @@
-import Loading from 'components/Loading';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from 'styles/global';
-import baseTheme from 'styles/theme';
+
 import App from './App';
+import Loading from './components/Loading';
+import GlobalStyles from './styles/global';
+import baseTheme from './styles/theme';
 
 import './styles/index.scss';
 
