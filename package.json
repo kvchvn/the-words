@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "npm run lint --fix"
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": [
