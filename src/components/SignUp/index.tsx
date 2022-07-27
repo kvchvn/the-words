@@ -4,8 +4,7 @@ import { useFormik } from 'formik';
 import { useCreateUserMutation } from '../../redux';
 
 import signUpValidationSchema from './validationSchema';
-import { SignUpFields, SignUpResponse } from '../../types';
-import { setToLocalStorage } from 'utils';
+import { SignUpFields } from '../../types';
 
 interface SignUpProps {
   goToSignIn: () => void;
@@ -26,7 +25,6 @@ function SignUp({ goToSignIn }: SignUpProps) {
     onSubmit: async (values) => {
       await createUser(values);
       if (userData) {
-        setToLocalStorage<SignUpResponse>('user', userData);
         goToSignIn();
       }
       // TO-DO: error handling
