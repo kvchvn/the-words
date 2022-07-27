@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 
 import signUpValidationSchema from './validationSchema';
-import { SignUpFields } from 'types';
+import { SignUpFields } from '../../types';
 
 interface SignUpProps {
   goToSignIn: () => void;
