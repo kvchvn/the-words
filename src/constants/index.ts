@@ -5,6 +5,7 @@ import {
   MAX_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
   MESSAGE_REQUIRED,
+  SERVER_ERROR,
 } from './authorization';
 
 export {
@@ -16,4 +17,5 @@ export {
   MAX_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
   MESSAGE_REQUIRED,
+  SERVER_ERROR,
 };
