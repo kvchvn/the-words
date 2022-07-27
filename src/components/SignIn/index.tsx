@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import { SignInFields } from 'types';
+import { useSignInUserMutation } from '../../redux';
+
+import { SignInFields, SignInResponse } from 'types';
+import { setToLocalStorage } from 'utils';
+import { ROUTER_PATHS } from '../../constants';
 
 interface SignInProps {
   goToSignUp: () => void;
 }
 
 function SignIn({ goToSignUp }: SignInProps) {
+  const [signIn, { data: userData }] = useSignInUserMutation();
+  const navigate = useNavigate();
+
   const initialValues: SignInFields = {
     email: '',
     password: '',
@@ -15,8 +23,17 @@ function SignIn({ goToSignUp }: SignInProps) {
 
   const { values, handleSubmit, handleChange } = useFormik({
     initialValues,
-    onSubmit: (values) => console.log(values),
+    onSubmit: async (values) => {
+      await signIn(values);
+    },
   });
+
+  useEffect(() => {
+    if (userData) {
+      setToLocalStorage<SignInResponse>('user', userData);
+      navigate(ROUTER_PATHS.main);
+    }
+  }, [userData, navigate]);
 
   return (
     <form onSubmit={handleSubmit}>

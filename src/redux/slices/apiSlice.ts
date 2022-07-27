@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { GetWordsQueryArg } from '../types';
-import { SignUpFields, SignUpResponse, WordsPage } from '../../types';
+import { SignInFields, SignInResponse, SignUpFields, SignUpResponse, WordsPage } from '../../types';
 import { BASE_URL as baseUrl, ENDPOINTS } from '../../constants';
 
 const apiSlice = createApi({
@@ -15,6 +15,13 @@ const apiSlice = createApi({
         body: userData,
       }),
     }),
+    signInUser: builder.mutation<SignInResponse, SignInFields>({
+      query: (userData) => ({
+        url: ENDPOINTS.signin,
+        method: 'POST',
+        body: userData,
+      }),
+    }),
     getWords: builder.query<WordsPage, GetWordsQueryArg>({
       query: ({ group, page }) => `${ENDPOINTS.words}?group=${group}&page=${page}`,
     }),
@@ -22,4 +29,4 @@ const apiSlice = createApi({
 });
 
 export default apiSlice;
-export const { useCreateUserMutation, useGetWordsQuery } = apiSlice;
+export const { useCreateUserMutation, useSignInUserMutation, useGetWordsQuery } = apiSlice;
