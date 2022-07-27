@@ -1,4 +1,4 @@
 import store from './store';
-import { useGetWordsQuery } from './apiSlice';
+import { useGetWordsQuery, useCreateUserMutation } from './slices/apiSlice';
 
-export { store, useGetWordsQuery };
+export { store, useGetWordsQuery, useCreateUserMutation };

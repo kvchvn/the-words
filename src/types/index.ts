@@ -1,5 +1,14 @@
 import { Theme, RouterPaths } from './common';
-import { SignInFields, SignUpFields } from './authorization';
+import { SignInFields, SignUpFields, SignUpResponse, SignInResponse } from './authorization';
 import { Word, WordsPage } from './words';
 
-export { Theme, RouterPaths, SignInFields, SignUpFields, Word, WordsPage };
+export {
+  Theme,
+  RouterPaths,
+  SignInFields,
+  SignUpFields,
+  SignUpResponse,
+  SignInResponse,
+  Word,
+  WordsPage,
+};

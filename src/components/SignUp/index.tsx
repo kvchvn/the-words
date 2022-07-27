@@ -1,14 +1,19 @@
 import React from 'react';
 import { useFormik } from 'formik';
 
+import { useCreateUserMutation } from '../../redux';
+
 import signUpValidationSchema from './validationSchema';
-import { SignUpFields } from '../../types';
+import { SignUpFields, SignUpResponse } from '../../types';
+import { setToLocalStorage } from 'utils';
 
 interface SignUpProps {
   goToSignIn: () => void;
 }
 
 function SignUp({ goToSignIn }: SignUpProps) {
+  const [createUser, { data: userData }] = useCreateUserMutation();
+
   const initialValues: SignUpFields = {
     name: '',
     email: '',
@@ -18,7 +23,14 @@ function SignUp({ goToSignIn }: SignUpProps) {
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues,
     validationSchema: signUpValidationSchema,
-    onSubmit: (values) => console.log(values),
+    onSubmit: async (values) => {
+      await createUser(values);
+      if (userData) {
+        setToLocalStorage<SignUpResponse>('user', userData);
+        goToSignIn();
+      }
+      // TO-DO: error handling
+    },
   });
 
   return (
