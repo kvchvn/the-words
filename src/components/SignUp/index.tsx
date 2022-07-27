@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 
 import { useCreateUserMutation } from '../../redux';
 
 import signUpValidationSchema from './validationSchema';
 import { SignUpFields } from '../../types';
+import { getUserFriendlyErrorMessage } from 'utils';
 
 interface SignUpProps {
   goToSignIn: () => void;
 }
 
 function SignUp({ goToSignIn }: SignUpProps) {
-  const [createUser, { data: userData }] = useCreateUserMutation();
+  const [createUser, { data: userData, isError, error }] = useCreateUserMutation();
 
   const initialValues: SignUpFields = {
     name: '',
@@ -30,6 +31,12 @@ function SignUp({ goToSignIn }: SignUpProps) {
       // TO-DO: error handling
     },
   });
+
+  useEffect(() => {
+    if (isError && error) {
+      alert(getUserFriendlyErrorMessage(error));
+    }
+  }, [isError, error]);
 
   return (
     <form onSubmit={handleSubmit}>

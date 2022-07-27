@@ -5,6 +5,7 @@ import {
   clearLocalStorage,
   toUpperCaseFirstLetter,
 } from './common';
+import { getUserFriendlyErrorMessage } from './api';
 
 export {
   getFromLocalStorage,
@@ -12,4 +13,5 @@ export {
   removeFromLocalStorage,
   clearLocalStorage,
   toUpperCaseFirstLetter,
+  getUserFriendlyErrorMessage,
 };
