@@ -14,8 +14,11 @@ const userSlice = createSlice({
     setUserData: (state, { payload }: PayloadAction<MainSignInResponse>) => {
       state.user = payload;
     },
+    removeUserData: (state) => {
+      state.user = null;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { setUserData } = userSlice.actions;
+export const { setUserData, removeUserData } = userSlice.actions;
