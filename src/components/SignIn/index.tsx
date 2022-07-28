@@ -4,17 +4,19 @@ import { useFormik } from 'formik';
 
 import { useSignInUserMutation } from '../../redux';
 import { MainSignInResponse, SignInFields } from '../../types';
-import { setToLocalStorage } from '../../utils';
+import { getUserFriendlyErrorMessage, setToLocalStorage } from '../../utils';
 import { ROUTER_PATHS } from '../../constants';
 import { useAppDispatch } from '../../redux/store';
-import { setUserData } from '../../redux/slices/userSlice';
+import { setUserData } from '../../redux';
+
+import Loading from '../Loading';
 
 interface SignInProps {
   goToSignUp: () => void;
 }
 
 function SignIn({ goToSignUp }: SignInProps) {
-  const [signIn, { data: userData }] = useSignInUserMutation();
+  const [signIn, { data: userData, isLoading, isError, error }] = useSignInUserMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ function SignIn({ goToSignUp }: SignInProps) {
     password: '',
   };
 
-  const { values, handleSubmit, handleChange } = useFormik({
+  const { values, handleSubmit, handleChange, resetForm } = useFormik({
     initialValues,
     onSubmit: async (values) => {
       await signIn(values);
@@ -37,29 +39,30 @@ function SignIn({ goToSignUp }: SignInProps) {
       dispatch(setUserData(mainUserData));
       navigate(ROUTER_PATHS.main);
     }
-  }, [userData, navigate, dispatch]);
+    if (isError && error) {
+      alert(getUserFriendlyErrorMessage(error, 'authorization'));
+      resetForm();
+    }
+  }, [userData, isError, error, resetForm, navigate, dispatch]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        type="email"
-        placeholder="E-mail"
-        value={values.email}
-        onChange={handleChange}
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Пароль"
-        value={values.password}
-        onChange={handleChange}
-      />
-      <button type="submit">Войти</button>
-      <p>
-        Еще нет аккаунта? <span onClick={goToSignUp}>Зарегистрироваться</span>
-      </p>
-    </form>
+    <>
+      {isLoading && <Loading />}
+      <form onSubmit={handleSubmit}>
+        <input name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
+        <input
+          name="password"
+          type="password"
+          placeholder="Пароль"
+          value={values.password}
+          onChange={handleChange}
+        />
+        <button type="submit">Войти</button>
+        <p>
+          Еще нет аккаунта? <span onClick={goToSignUp}>Зарегистрироваться</span>
+        </p>
+      </form>
+    </>
   );
 }
 
