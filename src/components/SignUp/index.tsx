@@ -35,7 +35,7 @@ function SignUp({ goToSignIn }: SignUpProps) {
       goToSignIn();
     }
     if (isError && error) {
-      alert(getUserFriendlyErrorMessage(error));
+      alert(getUserFriendlyErrorMessage(error, 'authorization'));
       resetForm();
     }
   }, [isError, error, userData, goToSignIn, resetForm]);
