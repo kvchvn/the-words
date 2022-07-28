@@ -18,3 +18,5 @@ export interface SignInResponse {
   userId: string;
   name: string;
 }
+
+export type MainSignInResponse = Omit<SignInResponse, 'message'>;
