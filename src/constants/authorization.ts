@@ -10,4 +10,9 @@ export const MESSAGE_REQUIRED = 'Поле обязательно к заполн
 export const SERVER_ERROR: ServerError = {
   default: 'Ой! Что-то пошло не так...',
   '417': 'Пользователь с таким email уже существует',
+  '403': 'Неправильный пароль',
+  '404': {
+    authorization: 'Пользователь с таким email не найден',
+    words: 'Слово не найдено',
+  },
 };

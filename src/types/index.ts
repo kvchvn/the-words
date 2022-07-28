@@ -7,7 +7,7 @@ import {
   MainSignInResponse,
 } from './authorization';
 import { Word, WordsPage } from './words';
-import { ServerError } from './api';
+import { ServerErrorType, ServerError } from './api';
 
 export {
   Theme,
@@ -18,6 +18,7 @@ export {
   SignInResponse,
   Word,
   WordsPage,
+  ServerErrorType,
   ServerError,
   MainSignInResponse,
 };
