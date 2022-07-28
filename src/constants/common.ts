@@ -9,6 +9,5 @@ export const ROUTER_PATHS: RouterPaths = {
 };
 
 export const LOCAL_STORAGE_KEYS = {
-  token: 'token',
   user: 'user',
 };

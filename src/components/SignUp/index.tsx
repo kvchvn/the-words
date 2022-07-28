@@ -22,22 +22,23 @@ function SignUp({ goToSignIn }: SignUpProps) {
     password: '',
   };
 
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
+  const { values, errors, touched, handleSubmit, handleChange, resetForm } = useFormik({
     initialValues,
     validationSchema: signUpValidationSchema,
-    onSubmit: async (values) => {
-      await createUser(values);
-      if (userData) {
-        goToSignIn();
-      }
+    onSubmit: (values) => {
+      createUser(values);
     },
   });
 
   useEffect(() => {
+    if (userData) {
+      goToSignIn();
+    }
     if (isError && error) {
       alert(getUserFriendlyErrorMessage(error));
+      resetForm();
     }
-  }, [isError, error]);
+  }, [isError, error, userData, goToSignIn, resetForm]);
 
   return (
     <>

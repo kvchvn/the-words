@@ -1,22 +1,29 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import PageTitle from '../../components/PageTitle';
 import SignUp from '../../components/SignUp';
 import SignIn from '../../components/SignIn';
 
 import { getFromLocalStorage } from '../../utils';
+import { MainSignInResponse } from '../../types';
+import { useEffect } from 'react';
+import { ROUTER_PATHS } from '../../constants';
 
 function AuthorizationPage() {
-  const [isSignUp, setIsSignUp] = useState(() => {
-    const token = getFromLocalStorage<string>('token');
-    return !token;
-  });
+  const userData = getFromLocalStorage<MainSignInResponse>('user');
+  const [isSignUp, setIsSignUp] = useState(!userData);
+  const navigate = useNavigate();
 
   const goToSignIn = useCallback(() => setIsSignUp(false), []);
 
   const goToSignUp = useCallback(() => setIsSignUp(true), []);
+
+  useEffect(() => {
+    if (userData) {
+      navigate(ROUTER_PATHS.main);
+    }
+  }, [navigate, userData]);
 
   return (
     <>
