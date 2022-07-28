@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { useCallback } from 'react';
 
-import PageTitle from 'components/PageTitle';
-import SignUp from 'components/SignUp';
-import SignIn from 'components/SignIn';
+import PageTitle from '../../components/PageTitle';
+import SignUp from '../../components/SignUp';
+import SignIn from '../../components/SignIn';
 
-import { getFromLocalStorage } from 'utils';
+import { getFromLocalStorage } from '../../utils';
 
 function AuthorizationPage() {
   const [isSignUp, setIsSignUp] = useState(() => {

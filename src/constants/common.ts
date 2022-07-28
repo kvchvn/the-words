@@ -1,4 +1,4 @@
-import { RouterPaths } from 'types';
+import { RouterPaths } from '../types';
 
 export const ROUTER_PATHS: RouterPaths = {
   main: '/',

@@ -5,7 +5,7 @@ import { useCreateUserMutation } from '../../redux';
 
 import signUpValidationSchema from './validationSchema';
 import { SignUpFields } from '../../types';
-import { getUserFriendlyErrorMessage } from 'utils';
+import { getUserFriendlyErrorMessage } from '../../utils';
 
 import Loading from '../Loading';
 
