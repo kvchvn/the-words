@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getFromLocalStorage } from '../../utils';
 
 const initialState = {
@@ -16,16 +16,15 @@ const wordsListSlice = createSlice({
     goToPrevPage: (state) => {
       state.page--;
     },
-    goToNextGroup: (state) => {
-      state.group++;
-      state.page = 0;
+    goToPage: (state, { payload }: PayloadAction<number>) => {
+      state.page = payload;
     },
-    goToPrevGroup: (state) => {
-      state.group--;
+    goToGroup: (state, { payload }: PayloadAction<number>) => {
+      state.group = payload;
       state.page = 0;
     },
   },
 });
 
 export default wordsListSlice.reducer;
-export const { goToNextPage, goToPrevPage, goToNextGroup, goToPrevGroup } = wordsListSlice.actions;
+export const { goToNextPage, goToPrevPage, goToGroup } = wordsListSlice.actions;
