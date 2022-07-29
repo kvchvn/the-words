@@ -23,7 +23,13 @@ const apiSlice = createApi({
       }),
     }),
     getWords: builder.query<WordsPage, GetWordsQueryArg>({
-      query: ({ group, page }) => `${ENDPOINTS.words}?group=${group}&page=${page}`,
+      query: ({ group, page }) => ({
+        url: ENDPOINTS.words,
+        params: {
+          group,
+          page,
+        },
+      }), //`${ENDPOINTS.words}?group=${group}&page=${page}`
     }),
   }),
 });
