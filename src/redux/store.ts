@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import userReducer from './slices/userSlice';
 import apiSlice from './slices/apiSlice';
+import userReducer from './slices/userSlice';
+import wordsListSliceReducer from './slices/wordsListSlice';
 import { useDispatch } from 'react-redux';
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
+    user: userReducer,
+    words: wordsListSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
