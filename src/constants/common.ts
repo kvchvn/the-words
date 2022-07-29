@@ -10,4 +10,6 @@ export const ROUTER_PATHS: RouterPaths = {
 
 export const LOCAL_STORAGE_KEYS = {
   user: 'user',
+  group: 'group',
+  page: 'page',
 };
