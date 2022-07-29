@@ -7,6 +7,7 @@ import {
   MESSAGE_REQUIRED,
   SERVER_ERROR,
 } from './authorization';
+import { MIN_GROUP, MIN_PAGE, MAX_GROUP, MAX_PAGE } from './words';
 
 export {
   ROUTER_PATHS,
@@ -18,4 +19,8 @@ export {
   MIN_PASSWORD_LENGTH,
   MESSAGE_REQUIRED,
   SERVER_ERROR,
+  MIN_GROUP,
+  MIN_PAGE,
+  MAX_GROUP,
+  MAX_PAGE,
 };
