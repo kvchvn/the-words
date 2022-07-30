@@ -2,9 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTER_PATHS } from '../../constants';
-import { removeUserData } from '../../redux';
-import { useUserSelector } from '../../redux/selectors';
-import { useAppDispatch } from '../../redux/store';
+import { removeUserData, useAppDispatch, useUserSelector } from '../../redux';
 import { removeFromLocalStorage } from '../../utils';
 
 function Header() {
