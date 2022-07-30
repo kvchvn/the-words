@@ -1,19 +1,22 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { DELTA } from '../../constants';
+import { useGrouping } from '../../hooks';
+
 interface GroupSelectProps {
-  count: number;
+  firstGroup: number;
+  lastGroup: number;
 }
 
-function GroupSelect({ count }: GroupSelectProps) {
-  // count = max number of group
-  const groups: number[] = new Array(count).fill(0).map((group, index) => group + (index + 1));
+function GroupSelect({ firstGroup, lastGroup }: GroupSelectProps) {
+  const { groupsArray, currentGroup, selectGroup } = useGrouping({ firstGroup, lastGroup });
 
   return (
     <article>
-      {groups.map((group) => (
-        <button type="button" key={uuid()}>
-          {group}
+      {groupsArray.map((group) => (
+        <button type="button" key={uuid()} value={group} onClick={selectGroup}>
+          {currentGroup === group ? `__${group + DELTA}__` : group + DELTA}
         </button>
       ))}
     </article>
