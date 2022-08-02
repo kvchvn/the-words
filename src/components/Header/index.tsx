@@ -1,26 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSignOut } from '../../hooks';
 
-import { ROUTER_PATHS } from '../../constants';
-import { removeUserData, useAppDispatch, useUserSelector } from '../../redux';
-import { removeFromLocalStorage } from '../../utils';
+import { useUserSelector } from '../../redux';
 
 function Header() {
-  const { user } = useUserSelector();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    removeFromLocalStorage('user');
-    dispatch(removeUserData());
-    navigate(ROUTER_PATHS.main);
-  };
+  const user = useUserSelector();
+  const { signOut } = useSignOut();
 
   return (
     <div>
       <h1>It`s Header</h1>
       {user && (
-        <button type="button" onClick={handleSignOut}>
+        <button type="button" onClick={signOut}>
           Sign Out
         </button>
       )}
