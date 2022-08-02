@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
+
 import { RootState } from '.';
 
-export const useUserSelector = () => useSelector((state: RootState) => state.user);
+export const useUserSelector = () => useSelector((state: RootState) => state.user.user);
 
 export const useGroupSelector = () => useSelector((state: RootState) => state.words.group);
 
