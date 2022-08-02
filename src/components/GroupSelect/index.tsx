@@ -6,11 +6,16 @@ import { useGrouping } from '../../hooks';
 
 interface GroupSelectProps {
   firstGroup: number;
-  lastGroup: number;
+  lastGroupForUsers: number;
+  lastGroupForGuests: number;
 }
 
-function GroupSelect({ firstGroup, lastGroup }: GroupSelectProps) {
-  const { groupsArray, currentGroup, selectGroup } = useGrouping({ firstGroup, lastGroup });
+function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: GroupSelectProps) {
+  const { groupsArray, currentGroup, selectGroup } = useGrouping({
+    firstGroup,
+    lastGroupForUsers,
+    lastGroupForGuests,
+  });
 
   return (
     <article>

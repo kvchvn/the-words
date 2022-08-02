@@ -1,14 +1,22 @@
 import { MouseEvent } from 'react';
 
-import { useGroupSelector, useAppDispatch } from '../redux';
+import { useGroupSelector, useAppDispatch, useUserSelector } from '../redux';
 import { goToGroup } from '../redux/slices/wordsListSlice';
 
 interface useGroupingHookArgs {
   firstGroup: number;
-  lastGroup: number;
+  lastGroupForUsers: number;
+  lastGroupForGuests: number;
 }
 
-const useGrouping = ({ firstGroup, lastGroup }: useGroupingHookArgs) => {
+const useGrouping = ({
+  firstGroup,
+  lastGroupForUsers,
+  lastGroupForGuests,
+}: useGroupingHookArgs) => {
+  const user = useUserSelector();
+  const lastGroup = user ? lastGroupForUsers : lastGroupForGuests;
+
   const groupsArray: number[] = new Array(lastGroup - firstGroup + 1)
     .fill(firstGroup)
     .map((group, index) => group + index);
