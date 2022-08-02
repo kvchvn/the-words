@@ -2,7 +2,12 @@ import { useDispatch } from 'react-redux';
 
 import store from './store';
 import rootReducer from './reducer';
-import { useGetWordsQuery, useSignInUserMutation, useCreateUserMutation } from './slices/apiSlice';
+import {
+  useLazyGetWordsQuery,
+  useSignInUserMutation,
+  useCreateUserMutation,
+  useLazyGetUserWordsQuery,
+} from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
 import { useGroupSelector, usePageSelector, useUserSelector } from './selectors';
 
@@ -13,9 +18,10 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 export {
   store,
-  useGetWordsQuery,
+  useLazyGetWordsQuery,
   useSignInUserMutation,
   useCreateUserMutation,
+  useLazyGetUserWordsQuery,
   setUserData,
   removeUserData,
   useGroupSelector,

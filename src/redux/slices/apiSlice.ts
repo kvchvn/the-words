@@ -1,13 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { GetWordsQueryArg } from '../types';
-import { SignInFields, SignInResponse, SignUpFields, SignUpResponse, WordsPage } from '../../types';
-import { BASE_URL as baseUrl, ENDPOINTS } from '../../constants';
+import baseQueryWithReauth from './baseQueryWithReauth';
+
+import { ENDPOINTS } from '../../constants';
+import { GetUserWordsQueryArgs, GetWordsQueryArgs } from '../types';
+import {
+  SignInFields,
+  SignInResponse,
+  SignUpFields,
+  SignUpResponse,
+  UserWord,
+  UserWords,
+  UserWordsResponse,
+  WordsPage,
+} from '../../types';
 
 const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
+    // sign up
     createUser: builder.mutation<SignUpResponse, SignUpFields>({
       query: (userData) => ({
         url: ENDPOINTS.users,
@@ -22,17 +34,31 @@ const apiSlice = createApi({
         body: userData,
       }),
     }),
-    getWords: builder.query<WordsPage, GetWordsQueryArg>({
+    // get a chunk of all words
+    getWords: builder.query<WordsPage, GetWordsQueryArgs>({
       query: ({ group, page }) => ({
         url: ENDPOINTS.words,
         params: {
           group,
           page,
         },
-      }), //`${ENDPOINTS.words}?group=${group}&page=${page}`
+      }),
+    }),
+    // get words are user marked as 'hard' or 'easy'
+    getUserWords: builder.query<UserWords, GetUserWordsQueryArgs>({
+      query: ({ userId }) => ({
+        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.words}`,
+      }),
+      transformResponse: (response: UserWordsResponse) =>
+        response.map<UserWord>(({ optional, difficulty }) => ({ ...optional, difficulty })),
     }),
   }),
 });
 
 export default apiSlice;
-export const { useCreateUserMutation, useSignInUserMutation, useGetWordsQuery } = apiSlice;
+export const {
+  useCreateUserMutation,
+  useSignInUserMutation,
+  useLazyGetWordsQuery,
+  useLazyGetUserWordsQuery,
+} = apiSlice;

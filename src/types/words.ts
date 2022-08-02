@@ -16,3 +16,18 @@ export interface Word {
 }
 
 export type WordsPage = Array<Word>;
+
+export interface UserWordResponse {
+  id: string;
+  wordId: string;
+  difficulty: string;
+  optional: Word;
+}
+
+export interface UserWord extends Word {
+  difficulty: string;
+}
+
+export type UserWordsResponse = Array<UserWordResponse>;
+
+export type UserWords = Array<UserWord>;
