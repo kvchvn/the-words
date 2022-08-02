@@ -1,17 +1,23 @@
 import React from 'react';
-import { WordsPage } from '../../types';
 
-interface WordsListProps {
-  words: WordsPage;
-}
+import { useWords } from '../../hooks';
 
-function WordsList({ words }: WordsListProps) {
+import Loading from '../Loading';
+
+function WordsList() {
+  const { words, isLoading } = useWords();
+
   return (
-    <ul>
-      {words.map((word) => (
-        <li key={word.id}>{word.word}</li>
-      ))}
-    </ul>
+    <div>
+      {isLoading && <Loading />}
+      {words && (
+        <ul>
+          {words.map((word) => (
+            <li key={word.id}>{word.word}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
