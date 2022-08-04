@@ -9,7 +9,7 @@ import {
   useLazyGetUserWordsQuery,
 } from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
-import { useGroupSelector, usePageSelector, useUserSelector } from './selectors';
+import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
 
 type AppDispatch = typeof store.dispatch;
 
@@ -27,4 +27,5 @@ export {
   useGroupSelector,
   usePageSelector,
   useUserSelector,
+  useWordIdSelector,
 };
