@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import {
   useLazyGetWordsQuery,
@@ -20,16 +20,21 @@ const useWords = () => {
 
   useEffect(() => {
     if (user) {
-      const { userId, token } = user;
-      getUserWords({ userId, token });
+      const { userId } = user;
+      getUserWords(userId);
     }
+  }, [user, getUserWords, getAllWords]);
+
+  useEffect(() => {
     if (group !== MAX_GROUP_FOR_USERS) {
       getAllWords({ group, page });
     }
-  }, [user, getUserWords, group, page, getAllWords]);
+  }, [group, page, getAllWords]);
 
-  const words: UserWords | WordsPage | undefined =
-    group === MAX_GROUP_FOR_USERS ? userWords : wordsPage;
+  const words: UserWords | WordsPage | undefined = useMemo(
+    () => (group === MAX_GROUP_FOR_USERS ? userWords : wordsPage),
+    [group, userWords, wordsPage]
+  );
 
   return { words, isLoading };
 };
