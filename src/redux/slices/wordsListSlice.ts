@@ -5,6 +5,7 @@ import { getFromLocalStorage } from '../../utils';
 const initialState = {
   group: getFromLocalStorage<number>('group') || MIN_GROUP,
   page: getFromLocalStorage<number>('page') || MIN_PAGE,
+  wordId: '',
 };
 
 const wordsListSlice = createSlice({
@@ -24,8 +25,21 @@ const wordsListSlice = createSlice({
       state.group = payload;
       state.page = 0;
     },
+    setCurrentWordId: (state, { payload }: PayloadAction<string>) => {
+      state.wordId = payload;
+    },
+    unsetCurrentWordId: (state) => {
+      state.wordId = '';
+    },
   },
 });
 
 export default wordsListSlice.reducer;
-export const { goToNextPage, goToPrevPage, goToGroup, goToPage } = wordsListSlice.actions;
+export const {
+  goToNextPage,
+  goToPrevPage,
+  goToGroup,
+  goToPage,
+  setCurrentWordId,
+  unsetCurrentWordId,
+} = wordsListSlice.actions;
