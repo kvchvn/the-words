@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQueryWithReauth from './baseQueryWithReauth';
 
 import { ENDPOINTS } from '../../constants';
-import { GetUserWordsQueryArgs, GetWordsQueryArgs } from '../types';
+import { GetWordsQueryArgs } from '../types';
 import {
   SignInFields,
   SignInResponse,
@@ -45,12 +45,17 @@ const apiSlice = createApi({
       }),
     }),
     // get words are user marked as 'hard' or 'easy'
-    getUserWords: builder.query<UserWords, GetUserWordsQueryArgs>({
-      query: ({ userId }) => ({
+    getUserWords: builder.query<UserWords, string>({
+      query: (userId) => ({
         url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.words}`,
       }),
       transformResponse: (response: UserWordsResponse) =>
         response.map<UserWord>(({ optional, difficulty }) => ({ ...optional, difficulty })),
+    }),
+    refreshToken: builder.query<SignInResponse, string>({
+      query: (userId) => ({
+        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.tokens}`,
+      }),
     }),
   }),
 });

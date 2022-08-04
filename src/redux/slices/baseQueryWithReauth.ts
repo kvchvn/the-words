@@ -7,17 +7,22 @@ import {
 
 import { RootState } from '..';
 import { removeUserData, setUserData } from './userSlice';
-import { BASE_URL as baseUrl, ENDPOINTS, TOKEN_EXPIRED_ERROR } from '../../constants';
+import { BASE_URL as baseUrl, TOKEN_EXPIRED_ERROR } from '../../constants';
 import { SignInResponse } from '../../types';
 import { clearLocalStorage } from '../../utils';
+import apiSlice from './apiSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
   prepareHeaders: (headers, api) => {
     const store = api.getState() as RootState;
     if (store && store.user.user) {
-      const { token } = store.user.user;
-      headers.set('Authorization', `Bearer ${token}`);
+      const { token, refreshToken } = store.user.user;
+      if (api.endpoint === 'refreshToken') {
+        headers.set('Authorization', `Bearer ${refreshToken}`);
+      } else {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
     }
     return headers;
   },
@@ -31,28 +36,25 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions);
   const store = api.getState() as RootState;
   if (store && store.user.user) {
-    const { userId, refreshToken } = store.user.user;
+    const { userId } = store.user.user;
+
     if (
       result.error &&
       result.error.status === 'PARSING_ERROR' &&
       result.error.originalStatus === TOKEN_EXPIRED_ERROR
     ) {
-      const refreshTokenResult = await baseQuery(
-        {
-          url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.tokens}`,
-          headers: {
-            Authorization: `Bearer ${refreshToken}`,
-          },
-        },
-        api,
-        extraOptions
-      );
-      if (refreshTokenResult.data) {
+      console.log('401 ERROR OCCURRED');
+      const refreshToken = apiSlice.endpoints.refreshToken.initiate(userId);
+      const refreshTokenResult = await refreshToken(api.dispatch, api.getState, api.extra);
+      console.log('refresh, ', refreshTokenResult);
+      if (refreshTokenResult && refreshTokenResult.data) {
+        console.log('REFRESH RESULT IS');
         const { message: _, ...mainData } = refreshTokenResult.data as SignInResponse;
         api.dispatch(setUserData(mainData));
 
         result = await baseQuery(args, api, extraOptions);
       } else {
+        console.log('REFRESH RESULT IS NOT. LOG OUT!');
         api.dispatch(removeUserData());
         clearLocalStorage();
       }
