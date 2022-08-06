@@ -1,35 +1,29 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import { useModal, useWords } from '../../hooks';
-import { useAppDispatch, useWordIdSelector } from '../../redux';
+import { useAppDispatch } from '../../redux';
 import { setCurrentWordId, unsetCurrentWordId } from '../../redux/slices/wordsListSlice';
 
 import Loading from '../Loading';
 import Modal from '../Modal';
 import WordCard from '../WordCard';
+import WordItem from '../WordItem';
 
 function WordsList() {
   const dispatch = useAppDispatch();
-  const currentWordId = useWordIdSelector();
-  const { words, isLoading } = useWords();
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { words, currentWord, currentWordDifficulty, checkWordDifficulty, isLoading } = useWords();
+  const { isModalOpen, handleOpen, handleClose } = useModal();
 
-  const handleClose = useCallback(() => {
-    closeModal(() => dispatch(unsetCurrentWordId()));
-  }, [closeModal, dispatch]);
+  const closeModal = useCallback(() => {
+    handleClose(() => dispatch(unsetCurrentWordId()));
+  }, [handleClose, dispatch]);
 
-  const handleOpen = useCallback(
+  const openModal = useCallback(
     (wordId: string) => {
-      openModal(() => dispatch(setCurrentWordId(wordId)));
+      handleOpen(() => dispatch(setCurrentWordId(wordId)));
     },
-    [dispatch, openModal]
+    [handleOpen, dispatch]
   );
-
-  const currentWord = useMemo(() => {
-    if (words && currentWordId) {
-      return words.find((word) => word.id === currentWordId);
-    }
-  }, [words, currentWordId]);
 
   return (
     <>
@@ -38,16 +32,20 @@ function WordsList() {
         {words && (
           <ul>
             {words.map((word) => (
-              <li key={word.id} onClick={handleOpen.bind(null, word.id)}>
-                {word.word}
-              </li>
+              <WordItem
+                key={word.id}
+                id={word.id}
+                word={word.word}
+                showDetailedData={openModal}
+                checkDifficulty={checkWordDifficulty}
+              />
             ))}
           </ul>
         )}
       </div>
       {isModalOpen && (
-        <Modal closeModal={handleClose}>
-          <WordCard word={currentWord} />
+        <Modal closeModal={closeModal}>
+          <WordCard word={currentWord} difficulty={currentWordDifficulty} />
         </Modal>
       )}
     </>
