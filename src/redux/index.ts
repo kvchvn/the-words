@@ -7,6 +7,9 @@ import {
   useSignInUserMutation,
   useCreateUserMutation,
   useLazyGetUserWordsQuery,
+  useCreateUserWordMutation,
+  useUpdateUserWordMutation,
+  useRemoveUserWordMutation,
 } from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
 import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
@@ -22,6 +25,9 @@ export {
   useSignInUserMutation,
   useCreateUserMutation,
   useLazyGetUserWordsQuery,
+  useCreateUserWordMutation,
+  useUpdateUserWordMutation,
+  useRemoveUserWordMutation,
   setUserData,
   removeUserData,
   useGroupSelector,
