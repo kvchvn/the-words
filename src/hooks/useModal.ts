@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { disableScrolling, enableScrolling } from '../utils';
 
 type callbackType = () => void;
@@ -6,19 +7,19 @@ type callbackType = () => void;
 const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = (onOpenModalAction: callbackType) => {
+  const handleOpen = (onOpenModalAction: callbackType) => {
     onOpenModalAction();
     disableScrolling();
     setIsModalOpen(true);
   };
 
-  const closeModal = (onCloseModalAction: callbackType) => {
+  const handleClose = (onCloseModalAction: callbackType) => {
     enableScrolling();
     onCloseModalAction();
     setIsModalOpen(false);
   };
 
-  return { isModalOpen, openModal, closeModal };
+  return { isModalOpen, handleOpen, handleClose };
 };
 
 export default useModal;
