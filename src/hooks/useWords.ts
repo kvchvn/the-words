@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import {
   useLazyGetWordsQuery,
@@ -6,14 +6,15 @@ import {
   useLazyGetUserWordsQuery,
   usePageSelector,
   useUserSelector,
+  useWordIdSelector,
 } from '../redux';
 import { MAX_GROUP_FOR_USERS } from '../constants';
-import { UserWords, WordsPage } from '../types';
 
 const useWords = () => {
   const group = useGroupSelector();
   const page = usePageSelector();
   const user = useUserSelector();
+  const currentWordId = useWordIdSelector();
 
   const [getAllWords, { data: wordsPage, isLoading }] = useLazyGetWordsQuery();
   const [getUserWords, { data: userWords }] = useLazyGetUserWordsQuery();
@@ -31,12 +32,17 @@ const useWords = () => {
     }
   }, [group, page, getAllWords]);
 
-  const words: UserWords | WordsPage | undefined = useMemo(
-    () => (group === MAX_GROUP_FOR_USERS ? userWords : wordsPage),
-    [group, userWords, wordsPage]
-  );
+  const checkWordDifficulty = (wordId: string) => {
+    return userWords?.find((userWord) => userWord.id === wordId)?.difficulty;
+  };
 
-  return { words, isLoading };
+  const words = group === MAX_GROUP_FOR_USERS ? userWords : wordsPage;
+
+  const currentWord = words?.find((word) => word.id === currentWordId);
+
+  const currentWordDifficulty = checkWordDifficulty(currentWordId);
+
+  return { words, userWords, currentWord, currentWordDifficulty, checkWordDifficulty, isLoading };
 };
 
 export default useWords;
