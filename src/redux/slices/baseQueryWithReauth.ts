@@ -43,18 +43,14 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result.error.status === 'PARSING_ERROR' &&
       result.error.originalStatus === TOKEN_EXPIRED_ERROR
     ) {
-      console.log('401 ERROR OCCURRED');
       const refreshToken = apiSlice.endpoints.refreshToken.initiate(userId);
       const refreshTokenResult = await refreshToken(api.dispatch, api.getState, api.extra);
-      console.log('refresh, ', refreshTokenResult);
       if (refreshTokenResult && refreshTokenResult.data) {
-        console.log('REFRESH RESULT IS');
         const { message: _, ...mainData } = refreshTokenResult.data as SignInResponse;
         api.dispatch(setUserData(mainData));
 
         result = await baseQuery(args, api, extraOptions);
       } else {
-        console.log('REFRESH RESULT IS NOT. LOG OUT!');
         api.dispatch(removeUserData());
         clearLocalStorage();
       }
