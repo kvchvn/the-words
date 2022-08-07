@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import PageTitle from '../../components/PageTitle';
 import WordsList from '../../components/WordsList';
@@ -11,6 +12,7 @@ import {
   MAX_PAGE,
   MIN_GROUP,
   MIN_PAGE,
+  ROUTER_PATHS,
 } from '../../constants';
 
 function TextbookPage() {
@@ -27,6 +29,10 @@ function TextbookPage() {
       <PageSelect firstPage={MIN_PAGE} lastPage={MAX_PAGE} />
       <hr />
       <WordsList />
+      <nav>
+        <Link to={`/${ROUTER_PATHS.sprintGame}`}>Sprint Game</Link>
+        <Link to={`/${ROUTER_PATHS.audioCallGame}`}>Audiocall Game</Link>
+      </nav>
     </>
   );
 }
