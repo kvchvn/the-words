@@ -6,7 +6,7 @@ import {
   SignInResponse,
   MainSignInResponse,
 } from './authorization';
-import { Word, WordsPage } from './words';
+import { Word, WordsPage, UserWord, UserWords, UserWordsResponse } from './words';
 import { ServerErrorType, ServerError } from './api';
 
 export {
@@ -21,4 +21,7 @@ export {
   ServerErrorType,
   ServerError,
   MainSignInResponse,
+  UserWord,
+  UserWords,
+  UserWordsResponse,
 };

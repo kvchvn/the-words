@@ -1,22 +1,32 @@
-import { SERVER_ERROR } from '../constants';
-
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+
+import { SERVER_ERROR } from '../constants';
 import { ServerError, ServerErrorType } from '../types';
+
+const getErrorStatus = (error: FetchBaseQueryError | SerializedError): number | null => {
+  if ('originalStatus' in error) {
+    return error.originalStatus;
+  }
+  if ('status' in error) {
+    if (typeof error.status === 'number') {
+      return error.status;
+    }
+  }
+  return null;
+};
 
 export const getUserFriendlyErrorMessage = (
   error: FetchBaseQueryError | SerializedError,
   type: keyof ServerErrorType
 ): string => {
-  let status = 'default';
-  if ('originalStatus' in error) {
-    status = String(error.originalStatus);
-  } else if ('status' in error) {
-    status = String(error.status);
-  }
+  const errorStatus = getErrorStatus(error);
+  const formattedErrorStatus = errorStatus ? String(errorStatus) : 'default';
 
   const message =
-    status in SERVER_ERROR ? SERVER_ERROR[status as keyof ServerError] : SERVER_ERROR.default;
+    formattedErrorStatus in SERVER_ERROR
+      ? SERVER_ERROR[formattedErrorStatus as keyof ServerError]
+      : SERVER_ERROR.default;
   if (typeof message === 'object') {
     return message[type];
   }

@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import { useSignInUserMutation } from '../../redux';
+import { useSignInUserMutation, useAppDispatch, setUserData } from '../../redux';
 import { MainSignInResponse, SignInFields } from '../../types';
 import { getUserFriendlyErrorMessage, setToLocalStorage } from '../../utils';
 import { ROUTER_PATHS } from '../../constants';
-import { useAppDispatch } from '../../redux/store';
-import { setUserData } from '../../redux';
 
 import Loading from '../Loading';
 

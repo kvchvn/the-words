@@ -16,5 +16,6 @@ export const removeFromLocalStorage = (key: keyof typeof LOCAL_STORAGE_KEYS) =>
 
 export const clearLocalStorage = () => localStorage.clear();
 
-export const toUpperCaseFirstLetter = (value: string): string =>
-  `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
+export const disableScrolling = () => (document.body.style.overflow = 'hidden');
+
+export const enableScrolling = () => (document.body.style.overflow = 'unset');

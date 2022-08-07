@@ -3,7 +3,8 @@ import {
   setToLocalStorage,
   removeFromLocalStorage,
   clearLocalStorage,
-  toUpperCaseFirstLetter,
+  disableScrolling,
+  enableScrolling,
 } from './common';
 import { getUserFriendlyErrorMessage } from './api';
 
@@ -12,6 +13,7 @@ export {
   setToLocalStorage,
   removeFromLocalStorage,
   clearLocalStorage,
-  toUpperCaseFirstLetter,
   getUserFriendlyErrorMessage,
+  disableScrolling,
+  enableScrolling,
 };
