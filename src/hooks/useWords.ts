@@ -8,7 +8,7 @@ import {
   useUserSelector,
   useWordIdSelector,
 } from '../redux';
-import { MAX_GROUP_FOR_USERS } from '../constants';
+import { HARD_WORD, MAX_GROUP_FOR_USERS } from '../constants';
 
 const useWords = () => {
   const group = useGroupSelector();
@@ -36,7 +36,9 @@ const useWords = () => {
     return userWords?.find((userWord) => userWord.id === wordId)?.difficulty;
   };
 
-  const words = group === MAX_GROUP_FOR_USERS ? userWords : wordsPage;
+  const hardUserWords = userWords?.filter((word) => word.difficulty === HARD_WORD);
+
+  const words = group === MAX_GROUP_FOR_USERS ? hardUserWords : wordsPage;
 
   const currentWord = words?.find((word) => word.id === currentWordId);
 
