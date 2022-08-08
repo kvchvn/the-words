@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useModal, useWords } from '../../hooks';
 import { useAppDispatch } from '../../redux';
 import { setCurrentWordId, unsetCurrentWordId } from '../../redux/slices/wordsListSlice';
+import { AggregatedWord } from '../../types';
 
 import Loading from '../Loading';
 import Modal from '../Modal';
@@ -11,7 +12,7 @@ import WordItem from '../WordItem';
 
 function WordsList() {
   const dispatch = useAppDispatch();
-  const { words, currentWord, currentWordDifficulty, checkWordDifficulty, isLoading } = useWords();
+  const { wordsResult, currentWord, isLoading } = useWords();
   const { isModalOpen, handleOpen, handleClose } = useModal();
 
   const closeModal = useCallback(() => {
@@ -29,15 +30,15 @@ function WordsList() {
     <>
       <div>
         {isLoading && <Loading />}
-        {words && (
+        {wordsResult && (
           <ul>
-            {words.map((word) => (
+            {wordsResult.map((word) => (
               <WordItem
                 key={word.id}
                 id={word.id}
                 word={word.word}
+                difficulty={(word as AggregatedWord).difficulty}
                 showDetailedData={openModal}
-                checkDifficulty={checkWordDifficulty}
               />
             ))}
           </ul>
@@ -45,7 +46,7 @@ function WordsList() {
       </div>
       {isModalOpen && (
         <Modal closeModal={closeModal}>
-          <WordCard word={currentWord} difficulty={currentWordDifficulty} />
+          <WordCard word={currentWord} closeModal={closeModal} />
         </Modal>
       )}
     </>
