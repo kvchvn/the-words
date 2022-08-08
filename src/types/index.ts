@@ -6,8 +6,18 @@ import {
   SignInResponse,
   MainSignInResponse,
 } from './authorization';
-import { Word, WordsPage, UserWord, UserWords, UserWordsResponse } from './words';
-import { ServerErrorType, ServerError } from './api';
+import {
+  Word,
+  WordsPage,
+  UserWord,
+  UserWords,
+  UserWordsResponse,
+  AggregatedWordsResponse,
+  AggregatedWords,
+  AggregatedWord,
+  WordsResult,
+} from './words';
+import { ServerErrorType, ServerError, PreparingParams } from './api';
 
 export {
   Theme,
@@ -24,4 +34,9 @@ export {
   UserWord,
   UserWords,
   UserWordsResponse,
+  PreparingParams,
+  AggregatedWordsResponse,
+  AggregatedWords,
+  AggregatedWord,
+  WordsResult,
 };
