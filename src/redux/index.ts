@@ -10,6 +10,7 @@ import {
   useCreateUserWordMutation,
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
+  useLazyGetAggregatedWordsQuery,
 } from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
 import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
@@ -28,6 +29,7 @@ export {
   useCreateUserWordMutation,
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
+  useLazyGetAggregatedWordsQuery,
   setUserData,
   removeUserData,
   useGroupSelector,

@@ -1,3 +1,5 @@
+export const WORDS_PER_PAGE = 20;
+
 export const MIN_GROUP = 0;
 export const MIN_PAGE = MIN_GROUP;
 
