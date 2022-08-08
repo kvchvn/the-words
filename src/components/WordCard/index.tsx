@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Word } from '../../types';
 import WordCardButtons from '../WordCardButtons';
 
+import { AggregatedWord, UserWord, Word } from '../../types';
+
 interface WordCardProps {
-  word: Word | undefined;
-  difficulty: string | undefined;
+  word: Word | UserWord | AggregatedWord | undefined;
+  closeModal: () => void;
 }
 
-function WordCard({ word, difficulty }: WordCardProps) {
+function WordCard({ word, closeModal }: WordCardProps) {
+  useEffect(() => {
+    if (!word) {
+      closeModal();
+    }
+  }, [word, closeModal]);
+
   return word ? (
     <div>
       <h1>{word.word}</h1>
-      <h2>difficulty: {difficulty ? difficulty : 'none'}</h2>
-      <WordCardButtons wordData={word} difficulty={difficulty} />
+      <h2>difficulty: {(word as AggregatedWord).difficulty || 'None'}</h2>
+      <WordCardButtons wordData={word} difficulty={(word as AggregatedWord).difficulty} />
+      <button type="button" onClick={closeModal}>
+        Закрыть
+      </button>
     </div>
-  ) : (
-    <p>word was not defined</p>
-  );
+  ) : null;
 }
 
 export default WordCard;
