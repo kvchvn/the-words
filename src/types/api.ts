@@ -13,6 +13,6 @@ export interface ServerError {
 }
 
 export interface PreparingParams {
-  page: number;
+  page?: number;
   difficulty?: typeof HARD_WORD | typeof EASY_WORD;
 }
