@@ -12,7 +12,7 @@ import WordItem from '../WordItem';
 
 function WordsList() {
   const dispatch = useAppDispatch();
-  const { wordsResult, currentWord, isLoading } = useWords();
+  const { wordsResult, isLoading } = useWords();
   const { isModalOpen, handleOpen, handleClose } = useModal();
 
   const closeModal = useCallback(() => {
@@ -46,7 +46,7 @@ function WordsList() {
       </div>
       {isModalOpen && (
         <Modal closeModal={closeModal}>
-          <WordCard word={currentWord} closeModal={closeModal} />
+          <WordCard closeModal={closeModal} />
         </Modal>
       )}
     </>
