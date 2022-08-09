@@ -4,6 +4,7 @@ import store from './store';
 import rootReducer from './reducer';
 import {
   useLazyGetWordsQuery,
+  useLazyGetWordQuery,
   useSignInUserMutation,
   useCreateUserMutation,
   useLazyGetUserWordsQuery,
@@ -11,6 +12,7 @@ import {
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
   useLazyGetAggregatedWordsQuery,
+  useLazyGetAggregatedWordQuery,
 } from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
 import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
@@ -23,6 +25,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 export {
   store,
   useLazyGetWordsQuery,
+  useLazyGetWordQuery,
   useSignInUserMutation,
   useCreateUserMutation,
   useLazyGetUserWordsQuery,
@@ -30,6 +33,7 @@ export {
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
   useLazyGetAggregatedWordsQuery,
+  useLazyGetAggregatedWordQuery,
   setUserData,
   removeUserData,
   useGroupSelector,

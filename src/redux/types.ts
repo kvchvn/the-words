@@ -15,8 +15,12 @@ export interface CreateUserWordArgs {
 
 export interface GetAggregatedWordsArgs {
   userId: string;
-  group: number;
-  page: number;
-  wordsPerPage: number;
+  group?: number;
+  page?: number;
+  wordsPerPage?: number;
   difficulty?: typeof HARD_WORD | typeof EASY_WORD;
+}
+
+export interface GetAggregatedWordArgs extends Pick<GetAggregatedWordsArgs, 'userId'> {
+  wordId: string;
 }
