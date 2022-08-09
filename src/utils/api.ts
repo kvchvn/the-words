@@ -2,7 +2,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 import { SERVER_ERROR } from '../constants';
-import { ServerError, ServerErrorType } from '../types';
+import { PreparingParams, ServerError, ServerErrorType } from '../types';
 
 const getErrorStatus = (error: FetchBaseQueryError | SerializedError): number | null => {
   if ('originalStatus' in error) {
@@ -31,4 +31,14 @@ export const getUserFriendlyErrorMessage = (
     return message[type];
   }
   return message;
+};
+
+export const prepareParams = ({ page, difficulty }: PreparingParams) => {
+  if (page) {
+    return `{"page":${page}}`;
+  }
+  if (difficulty) {
+    return `{"userWord.difficulty":"${difficulty}"}`;
+  }
+  return '';
 };

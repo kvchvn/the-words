@@ -3,7 +3,12 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQueryWithReauth from './baseQueryWithReauth';
 
 import { ENDPOINTS } from '../../constants';
-import { CreateUserWordArgs, GetWordsQueryArgs } from '../types';
+import {
+  CreateUserWordArgs,
+  GetAggregatedWordsArgs,
+  GetWordsQueryArgs,
+  GetAggregatedWordArgs,
+} from '../types';
 import {
   SignInFields,
   SignInResponse,
@@ -13,7 +18,13 @@ import {
   UserWords,
   UserWordsResponse,
   WordsPage,
+  AggregatedWords,
+  AggregatedWord,
+  AggregatedWordsResponse,
+  AggregatedWordResponse,
+  Word,
 } from '../../types';
+import { prepareParams } from '../../utils';
 
 const apiSlice = createApi({
   reducerPath: 'api',
@@ -45,19 +56,44 @@ const apiSlice = createApi({
         },
       }),
     }),
+    getWord: builder.query<Word, string>({
+      query: (wordId) => `${ENDPOINTS.words}/${wordId}`,
+    }),
+    getAggregatedWords: builder.query<AggregatedWords, GetAggregatedWordsArgs>({
+      query: ({ userId, group, page, wordsPerPage, difficulty }) => ({
+        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.aggregatedWords}`,
+        params: {
+          group,
+          wordsPerPage,
+          filter: prepareParams({ page, difficulty }),
+        },
+      }),
+      providesTags: ['UserWord'],
+      transformResponse: (response: AggregatedWordsResponse) =>
+        response[0].paginatedResults.map(({ userWord, _id, ...optional }) => ({
+          id: _id,
+          ...userWord,
+          ...optional,
+        })),
+    }),
+    getAggregatedWord: builder.query<AggregatedWord, GetAggregatedWordArgs>({
+      query: ({ userId, wordId }) =>
+        `${ENDPOINTS.users}/${userId}${ENDPOINTS.aggregatedWords}/${wordId}`,
+      providesTags: ['UserWord'],
+      transformResponse: (response: Array<AggregatedWordResponse>) => {
+        const { _id, userWord, ...options } = response[0];
+        return { id: _id, ...userWord, ...options };
+      },
+    }),
+    refreshToken: builder.query<SignInResponse, string>({
+      query: (userId) => `${ENDPOINTS.users}/${userId}${ENDPOINTS.tokens}`,
+    }),
     // get words are user marked as 'hard' or 'easy'
     getUserWords: builder.query<UserWords, string>({
-      query: (userId) => ({
-        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.words}`,
-      }),
+      query: (userId) => `${ENDPOINTS.users}/${userId}${ENDPOINTS.words}`,
       providesTags: ['UserWord'],
       transformResponse: (response: UserWordsResponse) =>
         response.map<UserWord>(({ optional, difficulty }) => ({ ...optional, difficulty })),
-    }),
-    refreshToken: builder.query<SignInResponse, string>({
-      query: (userId) => ({
-        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.tokens}`,
-      }),
     }),
     createUserWord: builder.mutation<void, CreateUserWordArgs>({
       query: ({ difficulty, userId, wordId, optional }) => ({
@@ -94,4 +130,7 @@ export const {
   useCreateUserWordMutation,
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
+  useLazyGetAggregatedWordsQuery,
+  useLazyGetAggregatedWordQuery,
+  useLazyGetWordQuery,
 } = apiSlice;

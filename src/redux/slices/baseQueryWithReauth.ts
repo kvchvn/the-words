@@ -34,7 +34,12 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   extraOptions
 ) => {
   let result = await baseQuery(args, api, extraOptions);
+  const logOut = () => {
+    api.dispatch(removeUserData());
+    clearLocalStorage();
+  };
   const store = api.getState() as RootState;
+
   if (store && store.user.user) {
     const { userId } = store.user.user;
 
@@ -43,16 +48,19 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result.error.status === 'PARSING_ERROR' &&
       result.error.originalStatus === TOKEN_EXPIRED_ERROR
     ) {
+      // if refreshToken request has been sent yet
+      if (api.endpoint === 'refreshToken') {
+        logOut();
+      }
       const refreshToken = apiSlice.endpoints.refreshToken.initiate(userId);
       const refreshTokenResult = await refreshToken(api.dispatch, api.getState, api.extra);
-      if (refreshTokenResult && refreshTokenResult.data) {
+      if (refreshTokenResult.data) {
         const { message: _, ...mainData } = refreshTokenResult.data as SignInResponse;
         api.dispatch(setUserData(mainData));
 
         result = await baseQuery(args, api, extraOptions);
       } else {
-        api.dispatch(removeUserData());
-        clearLocalStorage();
+        logOut();
       }
     }
   }

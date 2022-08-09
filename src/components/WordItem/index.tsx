@@ -3,16 +3,14 @@ import React from 'react';
 interface WordItemProps {
   id: string;
   word: string;
+  difficulty: string | undefined;
   showDetailedData: (wordId: string) => void;
-  checkDifficulty: (wordId: string) => string | undefined;
 }
 
-function WordItem({ id, word, showDetailedData, checkDifficulty }: WordItemProps) {
+function WordItem({ id, word, difficulty, showDetailedData }: WordItemProps) {
   const handleClick = () => {
     showDetailedData(id);
   };
-
-  const difficulty = checkDifficulty(id);
 
   return (
     <li onClick={handleClick}>

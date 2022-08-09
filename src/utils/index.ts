@@ -6,7 +6,7 @@ import {
   disableScrolling,
   enableScrolling,
 } from './common';
-import { getUserFriendlyErrorMessage } from './api';
+import { getUserFriendlyErrorMessage, prepareParams } from './api';
 
 export {
   getFromLocalStorage,
@@ -16,4 +16,5 @@ export {
   getUserFriendlyErrorMessage,
   disableScrolling,
   enableScrolling,
+  prepareParams,
 };

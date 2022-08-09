@@ -3,48 +3,46 @@ import { useEffect } from 'react';
 import {
   useLazyGetWordsQuery,
   useGroupSelector,
-  useLazyGetUserWordsQuery,
+  useLazyGetAggregatedWordsQuery,
   usePageSelector,
   useUserSelector,
-  useWordIdSelector,
 } from '../redux';
-import { HARD_WORD, MAX_GROUP_FOR_USERS } from '../constants';
+import { HARD_WORD, MAX_GROUP_FOR_USERS, WORDS_PER_PAGE as wordsPerPage } from '../constants';
+import { WordsResult } from '../types';
 
-const useWords = () => {
+interface UseWordsReturnType {
+  wordsResult: WordsResult;
+  isLoading: boolean;
+}
+
+const useWords = (): UseWordsReturnType => {
   const group = useGroupSelector();
   const page = usePageSelector();
   const user = useUserSelector();
-  const currentWordId = useWordIdSelector();
 
-  const [getAllWords, { data: wordsPage, isLoading }] = useLazyGetWordsQuery();
-  const [getUserWords, { data: userWords }] = useLazyGetUserWordsQuery();
+  const [getWords, { data: words, isLoading: isWordsLoading }] = useLazyGetWordsQuery();
+  const [getAggregatedWords, { data: aggregatedWords, isLoading: isAggregatedWordsLoading }] =
+    useLazyGetAggregatedWordsQuery();
 
   useEffect(() => {
     if (user) {
       const { userId } = user;
-      getUserWords(userId);
+      if (group === MAX_GROUP_FOR_USERS) {
+        const difficulty = HARD_WORD;
+        getAggregatedWords({ userId, difficulty });
+      } else {
+        getAggregatedWords({ group, page, userId, wordsPerPage });
+      }
+    } else {
+      getWords({ group, page });
     }
-  }, [user, getUserWords, getAllWords]);
+  }, [user, group, page, getAggregatedWords, getWords]);
 
-  useEffect(() => {
-    if (group !== MAX_GROUP_FOR_USERS) {
-      getAllWords({ group, page });
-    }
-  }, [group, page, getAllWords]);
+  const isLoading = isWordsLoading || isAggregatedWordsLoading;
 
-  const checkWordDifficulty = (wordId: string) => {
-    return userWords?.find((userWord) => userWord.id === wordId)?.difficulty;
-  };
+  const wordsResult = aggregatedWords || words;
 
-  const hardUserWords = userWords?.filter((word) => word.difficulty === HARD_WORD);
-
-  const words = group === MAX_GROUP_FOR_USERS ? hardUserWords : wordsPage;
-
-  const currentWord = words?.find((word) => word.id === currentWordId);
-
-  const currentWordDifficulty = checkWordDifficulty(currentWordId);
-
-  return { words, userWords, currentWord, currentWordDifficulty, checkWordDifficulty, isLoading };
+  return { wordsResult, isLoading };
 };
 
 export default useWords;

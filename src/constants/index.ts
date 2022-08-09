@@ -16,6 +16,7 @@ import {
   EASY_WORD,
   MAX_GROUP_FOR_USERS,
   MAX_GROUP_FOR_GUESTS,
+  WORDS_PER_PAGE,
 } from './words';
 
 export {
@@ -38,4 +39,5 @@ export {
   TOKEN_EXPIRED_ERROR,
   MAX_GROUP_FOR_USERS,
   MAX_GROUP_FOR_GUESTS,
+  WORDS_PER_PAGE,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { EASY_WORD, HARD_WORD } from '../../constants';
 import { useDifficulty } from '../../hooks';
+import { EASY_WORD, HARD_WORD } from '../../constants';
 import { Word } from '../../types';
 
 interface WordCardButtonsProps {
