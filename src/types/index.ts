@@ -13,9 +13,11 @@ import {
   UserWords,
   UserWordsResponse,
   AggregatedWordsResponse,
+  AggregatedWordResponse,
   AggregatedWords,
   AggregatedWord,
   WordsResult,
+  WordResult,
 } from './words';
 import { ServerErrorType, ServerError, PreparingParams } from './api';
 
@@ -36,7 +38,9 @@ export {
   UserWordsResponse,
   PreparingParams,
   AggregatedWordsResponse,
+  AggregatedWordResponse,
   AggregatedWords,
   AggregatedWord,
   WordsResult,
+  WordResult,
 };

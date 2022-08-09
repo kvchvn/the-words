@@ -60,4 +60,6 @@ export type UserWordsResponse = Array<UserWordResponse>;
 
 export type UserWords = Array<UserWord>;
 
-export type WordsResult = WordsPage | UserWords | AggregatedWords | undefined;
+export type WordsResult = WordsPage | AggregatedWords | undefined;
+
+export type WordResult = Word | AggregatedWord | undefined;

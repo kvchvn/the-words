@@ -1,31 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import WordCardButtons from '../WordCardButtons';
+import Loading from '../Loading';
 
-import { AggregatedWord, UserWord, Word } from '../../types';
+import { useCurrentWord } from '../../hooks';
+import { AggregatedWord } from '../../types';
 
 interface WordCardProps {
-  word: Word | UserWord | AggregatedWord | undefined;
   closeModal: () => void;
 }
 
-function WordCard({ word, closeModal }: WordCardProps) {
-  useEffect(() => {
-    if (!word) {
-      closeModal();
-    }
-  }, [word, closeModal]);
+function WordCard({ closeModal }: WordCardProps) {
+  const { wordData, isLoading, user } = useCurrentWord();
 
-  return word ? (
+  console.log(wordData);
+
+  const UI = wordData ? (
     <div>
-      <h1>{word.word}</h1>
-      <h2>difficulty: {(word as AggregatedWord).difficulty || 'None'}</h2>
-      <WordCardButtons wordData={word} difficulty={(word as AggregatedWord).difficulty} />
+      <h1>{wordData.word}</h1>
+      {user && <h2>difficulty: {(wordData as AggregatedWord).difficulty || 'None'}</h2>}
+      {user && (
+        <WordCardButtons wordData={wordData} difficulty={(wordData as AggregatedWord).difficulty} />
+      )}
       <button type="button" onClick={closeModal}>
         Закрыть
       </button>
     </div>
-  ) : null;
+  ) : (
+    <p>Ой... Мы не нашли информацию об этом слове</p>
+  );
+
+  return isLoading ? <Loading /> : UI;
 }
 
 export default WordCard;
