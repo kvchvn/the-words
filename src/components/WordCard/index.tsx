@@ -13,8 +13,6 @@ interface WordCardProps {
 function WordCard({ closeModal }: WordCardProps) {
   const { wordData, isLoading, user } = useCurrentWord();
 
-  console.log(wordData);
-
   const UI = wordData ? (
     <div>
       <h1>{wordData.word}</h1>
