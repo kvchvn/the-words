@@ -1,47 +1,24 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-
-import { useSignInUserMutation, useAppDispatch, setUserData } from '../../redux';
-import { MainSignInResponse, SignInFields } from '../../types';
-import { getUserFriendlyErrorMessage, setToLocalStorage } from '../../utils';
-import { ROUTER_PATHS } from '../../constants';
+import React from 'react';
 
 import Loading from '../Loading';
+
+import { useSignIn } from '../../hooks';
+import { SignInFields } from '../../types';
 
 interface SignInProps {
   goToSignUp: () => void;
 }
 
 function SignIn({ goToSignUp }: SignInProps) {
-  const [signIn, { data: userData, isLoading, isError, error }] = useSignInUserMutation();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
   const initialValues: SignInFields = {
     email: '',
     password: '',
   };
 
-  const { values, handleSubmit, handleChange, resetForm } = useFormik({
-    initialValues,
-    onSubmit: async (values) => {
-      await signIn(values);
-    },
-  });
-
-  useEffect(() => {
-    if (userData) {
-      const { message: _, ...mainUserData } = userData;
-      setToLocalStorage<MainSignInResponse>('user', mainUserData);
-      dispatch(setUserData(mainUserData));
-      navigate(ROUTER_PATHS.main);
-    }
-    if (isError && error) {
-      alert(getUserFriendlyErrorMessage(error, 'authorization'));
-      resetForm();
-    }
-  }, [userData, isError, error, resetForm, navigate, dispatch]);
+  const {
+    isLoading,
+    formik: { values, handleSubmit, handleChange },
+  } = useSignIn(initialValues);
 
   return (
     <>

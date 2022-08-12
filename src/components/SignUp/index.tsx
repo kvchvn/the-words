@@ -1,44 +1,32 @@
 import React, { useEffect } from 'react';
-import { useFormik } from 'formik';
-
-import { useCreateUserMutation } from '../../redux';
-
-import signUpValidationSchema from './validationSchema';
-import { SignUpFields } from '../../types';
-import { getUserFriendlyErrorMessage } from '../../utils';
 
 import Loading from '../Loading';
+
+import { useSignUp } from '../../hooks';
+import { SignUpFields } from '../../types';
 
 interface SignUpProps {
   goToSignIn: () => void;
 }
 
 function SignUp({ goToSignIn }: SignUpProps) {
-  const [createUser, { data: userData, isLoading, isError, error }] = useCreateUserMutation();
-
   const initialValues: SignUpFields = {
     name: '',
     email: '',
     password: '',
   };
 
-  const { values, errors, touched, handleSubmit, handleChange, resetForm } = useFormik({
-    initialValues,
-    validationSchema: signUpValidationSchema,
-    onSubmit: (values) => {
-      createUser(values);
-    },
-  });
+  const {
+    userData,
+    isLoading,
+    formik: { values, touched, errors, handleSubmit, handleChange },
+  } = useSignUp(initialValues);
 
   useEffect(() => {
     if (userData) {
       goToSignIn();
     }
-    if (isError && error) {
-      alert(getUserFriendlyErrorMessage(error, 'authorization'));
-      resetForm();
-    }
-  }, [isError, error, userData, goToSignIn, resetForm]);
+  }, [userData, goToSignIn]);
 
   return (
     <>
