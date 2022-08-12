@@ -5,7 +5,7 @@ import useSignOut from './useSignOut';
 import useModal from './useModal';
 import useDifficulty from './useDifficulty';
 import useCurrentWord from './useCurrentWord';
-import useAuthorization from './useAuthorization';
+import useToggle from './useToggle';
 import useSignUp from './useSignUp';
 import useSignIn from './useSignIn';
 
@@ -17,7 +17,7 @@ export {
   useModal,
   useDifficulty,
   useCurrentWord,
-  useAuthorization,
+  useToggle,
   useSignUp,
   useSignIn,
 };
