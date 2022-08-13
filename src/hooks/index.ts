@@ -5,6 +5,9 @@ import useSignOut from './useSignOut';
 import useModal from './useModal';
 import useDifficulty from './useDifficulty';
 import useCurrentWord from './useCurrentWord';
+import useToggle from './useToggle';
+import useSignUp from './useSignUp';
+import useSignIn from './useSignIn';
 
 export {
   usePagination,
@@ -14,4 +17,7 @@ export {
   useModal,
   useDifficulty,
   useCurrentWord,
+  useToggle,
+  useSignUp,
+  useSignIn,
 };
