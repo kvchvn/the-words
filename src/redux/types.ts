@@ -1,5 +1,5 @@
 import { EASY_WORD, HARD_WORD } from '../constants';
-import { Word } from '../types';
+import { Word, WordDifficulty } from '../types';
 
 export interface GetWordsQueryArgs {
   group: number;
@@ -18,7 +18,7 @@ export interface GetAggregatedWordsArgs {
   group?: number;
   page?: number;
   wordsPerPage?: number;
-  difficulty?: typeof HARD_WORD | typeof EASY_WORD;
+  difficulty?: WordDifficulty;
 }
 
 export interface GetAggregatedWordArgs extends Pick<GetAggregatedWordsArgs, 'userId'> {
