@@ -9,6 +9,7 @@ const AuthorizationPage = lazy(() => import('./pages/AuthorizationPage'));
 const TextbookPage = lazy(() => import('./pages/TextbookPage'));
 const SprintGamePage = lazy(() => import('./pages/SprintGamePage'));
 const AudioCallGamePage = lazy(() => import('./pages/AudioCallGamePage'));
+const GameResultsPage = lazy(() => import('./pages/GameResultsPage'));
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path={ROUTER_PATHS.textbook} element={<TextbookPage />} />
         <Route path={ROUTER_PATHS.sprintGame} element={<SprintGamePage />} />
         <Route path={ROUTER_PATHS.audioCallGame} element={<AudioCallGamePage />} />
+        <Route path={ROUTER_PATHS.gameResults} element={<GameResultsPage />} />
       </Route>
     </Routes>
   );
