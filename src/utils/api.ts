@@ -35,9 +35,13 @@ export const getUserFriendlyErrorMessage = (
 
 export const prepareParams = ({ page, difficulty }: PreparingParams) => {
   if (page !== undefined) {
-    return `{"page":${page}}`;
-  }
-  if (difficulty) {
+    const pageFilter = `{"page":${page}}`;
+    if (difficulty) {
+      const difficultyFilter = `{"userWord.difficulty":${difficulty}}`;
+      return `{"$and":[${pageFilter},${difficultyFilter}]}`;
+    }
+    return pageFilter;
+  } else if (difficulty) {
     return `{"userWord.difficulty":"${difficulty}"}`;
   }
   return '';
