@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import baseQueryWithReauth from './baseQueryWithReauth';
 
-import { ENDPOINTS } from '../../constants';
+import { ENDPOINTS, WORDS_PER_PAGE } from '../../constants';
 import {
   CreateUserWordArgs,
   GetAggregatedWordsArgs,
@@ -60,7 +60,7 @@ const apiSlice = createApi({
       query: (wordId) => `${ENDPOINTS.words}/${wordId}`,
     }),
     getAggregatedWords: builder.query<AggregatedWords, GetAggregatedWordsArgs>({
-      query: ({ userId, group, page, wordsPerPage, difficulty }) => ({
+      query: ({ userId, group, page, wordsPerPage = WORDS_PER_PAGE, difficulty }) => ({
         url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.aggregatedWords}`,
         params: {
           group,
