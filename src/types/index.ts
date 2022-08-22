@@ -19,7 +19,7 @@ import {
   WordsResult,
   WordResult,
 } from './words';
-import { ServerErrorType, ServerError, PreparingParams } from './api';
+import { ServerErrorType, ServerError, PreparingParams, WordDifficulty } from './api';
 
 export {
   Theme,
@@ -43,4 +43,5 @@ export {
   AggregatedWord,
   WordsResult,
   WordResult,
+  WordDifficulty,
 };
