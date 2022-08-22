@@ -37,6 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   const logOut = () => {
     api.dispatch(removeUserData());
     clearLocalStorage();
+    alert('Время ожидания истекло. Вам следует войти заново');
   };
   const store = api.getState() as RootState;
 
