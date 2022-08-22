@@ -7,6 +7,7 @@ import GroupSelect from '../../components/GroupSelect';
 import PageSelect from '../../components/PageSelect';
 
 import {
+  FROM_TEXTBOOK,
   MAX_GROUP_FOR_GUESTS,
   MAX_GROUP_FOR_USERS,
   MAX_PAGE,
@@ -30,8 +31,12 @@ function TextbookPage() {
       <hr />
       <WordsList />
       <nav>
-        <Link to={`/${ROUTER_PATHS.sprintGame}`}>Sprint Game</Link>
-        <Link to={`/${ROUTER_PATHS.audioCallGame}`}>Audiocall Game</Link>
+        <Link to={`/${ROUTER_PATHS.sprintGame}`} state={FROM_TEXTBOOK}>
+          Спринт
+        </Link>
+        <Link to={`/${ROUTER_PATHS.audioCallGame}`} state={FROM_TEXTBOOK}>
+          Аудиовызов
+        </Link>
       </nav>
     </>
   );
