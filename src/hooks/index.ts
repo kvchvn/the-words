@@ -8,6 +8,7 @@ import useCurrentWord from './useCurrentWord';
 import useToggle from './useToggle';
 import useSignUp from './useSignUp';
 import useSignIn from './useSignIn';
+import useSprintWords from './useSprintWords';
 
 export {
   usePagination,
@@ -20,4 +21,5 @@ export {
   useToggle,
   useSignUp,
   useSignIn,
+  useSprintWords,
 };
