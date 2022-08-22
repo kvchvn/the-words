@@ -1,4 +1,4 @@
-import { ROUTER_PATHS, LOCAL_STORAGE_KEYS } from './common';
+import { ROUTER_PATHS, LOCAL_STORAGE_KEYS, FROM_MAIN, FROM_TEXTBOOK } from './common';
 import { BASE_URL, ENDPOINTS, SERVER_ERROR, TOKEN_EXPIRED_ERROR } from './api';
 import {
   MIN_NAME_LENGTH,
@@ -17,6 +17,7 @@ import {
   MAX_GROUP_FOR_USERS,
   MAX_GROUP_FOR_GUESTS,
   WORDS_PER_PAGE,
+  NOT_EASY_WORD,
 } from './words';
 
 export {
@@ -40,4 +41,7 @@ export {
   MAX_GROUP_FOR_USERS,
   MAX_GROUP_FOR_GUESTS,
   WORDS_PER_PAGE,
+  FROM_MAIN,
+  FROM_TEXTBOOK,
+  NOT_EASY_WORD,
 };

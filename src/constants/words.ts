@@ -15,3 +15,5 @@ export const MAX_GROUP_FOR_GUESTS = MAX_GROUP - 1;
 
 export const HARD_WORD = 'hard';
 export const EASY_WORD = 'easy';
+// preparing according to mongodb syntax
+export const NOT_EASY_WORD = '{"$ne":"easy"}';
