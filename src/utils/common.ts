@@ -19,3 +19,9 @@ export const clearLocalStorage = () => localStorage.clear();
 export const disableScrolling = () => (document.body.style.overflow = 'hidden');
 
 export const enableScrolling = () => (document.body.style.overflow = 'unset');
+
+export const getRandomBetween = (min: number, max: number) => {
+  const modifiedMin = Math.ceil(min);
+  const modofiedMax = Math.floor(max);
+  return Math.floor(Math.random() * (modofiedMax - modifiedMin + 1)) + modifiedMin;
+};
