@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface SprintRoundProps {
-  word: string | null;
+  word: string | undefined;
   showNextWord: () => void;
 }
 
