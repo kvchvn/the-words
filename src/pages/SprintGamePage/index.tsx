@@ -7,7 +7,12 @@ import { useSprintWords } from '../../hooks';
 import { FROM_MAIN } from '../../constants';
 
 function SprintGamePage() {
-  const { state, gameData, user, toNextWord } = useSprintWords();
+  const {
+    state,
+    gameData: { originalWord, translatedWord, isRightAnswer },
+    user,
+    toNextWord,
+  } = useSprintWords();
 
   return (
     <>
@@ -40,7 +45,12 @@ function SprintGamePage() {
         </div>
       ) : (
         <div>
-          <SprintRound word={gameData.currentWord} showNextWord={toNextWord} />
+          <SprintRound
+            originalWord={originalWord}
+            translatedWord={translatedWord}
+            isRightAnswer={isRightAnswer}
+            showNextWord={toNextWord}
+          />
         </div>
       )}
     </>
