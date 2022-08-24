@@ -6,11 +6,12 @@ import {
 } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '..';
+import apiSlice from './apiSlice';
 import { removeUserData, setUserData } from './userSlice';
-import { BASE_URL as baseUrl, TOKEN_EXPIRED_ERROR } from '../../constants';
+import { goToGroup } from './wordsListSlice';
+import { BASE_URL as baseUrl, MIN_GROUP, TOKEN_EXPIRED_ERROR } from '../../constants';
 import { SignInResponse } from '../../types';
 import { clearLocalStorage } from '../../utils';
-import apiSlice from './apiSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
@@ -36,6 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions);
   const logOut = () => {
     api.dispatch(removeUserData());
+    api.dispatch(goToGroup(MIN_GROUP));
     clearLocalStorage();
     alert('Время ожидания истекло. Вам следует войти заново');
   };
