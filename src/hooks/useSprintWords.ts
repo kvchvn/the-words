@@ -10,19 +10,20 @@ import {
   useUserSelector,
 } from '../redux';
 import { goToNextPage } from '../redux/slices/wordsListSlice';
-import { AggregatedWords, WordsPage } from '../types';
+import { AggregatedWord, AggregatedWords, Word, WordsPage } from '../types';
 import { EASY_WORD, MAX_PAGE, ROUTER_PATHS } from '../constants';
-import { getUserFriendlyErrorMessage } from '../utils';
+import { getRandomBetween, getUserFriendlyErrorMessage } from '../utils';
 
-type WordsType = WordsPage | AggregatedWords | undefined;
+type WordsType = WordsPage | AggregatedWords;
 
 interface SprintGameData {
-  allWords: WordsType;
-  notEasyWords: WordsType;
-  currentWord: string | undefined;
+  allWords: WordsType | undefined;
+  notEasyWords: WordsType | undefined;
+  originalWord: string | undefined;
+  translatedWord: string | undefined;
+  isRightAnswer: boolean;
   currentWordIndex: number;
   wordsRunOut: boolean;
-  answers: Array<string> | undefined;
 }
 
 const useSprintWords = () => {
@@ -39,10 +40,11 @@ const useSprintWords = () => {
   const [gameData, setGameData] = useState<SprintGameData>({
     allWords: undefined,
     notEasyWords: undefined,
-    currentWord: undefined,
+    originalWord: undefined,
+    translatedWord: undefined,
+    isRightAnswer: false,
     currentWordIndex: 0,
     wordsRunOut: false,
-    answers: undefined,
   });
 
   const fetchWords = useCallback(
@@ -56,9 +58,55 @@ const useSprintWords = () => {
     [getAggregatedWords, getWords, user]
   );
 
+  const getRandomWord = (
+    wordsList: WordsPage | AggregatedWords,
+    currentIndex: number
+  ): Word | AggregatedWord => {
+    // it's made in order to true answers are encountering more times
+    const RANGE_WIDTH = 1;
+    const minIndex = currentIndex - RANGE_WIDTH;
+    const maxIndex = currentIndex + RANGE_WIDTH;
+    const correctedMinIndex = minIndex < 0 ? 0 : minIndex;
+    const correctedMaxIndex = maxIndex > wordsList.length - 1 ? wordsList.length - 1 : maxIndex;
+    const randomWordIndex = getRandomBetween(correctedMinIndex, correctedMaxIndex);
+    return wordsList[randomWordIndex];
+  };
+
+  const updateGameData = useCallback(
+    ({
+      allWords,
+      notEasyWords,
+      nextWordIndex,
+    }: {
+      allWords: WordsType;
+      notEasyWords: WordsType;
+      nextWordIndex: number;
+    }) => {
+      const currentWordIndex = nextWordIndex;
+      const originalWordData = notEasyWords[currentWordIndex];
+      let indexAtAllWords = currentWordIndex;
+      if (user) {
+        indexAtAllWords = allWords.indexOf(originalWordData as AggregatedWord);
+      }
+      const translatedWordData = getRandomWord(allWords, indexAtAllWords);
+      const originalWord = originalWordData.word;
+      const translatedWord = translatedWordData.wordTranslate;
+      const isRightAnswer = originalWordData.id === translatedWordData.id;
+      setGameData((prevState) => {
+        const required = { originalWord, translatedWord, currentWordIndex, isRightAnswer };
+        // if allWords & notEasyWords aren't in the State yet
+        if (currentWordIndex === 0) {
+          return { ...prevState, allWords, notEasyWords, ...required };
+        }
+        return { ...prevState, ...required };
+      });
+    },
+    [user]
+  );
+
   const toNextWord = () => {
-    const { notEasyWords, currentWordIndex } = gameData;
-    if (notEasyWords) {
+    const { notEasyWords, currentWordIndex, allWords } = gameData;
+    if (notEasyWords && allWords) {
       if (currentWordIndex === notEasyWords.length - 1) {
         if (page !== MAX_PAGE) {
           dispatch(goToNextPage());
@@ -67,9 +115,8 @@ const useSprintWords = () => {
           setGameData((prevState) => ({ ...prevState, wordsRunOut: true }));
         }
       } else {
-        const nextIndex = currentWordIndex + 1;
-        const nextWord = notEasyWords[nextIndex].word;
-        setGameData((prevState) => ({ ...prevState, word: nextWord, wordIndex: nextIndex }));
+        const nextWordIndex = currentWordIndex + 1;
+        updateGameData({ allWords, notEasyWords, nextWordIndex });
       }
     }
   };
@@ -84,22 +131,15 @@ const useSprintWords = () => {
         const notEasyWords = [...data].filter((word) =>
           'difficulty' in word ? word.difficulty !== EASY_WORD : true
         );
-        const currentWordIndex = 0;
-        const currentWord = notEasyWords[currentWordIndex].word;
-        setGameData((prevState) => ({
-          ...prevState,
-          allWords,
-          notEasyWords,
-          currentWord,
-          currentWordIndex,
-        }));
+        const startedWordIndex = 0;
+        updateGameData({ allWords, notEasyWords, nextWordIndex: startedWordIndex });
       }
     });
-  }, [fetchWords, group, page]);
+  }, [fetchWords, group, page, updateGameData]);
 
   useEffect(() => {
     if (gameData.wordsRunOut) {
-      navigate(ROUTER_PATHS.gameResults);
+      navigate(`/${ROUTER_PATHS.gameResults}`);
     }
   }, [gameData.wordsRunOut, navigate]);
 
