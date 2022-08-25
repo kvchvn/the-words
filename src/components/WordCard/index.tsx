@@ -1,10 +1,9 @@
 import React from 'react';
 
-import WordCardButtons from '../WordCardButtons';
-import Loading from '../Loading';
-
 import { useCurrentWord } from '../../hooks';
 import { AggregatedWord } from '../../types';
+import Loading from '../Loading';
+import WordCardButtons from '../WordCardButtons';
 
 interface WordCardProps {
   closeModal: () => void;

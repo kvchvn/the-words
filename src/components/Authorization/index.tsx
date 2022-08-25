@@ -1,9 +1,8 @@
 import React from 'react';
 
-import SignUp from '../SignUp';
-import SignIn from '../SignIn';
-
 import { useToggle } from '../../hooks';
+import SignIn from '../SignIn';
+import SignUp from '../SignUp';
 
 function Authorization() {
   const { value: isSignUp, toggleValue } = useToggle();

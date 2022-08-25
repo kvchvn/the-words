@@ -1,11 +1,11 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
-import PageTitle from '../../components/PageTitle';
-import WordsList from '../../components/WordsList';
 import GroupSelect from '../../components/GroupSelect';
 import PageSelect from '../../components/PageSelect';
-
+import PageTitle from '../../components/PageTitle';
+import WordsList from '../../components/WordsList';
 import {
   FROM_TEXTBOOK,
   MAX_GROUP_FOR_GUESTS,

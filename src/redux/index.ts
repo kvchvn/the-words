@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
-import store from './store';
 import rootReducer from './reducer';
+import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
 import {
   useLazyGetWordsQuery,
   useLazyGetWordQuery,
@@ -15,7 +15,7 @@ import {
   useLazyGetAggregatedWordQuery,
 } from './slices/apiSlice';
 import { setUserData, removeUserData } from './slices/userSlice';
-import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
+import store from './store';
 
 type AppDispatch = typeof store.dispatch;
 

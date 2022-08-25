@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useMemo } from 'react';
+
 import ReactDOM from 'react-dom';
 
 import { StyledOverlay, StyledModal } from './theme';

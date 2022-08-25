@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { HARD_WORD, MAX_GROUP_FOR_USERS, WORDS_PER_PAGE as wordsPerPage } from '../constants';
 import {
   useLazyGetWordsQuery,
   useGroupSelector,
@@ -7,7 +8,6 @@ import {
   usePageSelector,
   useUserSelector,
 } from '../redux';
-import { HARD_WORD, MAX_GROUP_FOR_USERS, WORDS_PER_PAGE as wordsPerPage } from '../constants';
 import { WordsResult } from '../types';
 
 interface UseWordsReturnType {

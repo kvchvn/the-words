@@ -1,10 +1,10 @@
+import { EASY_WORD, HARD_WORD } from '../constants';
 import {
   useCreateUserWordMutation,
   useRemoveUserWordMutation,
   useUpdateUserWordMutation,
   useUserSelector,
 } from '../redux';
-import { EASY_WORD, HARD_WORD } from '../constants';
 import { MainSignInResponse, Word } from '../types';
 
 const useDifficulty = (wordData: Word) => {

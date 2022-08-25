@@ -1,14 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import baseQueryWithReauth from './baseQueryWithReauth';
-
 import { ENDPOINTS, WORDS_PER_PAGE } from '../../constants';
-import {
-  CreateUserWordArgs,
-  GetAggregatedWordsArgs,
-  GetWordsQueryArgs,
-  GetAggregatedWordArgs,
-} from '../types';
 import {
   SignInFields,
   SignInResponse,
@@ -25,6 +17,13 @@ import {
   Word,
 } from '../../types';
 import { prepareParams } from '../../utils';
+import {
+  CreateUserWordArgs,
+  GetAggregatedWordsArgs,
+  GetWordsQueryArgs,
+  GetAggregatedWordArgs,
+} from '../types';
+import baseQueryWithReauth from './baseQueryWithReauth';
 
 const apiSlice = createApi({
   reducerPath: 'api',

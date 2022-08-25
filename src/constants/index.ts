@@ -1,4 +1,3 @@
-import { ROUTER_PATHS, LOCAL_STORAGE_KEYS, FROM_MAIN, FROM_TEXTBOOK } from './common';
 import { BASE_URL, ENDPOINTS, SERVER_ERROR, TOKEN_EXPIRED_ERROR } from './api';
 import {
   MIN_NAME_LENGTH,
@@ -6,6 +5,7 @@ import {
   MIN_PASSWORD_LENGTH,
   MESSAGE_REQUIRED,
 } from './authorization';
+import { ROUTER_PATHS, LOCAL_STORAGE_KEYS, FROM_MAIN, FROM_TEXTBOOK } from './common';
 import {
   MIN_GROUP,
   MIN_PAGE,
