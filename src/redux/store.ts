@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import saveToLocalStorage from './middlewares/words';
 
+import saveToLocalStorage from './middlewares/words';
 import rootReducer from './reducer';
 import apiSlice from './slices/apiSlice';
 

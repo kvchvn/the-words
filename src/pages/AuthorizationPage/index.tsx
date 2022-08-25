@@ -1,9 +1,8 @@
 import React from 'react';
-import Authorization from '../../components/Authorization';
 
+import Authorization from '../../components/Authorization';
 import PageTitle from '../../components/PageTitle';
 import Profile from '../../components/Profile';
-
 import { useUserSelector } from '../../redux';
 
 function AuthorizationPage() {

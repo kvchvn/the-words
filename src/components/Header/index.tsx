@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
-import { useUserSelector } from '../../redux';
 import { FROM_MAIN, ROUTER_PATHS } from '../../constants';
+import { useUserSelector } from '../../redux';
 
 function Header() {
   const user = useUserSelector();

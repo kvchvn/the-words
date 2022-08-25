@@ -2,9 +2,8 @@ import React from 'react';
 
 import PageTitle from '../../components/PageTitle';
 import SprintRound from '../../components/SprintRound';
-
-import { useSprintWords } from '../../hooks';
 import { FROM_MAIN } from '../../constants';
+import { useSprintWords } from '../../hooks';
 
 function SprintGamePage() {
   const {

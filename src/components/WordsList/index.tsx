@@ -4,7 +4,6 @@ import { useModal, useWords } from '../../hooks';
 import { useAppDispatch } from '../../redux';
 import { setCurrentWordId, unsetCurrentWordId } from '../../redux/slices/wordsListSlice';
 import { AggregatedWord } from '../../types';
-
 import Loading from '../Loading';
 import Modal from '../Modal';
 import WordCard from '../WordCard';

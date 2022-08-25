@@ -1,4 +1,5 @@
 import { Middleware, PayloadAction } from '@reduxjs/toolkit';
+
 import { RootState } from '..';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils';
 

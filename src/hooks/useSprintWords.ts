@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { EASY_WORD, MAX_PAGE, ROUTER_PATHS } from '../constants';
 import {
   useAppDispatch,
   useGroupSelector,
@@ -11,7 +13,6 @@ import {
 } from '../redux';
 import { goToNextPage } from '../redux/slices/wordsListSlice';
 import { AggregatedWord, AggregatedWords, Word, WordsPage } from '../types';
-import { EASY_WORD, MAX_PAGE, ROUTER_PATHS } from '../constants';
 import { getRandomBetween, getUserFriendlyErrorMessage } from '../utils';
 
 type WordsType = WordsPage | AggregatedWords;

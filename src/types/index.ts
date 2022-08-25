@@ -1,4 +1,4 @@
-import { Theme, RouterPaths } from './common';
+import { ServerErrorType, ServerError, PreparingParams, WordDifficulty } from './api';
 import {
   SignInFields,
   SignUpFields,
@@ -6,6 +6,7 @@ import {
   SignInResponse,
   MainSignInResponse,
 } from './authorization';
+import { Theme, RouterPaths } from './common';
 import {
   Word,
   WordsPage,
@@ -19,7 +20,6 @@ import {
   WordsResult,
   WordResult,
 } from './words';
-import { ServerErrorType, ServerError, PreparingParams, WordDifficulty } from './api';
 
 export {
   Theme,

@@ -1,14 +1,14 @@
-import usePagination from './usePagination';
-import useGrouping from './useGrouping';
-import useWords from './useWords';
-import useSignOut from './useSignOut';
-import useModal from './useModal';
-import useDifficulty from './useDifficulty';
 import useCurrentWord from './useCurrentWord';
-import useToggle from './useToggle';
-import useSignUp from './useSignUp';
+import useDifficulty from './useDifficulty';
+import useGrouping from './useGrouping';
+import useModal from './useModal';
+import usePagination from './usePagination';
 import useSignIn from './useSignIn';
+import useSignOut from './useSignOut';
+import useSignUp from './useSignUp';
 import useSprintWords from './useSprintWords';
+import useToggle from './useToggle';
+import useWords from './useWords';
 
 export {
   usePagination,

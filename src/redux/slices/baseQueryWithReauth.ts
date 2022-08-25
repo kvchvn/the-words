@@ -6,12 +6,12 @@ import {
 } from '@reduxjs/toolkit/query/react';
 
 import { RootState } from '..';
-import apiSlice from './apiSlice';
-import { removeUserData, setUserData } from './userSlice';
-import { goToGroup } from './wordsListSlice';
 import { BASE_URL as baseUrl, MIN_GROUP, TOKEN_EXPIRED_ERROR } from '../../constants';
 import { SignInResponse } from '../../types';
 import { clearLocalStorage } from '../../utils';
+import apiSlice from './apiSlice';
+import { removeUserData, setUserData } from './userSlice';
+import { goToGroup } from './wordsListSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
