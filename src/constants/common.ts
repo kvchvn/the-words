@@ -6,9 +6,9 @@ export const ROUTER_PATHS: RouterPaths = {
   textbook: 'textbook',
   sprintGame: 'sprint',
   audioCallGame: 'audiocall',
-  gameResults: 'results',
+  gameResults: 'game_results',
+  gameWelcome: 'game_welcome',
 };
-0;
 
 export const LOCAL_STORAGE_KEYS = {
   user: 'user',
@@ -18,3 +18,5 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const FROM_MAIN = 'main';
 export const FROM_TEXTBOOK = 'textbook';
+
+export const GAME_ROUND_TIME = 5;

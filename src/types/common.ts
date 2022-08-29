@@ -11,4 +11,5 @@ export interface RouterPaths {
   sprintGame: string;
   audioCallGame: string;
   gameResults: string;
+  gameWelcome: string;
 }
