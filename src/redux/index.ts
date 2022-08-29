@@ -1,20 +1,28 @@
 import { useDispatch } from 'react-redux';
 
 import rootReducer from './reducer';
-import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
 import {
-  useLazyGetWordsQuery,
-  useLazyGetWordQuery,
-  useSignInUserMutation,
+  useGameDataSelector,
+  useGameResultsSelector,
+  useGroupSelector,
+  usePageSelector,
+  useSprintDataSelector,
+  useUserSelector,
+  useWordIdSelector,
+} from './selectors';
+import {
   useCreateUserMutation,
-  useLazyGetUserWordsQuery,
   useCreateUserWordMutation,
-  useUpdateUserWordMutation,
-  useRemoveUserWordMutation,
-  useLazyGetAggregatedWordsQuery,
   useLazyGetAggregatedWordQuery,
+  useLazyGetAggregatedWordsQuery,
+  useLazyGetUserWordsQuery,
+  useLazyGetWordQuery,
+  useLazyGetWordsQuery,
+  useRemoveUserWordMutation,
+  useSignInUserMutation,
+  useUpdateUserWordMutation,
 } from './slices/apiSlice';
-import { setUserData, removeUserData } from './slices/userSlice';
+import { removeUserData, setUserData } from './slices/userSlice';
 import store from './store';
 
 type AppDispatch = typeof store.dispatch;
@@ -40,4 +48,7 @@ export {
   usePageSelector,
   useUserSelector,
   useWordIdSelector,
+  useGameDataSelector,
+  useSprintDataSelector,
+  useGameResultsSelector,
 };
