@@ -8,6 +8,7 @@ import PageTitle from '../../components/PageTitle';
 import WordsList from '../../components/WordsList';
 import {
   FROM_TEXTBOOK,
+  GAME_TYPES,
   MAX_GROUP_FOR_GUESTS,
   MAX_GROUP_FOR_USERS,
   MAX_PAGE,
@@ -31,10 +32,16 @@ function TextbookPage() {
       <hr />
       <WordsList />
       <nav>
-        <Link to={`/${ROUTER_PATHS.sprintGame}`} state={FROM_TEXTBOOK}>
+        <Link
+          to={`/${ROUTER_PATHS.gameWelcome}`}
+          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
+        >
           Спринт
         </Link>
-        <Link to={`/${ROUTER_PATHS.audioCallGame}`} state={FROM_TEXTBOOK}>
+        <Link
+          to={`/${ROUTER_PATHS.gameWelcome}`}
+          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.audioCallGame }}
+        >
           Аудиовызов
         </Link>
       </nav>

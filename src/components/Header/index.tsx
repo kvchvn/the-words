@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { FROM_MAIN, ROUTER_PATHS } from '../../constants';
+import { FROM_MAIN, GAME_TYPES, ROUTER_PATHS } from '../../constants';
 import { useUserSelector } from '../../redux';
 
 function Header() {
@@ -13,10 +13,16 @@ function Header() {
       <h1>Хэдэр</h1>
       <nav>
         <Link to={ROUTER_PATHS.textbook}>Учебник</Link>
-        <Link to={ROUTER_PATHS.sprintGame} state={FROM_MAIN}>
+        <Link
+          to={ROUTER_PATHS.gameWelcome}
+          state={{ entry: FROM_MAIN, game: GAME_TYPES.sprintGame }}
+        >
           Спринт
         </Link>
-        <Link to={ROUTER_PATHS.audioCallGame} state={FROM_MAIN}>
+        <Link
+          to={ROUTER_PATHS.gameWelcome}
+          state={{ entry: FROM_MAIN, game: GAME_TYPES.audioCallGame }}
+        >
           Аудиовызов
         </Link>
         <Link to={ROUTER_PATHS.authorization}>{user ? user.name : 'Авторизация'}</Link>
