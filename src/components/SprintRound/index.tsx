@@ -1,26 +1,47 @@
 import React from 'react';
 
+import { GAME_ROUND_TIME } from '../../constants';
+import { useAppDispatch } from '../../redux';
+import { saveAnswer } from '../../redux/slices/gameSlice';
+import { Word } from '../../types';
+import Timer from '../Timer';
+
 interface SprintRoundProps {
-  originalWord: string | undefined;
-  translatedWord: string | undefined;
-  isRightAnswer: boolean;
+  originalWord: Word | undefined;
+  translatedWord: Word | undefined;
+  isGameOver: boolean;
   showNextWord: () => void;
+  finishGame: () => void;
 }
 
 function SprintRound({
   originalWord,
   translatedWord,
-  isRightAnswer,
+  isGameOver,
   showNextWord,
+  finishGame,
 }: SprintRoundProps) {
-  return originalWord ? (
+  const dispatch = useAppDispatch();
+
+  const goToNextRound = (userAnswer: boolean) => {
+    const rightAnswer = originalWord!.id === translatedWord!.id;
+    const isTruthyAnswer = rightAnswer === userAnswer;
+    showNextWord();
+    dispatch(saveAnswer(isTruthyAnswer));
+  };
+  return originalWord && translatedWord ? (
     <section>
-      <h4>{originalWord}</h4>
-      <h4>{translatedWord}</h4>
-      <h5>Ответ: {String(isRightAnswer)}</h5>
-      <button type="button" onClick={showNextWord}>
-        Следующее слово
-      </button>
+      <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
+      <h4>{originalWord.word}</h4>
+      <h4>{translatedWord.wordTranslate}</h4>
+      <div>
+        <button disabled={isGameOver} type="button" onClick={goToNextRound.bind(null, true)}>
+          Правда
+        </button>
+        <button disabled={isGameOver} type="button" onClick={goToNextRound.bind(null, false)}>
+          Неправда
+        </button>
+      </div>
     </section>
   ) : (
     <p>Loading</p>
