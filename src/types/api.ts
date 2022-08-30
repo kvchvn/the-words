@@ -1,4 +1,4 @@
-import { EASY_WORD, HARD_WORD, NOT_EASY_WORD } from '../constants';
+import { WordDifficulty } from './words';
 
 export interface ServerErrorType {
   authorization: string;
@@ -11,8 +11,6 @@ export interface ServerError {
   '403': string;
   '404': ServerErrorType;
 }
-
-export type WordDifficulty = typeof HARD_WORD | typeof EASY_WORD | typeof NOT_EASY_WORD;
 
 export interface PreparingParams {
   page?: number;

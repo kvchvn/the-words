@@ -1,4 +1,4 @@
-import { PreparingParams, ServerError, ServerErrorType, WordDifficulty } from './api';
+import { PreparingParams, ServerError, ServerErrorType } from './api';
 import {
   MainSignInResponse,
   SignInFields,
@@ -13,10 +13,9 @@ import {
   AggregatedWordResponse,
   AggregatedWords,
   AggregatedWordsResponse,
-  UserWord,
-  UserWords,
-  UserWordsResponse,
   Word,
+  WordDifficulty,
+  WordOptional,
   WordResult,
   WordsPage,
   WordsResult,
@@ -34,9 +33,6 @@ export {
   ServerErrorType,
   ServerError,
   MainSignInResponse,
-  UserWord,
-  UserWords,
-  UserWordsResponse,
   PreparingParams,
   AggregatedWordsResponse,
   AggregatedWordResponse,
@@ -47,4 +43,5 @@ export {
   WordDifficulty,
   UpdateGameDataFn,
   UpdateGameDataParams,
+  WordOptional,
 };
