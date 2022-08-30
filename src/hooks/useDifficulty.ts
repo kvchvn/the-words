@@ -1,39 +1,26 @@
-import { EASY_WORD, HARD_WORD } from '../constants';
-import {
-  useCreateUserWordMutation,
-  useRemoveUserWordMutation,
-  useUpdateUserWordMutation,
-  useUserSelector,
-} from '../redux';
-import { MainSignInResponse, Word } from '../types';
+import { WORD_WITHOUT_DIFFICULTY } from '../constants';
+import { useCreateUserWordMutation, useUpdateUserWordMutation, useUserSelector } from '../redux';
+import { MainSignInResponse, Word, WordDifficulty } from '../types';
 
 const useDifficulty = (wordData: Word) => {
   const user = useUserSelector();
   const [createUserWord] = useCreateUserWordMutation();
   const [updateUserWord] = useUpdateUserWordMutation();
-  const [removeUserWord] = useRemoveUserWordMutation();
 
-  const toggleDifficulty = async (
-    current: string | undefined,
-    desired: typeof HARD_WORD | typeof EASY_WORD
-  ) => {
+  const toggleDifficulty = async (current: WordDifficulty | undefined, desired: WordDifficulty) => {
     const userId = (user as MainSignInResponse).userId;
     const wordId = wordData.id;
-    const options = {
-      userId,
-      wordId,
-      optional: wordData,
-    };
 
     if (!current) {
-      await createUserWord({ difficulty: desired, ...options });
+      await createUserWord({ difficulty: desired, userId, wordId });
       return;
     }
     if (current === desired) {
-      await removeUserWord({ userId, wordId });
+      // removeUserWord doesn't use to save statistics data
+      await updateUserWord({ userId, wordId, difficulty: WORD_WITHOUT_DIFFICULTY });
       return;
     }
-    await updateUserWord({ difficulty: desired, ...options });
+    await updateUserWord({ difficulty: desired, userId, wordId });
   };
 
   return { toggleDifficulty, user };
