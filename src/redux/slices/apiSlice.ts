@@ -2,26 +2,23 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { ENDPOINTS, WORDS_PER_PAGE } from '../../constants';
 import {
+  AggregatedWord,
+  AggregatedWordResponse,
+  AggregatedWords,
+  AggregatedWordsResponse,
   SignInFields,
   SignInResponse,
   SignUpFields,
   SignUpResponse,
-  UserWord,
-  UserWords,
-  UserWordsResponse,
-  WordsPage,
-  AggregatedWords,
-  AggregatedWord,
-  AggregatedWordsResponse,
-  AggregatedWordResponse,
   Word,
+  WordsPage,
 } from '../../types';
 import { prepareParams } from '../../utils';
 import {
   CreateUserWordArgs,
+  GetAggregatedWordArgs,
   GetAggregatedWordsArgs,
   GetWordsQueryArgs,
-  GetAggregatedWordArgs,
 } from '../types';
 import baseQueryWithReauth from './baseQueryWithReauth';
 
@@ -69,10 +66,10 @@ const apiSlice = createApi({
       }),
       providesTags: ['UserWord'],
       transformResponse: (response: AggregatedWordsResponse) =>
-        response[0].paginatedResults.map(({ userWord, _id, ...optional }) => ({
+        response[0].paginatedResults.map(({ userWord, _id, ...restOptions }) => ({
           id: _id,
           ...userWord,
-          ...optional,
+          ...restOptions,
         })),
     }),
     getAggregatedWord: builder.query<AggregatedWord, GetAggregatedWordArgs>({
@@ -86,13 +83,6 @@ const apiSlice = createApi({
     }),
     refreshToken: builder.query<SignInResponse, string>({
       query: (userId) => `${ENDPOINTS.users}/${userId}${ENDPOINTS.tokens}`,
-    }),
-    // get words are user marked as 'hard' or 'easy'
-    getUserWords: builder.query<UserWords, string>({
-      query: (userId) => `${ENDPOINTS.users}/${userId}${ENDPOINTS.words}`,
-      providesTags: ['UserWord'],
-      transformResponse: (response: UserWordsResponse) =>
-        response.map<UserWord>(({ optional, difficulty }) => ({ ...optional, difficulty })),
     }),
     createUserWord: builder.mutation<void, CreateUserWordArgs>({
       query: ({ difficulty, userId, wordId, optional }) => ({
@@ -125,7 +115,6 @@ export const {
   useCreateUserMutation,
   useSignInUserMutation,
   useLazyGetWordsQuery,
-  useLazyGetUserWordsQuery,
   useCreateUserWordMutation,
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
