@@ -27,19 +27,17 @@ const useSprintGame = () => {
 
   const updateSprintData: UpdateGameDataFn = useCallback(
     ({ allWords, notEasyWords, nextWordIndex }) => {
-      if (allWords && notEasyWords) {
-        const originalWord = notEasyWords[nextWordIndex];
-        const indexAtAllWords = user
-          ? allWords.indexOf(originalWord as AggregatedWord)
-          : nextWordIndex;
-        const translatedWord = getRandomWord(allWords, indexAtAllWords);
-        if (nextWordIndex === STARTED_WORD_INDEX) {
-          dispatch(setWords({ allWords, notEasyWords }));
-        } else {
-          dispatch(setWord({ originalWord, wordIndex: nextWordIndex }));
-        }
-        dispatch(setTranslatedWord(translatedWord));
+      const originalWord = notEasyWords[nextWordIndex];
+      const indexAtAllWords = user
+        ? allWords.indexOf(originalWord as AggregatedWord)
+        : nextWordIndex;
+      const translatedWord = getRandomWord(allWords, indexAtAllWords);
+      if (nextWordIndex === STARTED_WORD_INDEX) {
+        dispatch(setWords({ allWords, notEasyWords }));
+      } else {
+        dispatch(setWord({ originalWord, wordIndex: nextWordIndex }));
       }
+      dispatch(setTranslatedWord(translatedWord));
     },
     [dispatch, user]
   );
