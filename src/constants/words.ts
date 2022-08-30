@@ -18,3 +18,5 @@ export const EASY_WORD = 'easy';
 export const WORD_WITHOUT_DIFFICULTY = 'none';
 // preparing according to mongodb syntax
 export const NOT_EASY_WORD = '{"$ne":"easy"}';
+
+export const MEANING_ANSWERS_AMOUNT = 3;
