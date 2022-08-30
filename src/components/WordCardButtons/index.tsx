@@ -2,11 +2,11 @@ import React from 'react';
 
 import { EASY_WORD, HARD_WORD } from '../../constants';
 import { useDifficulty } from '../../hooks';
-import { Word } from '../../types';
+import { Word, WordDifficulty } from '../../types';
 
 interface WordCardButtonsProps {
   wordData: Word;
-  difficulty: string | undefined;
+  difficulty: WordDifficulty | undefined;
 }
 
 function WordCardButtons({ wordData, difficulty }: WordCardButtonsProps) {
