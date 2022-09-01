@@ -5,6 +5,7 @@ import {
   useGameDataSelector,
   useGameResultsSelector,
   useGroupSelector,
+  useIsGameStarted,
   usePageSelector,
   useSprintDataSelector,
   useUserSelector,
@@ -49,4 +50,5 @@ export {
   useGameDataSelector,
   useSprintDataSelector,
   useGameResultsSelector,
+  useIsGameStarted,
 };

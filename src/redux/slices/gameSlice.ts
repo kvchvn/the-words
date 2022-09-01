@@ -4,6 +4,7 @@ import { STARTED_WORD_INDEX } from '../../constants';
 import { AggregatedWords, Word, WordsPage, WordsResult } from '../../types';
 
 interface GameSliceState {
+  isGameStarted: boolean;
   allWords: WordsResult;
   notEasyWords: WordsResult;
   originalWord: Word | undefined;
@@ -16,6 +17,7 @@ interface GameSliceState {
 }
 
 const initialState: GameSliceState = {
+  isGameStarted: false,
   allWords: undefined,
   notEasyWords: undefined,
   originalWord: undefined,
@@ -44,6 +46,7 @@ const gameSlice = createSlice({
       state.allWords = [...allWords];
       state.notEasyWords = [...notEasyWords];
       state.originalWord = notEasyWords[STARTED_WORD_INDEX];
+      state.isGameStarted = true;
     },
     setWord: (state, { payload }: PayloadAction<{ originalWord: Word; wordIndex: number }>) => {
       const { originalWord, wordIndex } = payload;

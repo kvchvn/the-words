@@ -12,6 +12,8 @@ export const useWordIdSelector = () => useSelector((state: RootState) => state.w
 
 export const useGameDataSelector = () => useSelector((state: RootState) => state.game);
 
+export const useIsGameStarted = () => useSelector((state: RootState) => state.game.isGameStarted);
+
 export const useSprintDataSelector = () => useSelector((state: RootState) => state.sprint);
 
 export const useGameResultsSelector = () => useSelector((state: RootState) => state.game.results);
