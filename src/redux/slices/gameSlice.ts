@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { STARTED_WORD_INDEX } from '../../constants';
-import { AggregatedWords, Word, WordsPage, WordsResult } from '../../types';
+import { AggregatedWords, Word, WordResult, WordsPage, WordsResult } from '../../types';
 
 interface GameSliceState {
   isGameStarted: boolean;
   allWords: WordsResult;
   notEasyWords: WordsResult;
-  originalWord: Word | undefined;
+  originalWord: WordResult;
   wordIndex: number;
   isGameOver: boolean;
   results: {

@@ -3,12 +3,12 @@ import React from 'react';
 import { GAME_ROUND_TIME } from '../../constants';
 import { useAppDispatch } from '../../redux';
 import { saveAnswer } from '../../redux/slices/gameSlice';
-import { Word } from '../../types';
+import { AggregatedWord, WordResult } from '../../types';
 import Timer from '../Timer';
 
 interface SprintRoundProps {
-  originalWord: Word | undefined;
-  translatedWord: Word | undefined;
+  originalWord: WordResult;
+  translatedWord: WordResult;
   isGameOver: boolean;
   showNextWord: () => void;
   finishGame: () => void;

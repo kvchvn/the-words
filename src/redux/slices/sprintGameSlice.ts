@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Word } from '../../types';
+import { Word, WordResult } from '../../types';
 
 interface SprintGameSliceState {
-  translatedWord: Word | undefined;
+  translatedWord: WordResult;
 }
 
 const initialState: SprintGameSliceState = {
