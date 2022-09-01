@@ -10,6 +10,7 @@ interface SprintRoundProps {
   originalWord: WordResult;
   translatedWord: WordResult;
   isGameOver: boolean;
+  updateWordStatistics: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
   showNextWord: () => void;
   finishGame: () => void;
 }
@@ -18,17 +19,22 @@ function SprintRound({
   originalWord,
   translatedWord,
   isGameOver,
+  updateWordStatistics,
   showNextWord,
   finishGame,
 }: SprintRoundProps) {
   const dispatch = useAppDispatch();
 
   const goToNextRound = (userAnswer: boolean) => {
-    const rightAnswer = originalWord!.id === translatedWord!.id;
-    const isTruthyAnswer = rightAnswer === userAnswer;
-    showNextWord();
-    dispatch(saveAnswer(isTruthyAnswer));
+    if (originalWord && translatedWord) {
+      const rightAnswer = originalWord.id === translatedWord.id;
+      const isTruthyAnswer = rightAnswer === userAnswer;
+      updateWordStatistics(originalWord, isTruthyAnswer);
+      showNextWord();
+      dispatch(saveAnswer(isTruthyAnswer));
+    }
   };
+
   return originalWord && translatedWord ? (
     <section>
       <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />

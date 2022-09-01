@@ -10,6 +10,7 @@ function SprintGamePage() {
   const {
     gameData: { originalWord, isGameOver },
     translatedWord,
+    updateWordStatistics,
     toNextWord,
     finishGame,
   } = useGame(updateSprintData);
@@ -22,6 +23,7 @@ function SprintGamePage() {
           translatedWord={translatedWord}
           isGameOver={isGameOver}
           showNextWord={toNextWord}
+          updateWordStatistics={updateWordStatistics}
           finishGame={finishGame}
         />
       </div>

@@ -1,32 +1,42 @@
 import { useCallback, useEffect } from 'react';
 
-import { EASY_WORD, MAX_PAGE, STARTED_WORD_INDEX } from '../constants';
+import {
+  EASY_WORD,
+  HARD_WORD,
+  MAX_PAGE,
+  MEANING_ANSWERS_AMOUNT,
+  STARTED_WORD_INDEX,
+} from '../constants';
 import {
   useAppDispatch,
+  useCreateUserWordMutation,
   useGameDataSelector,
   useGroupSelector,
   useLazyGetAggregatedWordsQuery,
   useLazyGetWordsQuery,
   usePageSelector,
   useSprintDataSelector,
+  useUpdateUserWordMutation,
   useUserSelector,
 } from '../redux';
 import { endGame } from '../redux/slices/gameSlice';
 import { goToNextPage } from '../redux/slices/wordsListSlice';
-import { UpdateGameDataFn } from '../types';
+import { AggregatedWord, UpdateGameDataFn, Word, WordDifficulty, WordOptional } from '../types';
 import { getUserFriendlyErrorMessage } from '../utils';
 
 const useGame = (updateGameData: UpdateGameDataFn) => {
   const user = useUserSelector();
   const page = usePageSelector();
   const group = useGroupSelector();
-  const dispatch = useAppDispatch();
-
   const gameData = useGameDataSelector();
   const { translatedWord } = useSprintDataSelector();
 
+  const dispatch = useAppDispatch();
+
   const [getAggregatedWords] = useLazyGetAggregatedWordsQuery();
   const [getWords] = useLazyGetWordsQuery();
+  const [createUserWord] = useCreateUserWordMutation();
+  const [updateUserWord] = useUpdateUserWordMutation();
 
   const finishGame = () => dispatch(endGame());
 
@@ -39,6 +49,72 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
       return await getWords({ group, page });
     },
     [getAggregatedWords, getWords, user]
+  );
+
+  const updateWordStatistics = useCallback(
+    (originalWord: Word | AggregatedWord, isTruthyAnswer: boolean) => {
+      if (user) {
+        const { userId } = user;
+        const { id: wordId } = originalWord;
+        const difficulty = 'difficulty' in originalWord ? originalWord.difficulty : undefined;
+        const optional = 'optional' in originalWord ? originalWord.optional : undefined;
+
+        let rightAnswers = 0;
+        let totalAnswers = 0;
+        let answersList: Array<boolean> = [];
+
+        if (optional) {
+          rightAnswers = optional.statistics.rightAnswers;
+          totalAnswers = optional.statistics.totalAnswers;
+          answersList = optional.statistics.answersList;
+        }
+
+        if (isTruthyAnswer) {
+          // if userAnswer is true
+          rightAnswers = rightAnswers + 1;
+          answersList = [...answersList, true];
+        } else {
+          answersList = [...answersList, false];
+        }
+        totalAnswers = totalAnswers + 1;
+
+        // updated values
+        const statistics = { rightAnswers, totalAnswers, answersList };
+        const lastSeveralAnswers = answersList.slice(-MEANING_ANSWERS_AMOUNT);
+
+        const setWordDifficultyAs = (newDifficulty: WordDifficulty) => {
+          const updatedOptional = { ...(optional as WordOptional), statistics };
+          updateUserWord({ userId, wordId, difficulty: newDifficulty, optional: updatedOptional });
+        };
+
+        const updateOptional = () => {
+          // just update statistics without difficulty changing
+          const updatedOptional = { ...(optional as WordOptional), statistics };
+          updateUserWord({ userId, wordId, optional: updatedOptional });
+        };
+
+        if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
+          if (!lastSeveralAnswers.includes(true)) {
+            // it means that all last answers are falsy, and the word should mark as hard
+            setWordDifficultyAs(HARD_WORD);
+          } else if (!lastSeveralAnswers.includes(false)) {
+            // all last answers are true, and the word is easy for the user
+            setWordDifficultyAs(EASY_WORD);
+          } else {
+            updateOptional();
+          }
+        } else {
+          if (optional || difficulty) {
+            updateOptional();
+          } else {
+            // if the user plays with the word at the first time
+            const optional = { statistics };
+            createUserWord({ userId, wordId, optional });
+          }
+        }
+      }
+    },
+    [createUserWord, updateUserWord, user]
   );
 
   const toNextWord = () => {
@@ -72,7 +148,7 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
     });
   }, [fetchWords, group, page, updateGameData, dispatch]);
 
-  return { gameData, translatedWord, user, toNextWord, finishGame };
+  return { gameData, translatedWord, user, toNextWord, updateWordStatistics, finishGame };
 };
 
 export default useGame;
