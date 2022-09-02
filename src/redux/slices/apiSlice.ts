@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { ENDPOINTS, WORDS_PER_PAGE } from '../../constants';
+import { ENDPOINTS, TAG_ID, WORDS_PER_PAGE } from '../../constants';
 import {
   AggregatedWord,
   AggregatedWordResponse,
@@ -64,7 +64,7 @@ const apiSlice = createApi({
           filter: prepareParams({ page, difficulty }),
         },
       }),
-      providesTags: ['UserWord'],
+      providesTags: [{ type: 'UserWord', id: TAG_ID.difficulty }],
       transformResponse: (response: AggregatedWordsResponse) =>
         response[0].paginatedResults.map(({ userWord, _id, ...restOptions }) => ({
           id: _id,
@@ -75,7 +75,7 @@ const apiSlice = createApi({
     getAggregatedWord: builder.query<AggregatedWord, GetAggregatedWordArgs>({
       query: ({ userId, wordId }) =>
         `${ENDPOINTS.users}/${userId}${ENDPOINTS.aggregatedWords}/${wordId}`,
-      providesTags: ['UserWord'],
+      providesTags: [{ type: 'UserWord', id: TAG_ID.difficulty }],
       transformResponse: (response: Array<AggregatedWordResponse>) => {
         const { _id, userWord, ...options } = response[0];
         return { id: _id, ...userWord, ...options };
@@ -90,7 +90,7 @@ const apiSlice = createApi({
         method: 'POST',
         body: { difficulty, optional },
       }),
-      invalidatesTags: ['UserWord'],
+      invalidatesTags: (_, __, { tagId }) => [{ type: 'UserWord', id: tagId }],
     }),
     updateUserWord: builder.mutation<void, CreateUserWordArgs>({
       query: ({ difficulty, userId, wordId, optional }) => ({
@@ -98,7 +98,7 @@ const apiSlice = createApi({
         method: 'PUT',
         body: { difficulty, optional },
       }),
-      invalidatesTags: ['UserWord'],
+      invalidatesTags: (_, __, { tagId }) => [{ type: 'UserWord', id: tagId }],
     }),
     removeUserWord: builder.mutation<void, Pick<CreateUserWordArgs, 'userId' | 'wordId'>>({
       query: ({ userId, wordId }) => ({

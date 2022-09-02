@@ -1,4 +1,5 @@
-import { WordDifficulty, WordOptional } from '../types';
+import { TAG_ID } from '../constants';
+import { TagId, WordDifficulty, WordOptional } from '../types';
 
 export interface GetWordsQueryArgs {
   group: number;
@@ -6,9 +7,10 @@ export interface GetWordsQueryArgs {
 }
 
 export interface CreateUserWordArgs {
-  difficulty?: WordDifficulty;
   userId: string;
   wordId: string;
+  tagId: typeof TAG_ID[keyof TagId];
+  difficulty?: WordDifficulty;
   optional?: WordOptional;
 }
 

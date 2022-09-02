@@ -16,3 +16,8 @@ export interface PreparingParams {
   page?: number;
   difficulty?: WordDifficulty;
 }
+
+export interface TagId {
+  difficulty: 'DIFFICULTY';
+  game: 'GAME';
+}

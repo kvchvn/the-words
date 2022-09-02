@@ -6,6 +6,7 @@ import {
   MAX_PAGE,
   MEANING_ANSWERS_AMOUNT,
   STARTED_WORD_INDEX,
+  TAG_ID,
 } from '../constants';
 import {
   useAppDispatch,
@@ -56,6 +57,7 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
       if (user) {
         const { userId } = user;
         const { id: wordId } = originalWord;
+        const tagId = TAG_ID.game;
         const difficulty = 'difficulty' in originalWord ? originalWord.difficulty : undefined;
         const optional = 'optional' in originalWord ? originalWord.optional : undefined;
 
@@ -84,13 +86,19 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
 
         const setWordDifficultyAs = (newDifficulty: WordDifficulty) => {
           const updatedOptional = { ...(optional as WordOptional), statistics };
-          updateUserWord({ userId, wordId, difficulty: newDifficulty, optional: updatedOptional });
+          updateUserWord({
+            userId,
+            wordId,
+            difficulty: newDifficulty,
+            optional: updatedOptional,
+            tagId,
+          });
         };
 
         const updateOptional = () => {
           // just update statistics without difficulty changing
           const updatedOptional = { ...(optional as WordOptional), statistics };
-          updateUserWord({ userId, wordId, optional: updatedOptional });
+          updateUserWord({ userId, wordId, optional: updatedOptional, tagId });
         };
 
         if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
@@ -109,7 +117,7 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
           } else {
             // if the user plays with the word at the first time
             const optional = { statistics };
-            createUserWord({ userId, wordId, optional });
+            createUserWord({ userId, wordId, optional, tagId });
           }
         }
       }

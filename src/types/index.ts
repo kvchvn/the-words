@@ -1,4 +1,4 @@
-import { PreparingParams, ServerError, ServerErrorType } from './api';
+import { PreparingParams, ServerError, ServerErrorType, TagId } from './api';
 import {
   MainSignInResponse,
   SignInFields,
@@ -44,4 +44,5 @@ export {
   UpdateGameDataFn,
   UpdateGameDataParams,
   WordOptional,
+  TagId,
 };
