@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { MIN_GROUP, MIN_PAGE } from '../../constants';
-import { getFromLocalStorage } from '../../utils';
 
 const initialState = {
-  group: getFromLocalStorage<number>('group') || MIN_GROUP,
-  page: getFromLocalStorage<number>('page') || MIN_PAGE,
+  group: MIN_GROUP,
+  page: MIN_PAGE,
   wordId: '',
 };
 
