@@ -15,7 +15,7 @@ const useSprintGame = () => {
     wordsList: WordsPage | AggregatedWords,
     currentIndex: number
   ): Word | AggregatedWord => {
-    // it's made in order to true answers are encountering more times
+    // it's made in order to "true" answers are encountering more times
     const RANGE_WIDTH = 1;
     const minIndex = currentIndex - RANGE_WIDTH;
     const maxIndex = currentIndex + RANGE_WIDTH;

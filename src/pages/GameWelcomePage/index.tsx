@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
@@ -12,7 +12,8 @@ import {
   MIN_GROUP,
   ROUTER_PATHS,
 } from '../../constants';
-import { useGroupSelector } from '../../redux';
+import { useAppDispatch, useGroupSelector } from '../../redux';
+import { goToGroup } from '../../redux/slices/wordsListSlice';
 import { RouterPaths } from '../../types';
 
 interface GameWelcomePageLocationState {
@@ -28,9 +29,15 @@ function GameWelcomePage() {
     state: { entry, game },
   } = useLocation() as GameWelcomePageLocationState;
 
+  const dispatch = useAppDispatch();
+
   const [isGroupSelection, setIsGroupSelection] = useState(entry === FROM_MAIN);
 
   const hideGroupSelection = () => setIsGroupSelection(false);
+
+  useEffect(() => {
+    dispatch(goToGroup(MIN_GROUP));
+  }, [dispatch]);
 
   return isGroupSelection ? (
     <div>
