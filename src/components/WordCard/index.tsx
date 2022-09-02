@@ -17,7 +17,7 @@ function WordCard({ closeModal }: WordCardProps) {
       <h1>{wordData.word}</h1>
       {user && <h2>difficulty: {(wordData as AggregatedWord).difficulty || 'None'}</h2>}
       {user && (
-        <WordCardButtons wordData={wordData} difficulty={(wordData as AggregatedWord).difficulty} />
+        <WordCardButtons word={wordData} difficulty={(wordData as AggregatedWord).difficulty} />
       )}
       <button type="button" onClick={closeModal}>
         Закрыть

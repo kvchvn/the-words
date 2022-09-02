@@ -2,15 +2,15 @@ import React from 'react';
 
 import { EASY_WORD, HARD_WORD } from '../../constants';
 import { useDifficulty } from '../../hooks';
-import { Word, WordDifficulty } from '../../types';
+import { AggregatedWord, Word, WordDifficulty } from '../../types';
 
 interface WordCardButtonsProps {
-  wordData: Word;
+  word: Word | AggregatedWord;
   difficulty: WordDifficulty | undefined;
 }
 
-function WordCardButtons({ wordData, difficulty }: WordCardButtonsProps) {
-  const { user, toggleDifficulty } = useDifficulty(wordData);
+function WordCardButtons({ word, difficulty }: WordCardButtonsProps) {
+  const { user, toggleDifficulty } = useDifficulty(word);
 
   const toggleHardDifficulty = () => toggleDifficulty(difficulty, HARD_WORD);
 
