@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { FROM_MAIN, GAME_TYPES, ROUTER_PATHS } from '../../constants';
-import { useIsGameStarted, useUserSelector } from '../../redux';
+import { useIsGameStartedSelector, useUserSelector } from '../../redux';
 
 function Header() {
   const user = useUserSelector();
-  const isGameStarted = useIsGameStarted();
+  const isGameStarted = useIsGameStartedSelector();
 
   return isGameStarted ? null : (
     <div>
