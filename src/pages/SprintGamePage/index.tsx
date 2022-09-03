@@ -11,6 +11,7 @@ function SprintGamePage() {
     gameData: { originalWord, isGameOver },
     translatedWord,
     updateWordStatistics,
+    playSound,
     toNextWord,
     finishGame,
   } = useGame(updateSprintData);
@@ -22,6 +23,7 @@ function SprintGamePage() {
           originalWord={originalWord}
           translatedWord={translatedWord}
           isGameOver={isGameOver}
+          playSound={playSound}
           showNextWord={toNextWord}
           updateWordStatistics={updateWordStatistics}
           finishGame={finishGame}
