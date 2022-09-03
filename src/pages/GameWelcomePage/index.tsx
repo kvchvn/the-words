@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import GroupSelect from '../../components/GroupSelect';
 import {
@@ -25,19 +25,30 @@ interface GameWelcomePageLocationState {
 
 function GameWelcomePage() {
   const group = useGroupSelector();
-  const {
-    state: { entry, game },
-  } = useLocation() as GameWelcomePageLocationState;
+  const navigate = useNavigate();
+  const { state } = useLocation() as GameWelcomePageLocationState;
 
   const dispatch = useAppDispatch();
 
-  const [isGroupSelection, setIsGroupSelection] = useState(entry === FROM_MAIN);
+  const [isGroupSelection, setIsGroupSelection] = useState(
+    state ? state.entry === FROM_MAIN : true
+  );
 
   const hideGroupSelection = () => setIsGroupSelection(false);
 
   useEffect(() => {
     dispatch(goToGroup(MIN_GROUP));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!state) {
+      navigate(ROUTER_PATHS.main);
+    }
+  }, [navigate, state]);
+
+  if (!state) {
+    return null;
+  }
 
   return isGroupSelection ? (
     <div>
@@ -53,7 +64,7 @@ function GameWelcomePage() {
     <>
       <h5>Вы готовы?</h5>
       <p>Уровень сложности: {group + DELTA}</p>
-      <Link to={`/${ROUTER_PATHS[game]}`}>Начать игру</Link>
+      <Link to={`/${ROUTER_PATHS[state.game]}`}>Начать игру</Link>
     </>
   );
 }
