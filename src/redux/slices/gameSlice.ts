@@ -33,6 +33,9 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    startGame: (state) => {
+      state.isGameStarted = true;
+    },
     setWords: (
       state,
       {
@@ -46,7 +49,6 @@ const gameSlice = createSlice({
       state.allWords = [...allWords];
       state.notEasyWords = [...notEasyWords];
       state.originalWord = notEasyWords[STARTED_WORD_INDEX];
-      state.isGameStarted = true;
     },
     setWord: (state, { payload }: PayloadAction<{ originalWord: Word; wordIndex: number }>) => {
       const { originalWord, wordIndex } = payload;
@@ -67,4 +69,4 @@ const gameSlice = createSlice({
 });
 
 export default gameSlice.reducer;
-export const { setWords, setWord, endGame, resetGame, saveAnswer } = gameSlice.actions;
+export const { setWords, setWord, endGame, resetGame, saveAnswer, startGame } = gameSlice.actions;

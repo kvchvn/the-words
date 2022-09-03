@@ -1,5 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import rightAnswerSound from '../assets/sounds/right.mp3';
 import wrongAnswerSound from '../assets/sounds/wrong.mp3';
 import {
@@ -7,6 +9,7 @@ import {
   HARD_WORD,
   MAX_PAGE,
   MEANING_ANSWERS_AMOUNT,
+  ROUTER_PATHS,
   STARTED_WORD_INDEX,
   TAG_ID,
 } from '../constants';
@@ -15,6 +18,7 @@ import {
   useCreateUserWordMutation,
   useGameDataSelector,
   useGroupSelector,
+  useIsGameStartedSelector,
   useLazyGetAggregatedWordsQuery,
   useLazyGetWordsQuery,
   usePageSelector,
@@ -33,7 +37,10 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
   const page = usePageSelector();
   const group = useGroupSelector();
   const gameData = useGameDataSelector();
+  const isGameStarted = useIsGameStartedSelector();
   const { translatedWord } = useSprintDataSelector();
+
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -163,6 +170,13 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
       }
     });
   }, [fetchWords, group, page, updateGameData, dispatch]);
+
+  useEffect(() => {
+    // if user goes to game-page directly (by entering address to searchbar)
+    if (!isGameStarted) {
+      navigate(ROUTER_PATHS.main);
+    }
+  }, [navigate, isGameStarted]);
 
   return {
     gameData,

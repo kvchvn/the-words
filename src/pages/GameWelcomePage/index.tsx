@@ -13,6 +13,7 @@ import {
   ROUTER_PATHS,
 } from '../../constants';
 import { useAppDispatch, useGroupSelector } from '../../redux';
+import { startGame } from '../../redux/slices/gameSlice';
 import { goToGroup } from '../../redux/slices/wordsListSlice';
 import { RouterPaths } from '../../types';
 
@@ -35,6 +36,8 @@ function GameWelcomePage() {
   );
 
   const hideGroupSelection = () => setIsGroupSelection(false);
+
+  const launchGame = () => dispatch(startGame());
 
   useEffect(() => {
     dispatch(goToGroup(MIN_GROUP));
@@ -64,7 +67,9 @@ function GameWelcomePage() {
     <>
       <h5>Вы готовы?</h5>
       <p>Уровень сложности: {group + DELTA}</p>
-      <Link to={`/${ROUTER_PATHS[state.game]}`}>Начать игру</Link>
+      <Link to={`/${ROUTER_PATHS[state.game]}`} onClick={launchGame}>
+        Начать игру
+      </Link>
     </>
   );
 }

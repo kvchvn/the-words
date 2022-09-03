@@ -15,6 +15,7 @@ function SprintGamePage() {
     toNextWord,
     finishGame,
   } = useGame(updateSprintData);
+
   return (
     <>
       <PageTitle>Спринт</PageTitle>
