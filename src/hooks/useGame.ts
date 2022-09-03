@@ -1,5 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
+import rightAnswerSound from '../assets/sounds/right.mp3';
+import wrongAnswerSound from '../assets/sounds/wrong.mp3';
 import {
   EASY_WORD,
   HARD_WORD,
@@ -24,6 +26,7 @@ import { endGame } from '../redux/slices/gameSlice';
 import { goToNextPage } from '../redux/slices/wordsListSlice';
 import { AggregatedWord, UpdateGameDataFn, Word, WordDifficulty, WordOptional } from '../types';
 import { getUserFriendlyErrorMessage } from '../utils';
+import { playAudio } from '../utils/common';
 
 const useGame = (updateGameData: UpdateGameDataFn) => {
   const user = useUserSelector();
@@ -51,6 +54,11 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
     },
     [getAggregatedWords, getWords, user]
   );
+
+  const playSound = (isTruthyAnswer: boolean) => {
+    const src = isTruthyAnswer ? rightAnswerSound : wrongAnswerSound;
+    return playAudio(src);
+  };
 
   const updateWordStatistics = useCallback(
     (originalWord: Word | AggregatedWord, isTruthyAnswer: boolean) => {
@@ -156,7 +164,15 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
     });
   }, [fetchWords, group, page, updateGameData, dispatch]);
 
-  return { gameData, translatedWord, user, toNextWord, updateWordStatistics, finishGame };
+  return {
+    gameData,
+    translatedWord,
+    user,
+    toNextWord,
+    playSound,
+    updateWordStatistics,
+    finishGame,
+  };
 };
 
 export default useGame;
