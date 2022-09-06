@@ -23,6 +23,7 @@ function GameResultsPage() {
   };
 
   useEffect(() => {
+    // if user wants to open page directly
     if (!isGameOver) {
       navigate(ROUTER_PATHS.main);
     }
