@@ -40,8 +40,10 @@ function GameWelcomePage() {
   const launchGame = () => dispatch(startGame());
 
   useEffect(() => {
-    dispatch(goToGroup(MIN_GROUP));
-  }, [dispatch]);
+    if (state && state.entry === FROM_MAIN) {
+      dispatch(goToGroup(MIN_GROUP));
+    }
+  }, [dispatch, state]);
 
   useEffect(() => {
     if (!state) {

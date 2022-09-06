@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
+import { EASY_WORD } from '../../constants';
 import { useModal, useWords } from '../../hooks';
 import { useAppDispatch } from '../../redux';
 import { setCurrentWordId, unsetCurrentWordId } from '../../redux/slices/wordsListSlice';
@@ -9,7 +10,11 @@ import Modal from '../Modal';
 import WordCard from '../WordCard';
 import WordItem from '../WordItem';
 
-function WordsList() {
+interface WordsListProps {
+  toggleGames: (disable: boolean) => void;
+}
+
+function WordsList({ toggleGames }: WordsListProps) {
   const dispatch = useAppDispatch();
   const { wordsResult, isLoading } = useWords();
   const { isModalOpen, handleOpen, handleClose } = useModal();
@@ -24,6 +29,19 @@ function WordsList() {
     },
     [handleOpen, dispatch]
   );
+
+  useEffect(() => {
+    if (wordsResult) {
+      const hasNotEasyWord = [...wordsResult].some((word) =>
+        'difficulty' in word ? word.difficulty !== EASY_WORD : true
+      );
+      if (!hasNotEasyWord) {
+        toggleGames(true);
+      } else {
+        toggleGames(false);
+      }
+    }
+  }, [toggleGames, wordsResult]);
 
   return (
     <>

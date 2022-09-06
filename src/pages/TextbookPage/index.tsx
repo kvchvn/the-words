@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -18,6 +18,10 @@ import {
 } from '../../constants';
 
 function TextbookPage() {
+  const [isGamesDisabled, setIsGamesDisabled] = useState(false);
+
+  const toggleGames = useCallback((disable: boolean) => setIsGamesDisabled(disable), []);
+
   return (
     <>
       <PageTitle>Учебник</PageTitle>
@@ -30,19 +34,19 @@ function TextbookPage() {
       <hr />
       <PageSelect firstPage={MIN_PAGE} lastPage={MAX_PAGE} />
       <hr />
-      <WordsList />
+      <WordsList toggleGames={toggleGames} />
       <nav>
         <Link
           to={`/${ROUTER_PATHS.gameWelcome}`}
           state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
         >
-          Спринт
+          <button disabled={isGamesDisabled}>Спринт</button>
         </Link>
         <Link
           to={`/${ROUTER_PATHS.gameWelcome}`}
           state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.audioCallGame }}
         >
-          Аудиовызов
+          <button disabled={isGamesDisabled}>Аудиовызов</button>
         </Link>
       </nav>
     </>
