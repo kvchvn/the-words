@@ -8,12 +8,12 @@ import { FROM_MAIN, FROM_TEXTBOOK } from '../../constants';
 import { useGame } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
 
-interface SprintGamePageLocationState {
+interface SprintGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK | null;
 }
 
 function SprintGamePage() {
-  const { state: entry } = useLocation() as SprintGamePageLocationState;
+  const { state: entry } = useLocation() as SprintGamePageLocation;
   const { updateSprintData } = useSprintGame();
   const {
     gameData: { originalWord, isGameOver },

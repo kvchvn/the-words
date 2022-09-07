@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 
 import finishGameSound from '../../assets/sounds/finish.mp3';
 import PageTitle from '../../components/PageTitle';
@@ -10,7 +11,8 @@ import { resetGame } from '../../redux/slices/gameSlice';
 import { playAudio } from '../../utils/common';
 
 function GameResultsPage() {
-  const { totalAnswers, rightAnswers } = useGameResultsSelector();
+  const { totalAnswers, rightAnswers, rightAnswersList, wrongAnswersList } =
+    useGameResultsSelector();
   const isGameOver = useIsGameOverSelector();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -42,6 +44,25 @@ function GameResultsPage() {
       <p>
         Правильных ответов: {rightAnswers} из {totalAnswers}
       </p>
+      <hr />
+      Правильно угаданы:
+      <ul>
+        {rightAnswersList.map((word) => (
+          <li key={uuid()}>
+            {word.word} --- {word.wordTranslate}
+          </li>
+        ))}
+      </ul>
+      <hr />
+      Неправильно угаданы:
+      <ul>
+        {wrongAnswersList.map((word) => (
+          <li key={uuid()}>
+            {word.word} --- {word.wordTranslate}
+          </li>
+        ))}
+      </ul>
+      <hr />
       {!isButtonsHidden && (
         <div>
           <button type="button" onClick={goToMainPage}>

@@ -36,7 +36,7 @@ function SprintRound({
         playSound(isTruthyAnswer).then(() => {
           updateWordStatistics(originalWord, isTruthyAnswer);
           showNextWord();
-          dispatch(saveAnswer(isTruthyAnswer));
+          dispatch(saveAnswer({ word: originalWord, isTruthyAnswer }));
         });
       }
     },

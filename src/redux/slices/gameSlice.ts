@@ -13,6 +13,8 @@ interface GameSliceState {
   results: {
     totalAnswers: number;
     rightAnswers: number;
+    rightAnswersList: Array<Word>;
+    wrongAnswersList: Array<Word>;
   };
 }
 
@@ -26,6 +28,8 @@ const initialState: GameSliceState = {
   results: {
     totalAnswers: 0,
     rightAnswers: 0,
+    rightAnswersList: [],
+    wrongAnswersList: [],
   },
 };
 
@@ -55,9 +59,13 @@ const gameSlice = createSlice({
       state.originalWord = originalWord;
       state.wordIndex = wordIndex;
     },
-    saveAnswer: (state, { payload }: PayloadAction<boolean>) => {
-      if (payload) {
+    saveAnswer: (state, { payload }: PayloadAction<{ word: Word; isTruthyAnswer: boolean }>) => {
+      const { word, isTruthyAnswer } = payload;
+      if (isTruthyAnswer) {
         state.results.rightAnswers++;
+        state.results.rightAnswersList.push(word);
+      } else {
+        state.results.wrongAnswersList.push(word);
       }
       state.results.totalAnswers++;
     },
