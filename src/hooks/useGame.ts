@@ -14,6 +14,7 @@ import {
   ROUTER_PATHS,
   STARTED_WORD_INDEX,
   TAG_ID,
+  WORD_WITHOUT_DIFFICULTY,
 } from '../constants';
 import {
   useAppDispatch,
@@ -120,6 +121,12 @@ const useGame = (
           const updatedOptional = { ...(optional as WordOptional), statistics };
           updateUserWord({ userId, wordId, optional: updatedOptional, tagId });
         };
+
+        if (difficulty === EASY_WORD && !isTruthyAnswer) {
+          // reset difficulty, if the user will answer wrong to an easy word
+          setWordDifficultyAs(WORD_WITHOUT_DIFFICULTY);
+          return;
+        }
 
         if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
           if (!lastSeveralAnswers.includes(true)) {
