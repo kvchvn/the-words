@@ -6,6 +6,8 @@ import rightAnswerSound from '../assets/sounds/right.mp3';
 import wrongAnswerSound from '../assets/sounds/wrong.mp3';
 import {
   EASY_WORD,
+  FROM_MAIN,
+  FROM_TEXTBOOK,
   HARD_WORD,
   MAX_PAGE,
   MEANING_ANSWERS_AMOUNT,
@@ -32,7 +34,10 @@ import { AggregatedWord, UpdateGameDataFn, Word, WordDifficulty, WordOptional } 
 import { getUserFriendlyErrorMessage } from '../utils';
 import { playAudio } from '../utils/common';
 
-const useGame = (updateGameData: UpdateGameDataFn) => {
+const useGame = (
+  entry: typeof FROM_MAIN | typeof FROM_TEXTBOOK | null,
+  updateGameData: UpdateGameDataFn
+) => {
   const user = useUserSelector();
   const page = usePageSelector();
   const group = useGroupSelector();
@@ -163,13 +168,16 @@ const useGame = (updateGameData: UpdateGameDataFn) => {
         getUserFriendlyErrorMessage(error, 'words');
       } else if (data) {
         const allWords = [...data];
-        const notEasyWords = [...data].filter((word) =>
-          'difficulty' in word ? word.difficulty !== EASY_WORD : true
-        );
+        const notEasyWords =
+          entry === FROM_MAIN
+            ? [...data]
+            : [...data].filter((word) =>
+                'difficulty' in word ? word.difficulty !== EASY_WORD : true
+              );
         updateGameData({ allWords, notEasyWords, nextWordIndex: STARTED_WORD_INDEX });
       }
     });
-  }, [fetchWords, group, page, updateGameData, dispatch]);
+  }, [fetchWords, group, page, updateGameData, dispatch, entry]);
 
   useEffect(() => {
     // if user goes to game-page directly (by entering address to searchbar)

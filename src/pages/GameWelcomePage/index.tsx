@@ -69,7 +69,7 @@ function GameWelcomePage() {
     <>
       <h5>Вы готовы?</h5>
       <p>Уровень сложности: {group + DELTA}</p>
-      <Link to={`/${ROUTER_PATHS[state.game]}`} onClick={launchGame}>
+      <Link to={`/${ROUTER_PATHS[state.game]}`} onClick={launchGame} state={state.entry}>
         Начать игру
       </Link>
     </>
