@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
-import PageTitle from '../../components/PageTitle';
-import WordsList from '../../components/WordsList';
 import GroupSelect from '../../components/GroupSelect';
 import PageSelect from '../../components/PageSelect';
-
+import PageTitle from '../../components/PageTitle';
+import WordsList from '../../components/WordsList';
 import {
+  FROM_TEXTBOOK,
+  GAME_TYPES,
   MAX_GROUP_FOR_GUESTS,
   MAX_GROUP_FOR_USERS,
   MAX_PAGE,
@@ -16,6 +18,10 @@ import {
 } from '../../constants';
 
 function TextbookPage() {
+  const [isGamesDisabled, setIsGamesDisabled] = useState(false);
+
+  const toggleGames = useCallback((disable: boolean) => setIsGamesDisabled(disable), []);
+
   return (
     <>
       <PageTitle>Учебник</PageTitle>
@@ -28,10 +34,20 @@ function TextbookPage() {
       <hr />
       <PageSelect firstPage={MIN_PAGE} lastPage={MAX_PAGE} />
       <hr />
-      <WordsList />
+      <WordsList toggleGames={toggleGames} />
       <nav>
-        <Link to={`/${ROUTER_PATHS.sprintGame}`}>Sprint Game</Link>
-        <Link to={`/${ROUTER_PATHS.audioCallGame}`}>Audiocall Game</Link>
+        <Link
+          to={`/${ROUTER_PATHS.gameWelcome}`}
+          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
+        >
+          <button disabled={isGamesDisabled}>Спринт</button>
+        </Link>
+        <Link
+          to={`/${ROUTER_PATHS.gameWelcome}`}
+          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.audioCallGame }}
+        >
+          <button disabled={isGamesDisabled}>Аудиовызов</button>
+        </Link>
       </nav>
     </>
   );

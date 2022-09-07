@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
 
-import { setUserData, useAppDispatch, useSignInUserMutation } from '../redux';
-import { getUserFriendlyErrorMessage, setToLocalStorage } from '../utils';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+
 import { ROUTER_PATHS } from '../constants';
+import { setUserData, useAppDispatch, useSignInUserMutation } from '../redux';
 import { MainSignInResponse, SignInFields } from '../types';
+import { getUserFriendlyErrorMessage, setToLocalStorage } from '../utils';
 
 const useSignIn = (initialValues: SignInFields) => {
   const [signIn, { data: userData, isLoading, isError, error }] = useSignInUserMutation();

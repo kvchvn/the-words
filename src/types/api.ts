@@ -1,4 +1,4 @@
-import { EASY_WORD, HARD_WORD } from '../constants';
+import { WordDifficulty } from './words';
 
 export interface ServerErrorType {
   authorization: string;
@@ -14,5 +14,10 @@ export interface ServerError {
 
 export interface PreparingParams {
   page?: number;
-  difficulty?: typeof HARD_WORD | typeof EASY_WORD;
+  difficulty?: WordDifficulty;
+}
+
+export interface TagId {
+  difficulty: 'DIFFICULTY';
+  game: 'GAME';
 }

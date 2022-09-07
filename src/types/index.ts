@@ -1,25 +1,25 @@
-import { Theme, RouterPaths } from './common';
+import { PreparingParams, ServerError, ServerErrorType, TagId } from './api';
 import {
+  MainSignInResponse,
   SignInFields,
+  SignInResponse,
   SignUpFields,
   SignUpResponse,
-  SignInResponse,
-  MainSignInResponse,
 } from './authorization';
+import { RouterPaths, Theme } from './common';
+import { UpdateGameDataFn, UpdateGameDataParams } from './games';
 import {
-  Word,
-  WordsPage,
-  UserWord,
-  UserWords,
-  UserWordsResponse,
-  AggregatedWordsResponse,
+  AggregatedWord,
   AggregatedWordResponse,
   AggregatedWords,
-  AggregatedWord,
-  WordsResult,
+  AggregatedWordsResponse,
+  Word,
+  WordDifficulty,
+  WordOptional,
   WordResult,
+  WordsPage,
+  WordsResult,
 } from './words';
-import { ServerErrorType, ServerError, PreparingParams } from './api';
 
 export {
   Theme,
@@ -33,9 +33,6 @@ export {
   ServerErrorType,
   ServerError,
   MainSignInResponse,
-  UserWord,
-  UserWords,
-  UserWordsResponse,
   PreparingParams,
   AggregatedWordsResponse,
   AggregatedWordResponse,
@@ -43,4 +40,9 @@ export {
   AggregatedWord,
   WordsResult,
   WordResult,
+  WordDifficulty,
+  UpdateGameDataFn,
+  UpdateGameDataParams,
+  WordOptional,
+  TagId,
 };

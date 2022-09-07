@@ -1,4 +1,4 @@
-import { EASY_WORD, HARD_WORD } from '../constants';
+import { EASY_WORD, HARD_WORD, WORD_WITHOUT_DIFFICULTY } from '../constants';
 
 export interface Word {
   id: string;
@@ -17,23 +17,29 @@ export interface Word {
   textExampleTranslate: string;
 }
 
+export type WordDifficulty = typeof HARD_WORD | typeof EASY_WORD | typeof WORD_WITHOUT_DIFFICULTY;
+
+export interface WordOptional {
+  statistics: {
+    rightAnswers: number;
+    totalAnswers: number;
+    answersList: Array<boolean>;
+  };
+}
+
 export type WordsPage = Array<Word>;
 
 export interface AggregatedWordResponse extends Omit<Word, 'id'> {
   _id: string;
   userWord: {
-    difficulty: typeof HARD_WORD | typeof EASY_WORD;
-    optional: {
-      [key: string]: string;
-    };
+    difficulty: WordDifficulty;
+    optional: WordOptional;
   };
 }
 
 export interface AggregatedWord extends Word {
-  difficulty: typeof HARD_WORD | typeof EASY_WORD;
-  optional: {
-    [key: string]: string;
-  };
+  difficulty?: WordDifficulty;
+  optional?: WordOptional;
 }
 
 export type AggregatedWords = Array<AggregatedWord>;
@@ -44,21 +50,6 @@ export type AggregatedWordsResponse = [
     totalCount: [{ count: number }];
   }
 ];
-
-export interface UserWordResponse {
-  id: string;
-  wordId: string;
-  difficulty: string;
-  optional: Word;
-}
-
-export interface UserWord extends Word {
-  difficulty: string;
-}
-
-export type UserWordsResponse = Array<UserWordResponse>;
-
-export type UserWords = Array<UserWord>;
 
 export type WordsResult = WordsPage | AggregatedWords | undefined;
 

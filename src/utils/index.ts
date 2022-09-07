@@ -1,3 +1,4 @@
+import { getUserFriendlyErrorMessage, prepareParams } from './api';
 import {
   getFromLocalStorage,
   setToLocalStorage,
@@ -5,8 +6,8 @@ import {
   clearLocalStorage,
   disableScrolling,
   enableScrolling,
+  getRandomBetween,
 } from './common';
-import { getUserFriendlyErrorMessage, prepareParams } from './api';
 
 export {
   getFromLocalStorage,
@@ -17,4 +18,5 @@ export {
   disableScrolling,
   enableScrolling,
   prepareParams,
+  getRandomBetween,
 };

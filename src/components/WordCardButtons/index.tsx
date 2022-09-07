@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { useDifficulty } from '../../hooks';
 import { EASY_WORD, HARD_WORD } from '../../constants';
-import { Word } from '../../types';
+import { useDifficulty } from '../../hooks';
+import { AggregatedWord, Word, WordDifficulty } from '../../types';
 
 interface WordCardButtonsProps {
-  wordData: Word;
-  difficulty: string | undefined;
+  word: Word | AggregatedWord;
+  difficulty: WordDifficulty | undefined;
 }
 
-function WordCardButtons({ wordData, difficulty }: WordCardButtonsProps) {
-  const { user, toggleDifficulty } = useDifficulty(wordData);
+function WordCardButtons({ word, difficulty }: WordCardButtonsProps) {
+  const { user, toggleDifficulty } = useDifficulty(word);
 
   const toggleHardDifficulty = () => toggleDifficulty(difficulty, HARD_WORD);
 

@@ -1,4 +1,4 @@
-import { ServerError } from '../types';
+import { ServerError, TagId } from '../types';
 
 export const BASE_URL = 'https://rs-lang-1.herokuapp.com';
 
@@ -23,3 +23,8 @@ export const SERVER_ERROR: ServerError = {
 };
 
 export const TOKEN_EXPIRED_ERROR = 401;
+
+export const TAG_ID: TagId = {
+  difficulty: 'DIFFICULTY',
+  game: 'GAME',
+};

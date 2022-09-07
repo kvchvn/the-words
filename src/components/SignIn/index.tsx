@@ -1,9 +1,8 @@
 import React from 'react';
 
-import Loading from '../Loading';
-
 import { useSignIn } from '../../hooks';
 import { SignInFields } from '../../types';
+import Loading from '../Loading';
 
 interface SignInProps {
   goToSignUp: () => void;

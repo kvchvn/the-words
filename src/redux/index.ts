@@ -1,21 +1,30 @@
 import { useDispatch } from 'react-redux';
 
-import store from './store';
 import rootReducer from './reducer';
 import {
-  useLazyGetWordsQuery,
-  useLazyGetWordQuery,
-  useSignInUserMutation,
+  useGameDataSelector,
+  useGameResultsSelector,
+  useGroupSelector,
+  useIsGameOverSelector,
+  useIsGameStartedSelector,
+  usePageSelector,
+  useSprintDataSelector,
+  useUserSelector,
+  useWordIdSelector,
+} from './selectors';
+import {
   useCreateUserMutation,
-  useLazyGetUserWordsQuery,
   useCreateUserWordMutation,
-  useUpdateUserWordMutation,
-  useRemoveUserWordMutation,
-  useLazyGetAggregatedWordsQuery,
   useLazyGetAggregatedWordQuery,
+  useLazyGetAggregatedWordsQuery,
+  useLazyGetWordQuery,
+  useLazyGetWordsQuery,
+  useRemoveUserWordMutation,
+  useSignInUserMutation,
+  useUpdateUserWordMutation,
 } from './slices/apiSlice';
-import { setUserData, removeUserData } from './slices/userSlice';
-import { useGroupSelector, usePageSelector, useUserSelector, useWordIdSelector } from './selectors';
+import { removeUserData, setUserData } from './slices/userSlice';
+import store from './store';
 
 type AppDispatch = typeof store.dispatch;
 
@@ -28,7 +37,6 @@ export {
   useLazyGetWordQuery,
   useSignInUserMutation,
   useCreateUserMutation,
-  useLazyGetUserWordsQuery,
   useCreateUserWordMutation,
   useUpdateUserWordMutation,
   useRemoveUserWordMutation,
@@ -40,4 +48,9 @@ export {
   usePageSelector,
   useUserSelector,
   useWordIdSelector,
+  useGameDataSelector,
+  useSprintDataSelector,
+  useGameResultsSelector,
+  useIsGameStartedSelector,
+  useIsGameOverSelector,
 };

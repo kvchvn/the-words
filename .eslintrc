@@ -6,6 +6,7 @@
     "prettier",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
+
   ],
   "env": {
     "browser": true,
@@ -22,7 +23,7 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint", "react", "prettier", "react-hooks"
+    "@typescript-eslint", "react", "prettier", "react-hooks", "import"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
@@ -45,7 +46,26 @@
     "@typescript-eslint/no-unused-vars": ["error", {
       "argsIgnorePattern": "^_",
       "varsIgnorePattern": "^_"
-    }]
+    }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
   "settings": {
     "react": {
