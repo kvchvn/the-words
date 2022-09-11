@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import rootReducer from './reducer';
 import {
+  useAudioCallDataSelector,
   useGameDataSelector,
   useGameResultsSelector,
   useGroupSelector,
@@ -53,4 +54,5 @@ export {
   useGameResultsSelector,
   useIsGameStartedSelector,
   useIsGameOverSelector,
+  useAudioCallDataSelector,
 };

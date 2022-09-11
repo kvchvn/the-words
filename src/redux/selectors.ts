@@ -20,3 +20,5 @@ export const useIsGameOverSelector = () => useSelector((state: RootState) => sta
 export const useSprintDataSelector = () => useSelector((state: RootState) => state.sprint);
 
 export const useGameResultsSelector = () => useSelector((state: RootState) => state.game.results);
+
+export const useAudioCallDataSelector = () => useSelector((state: RootState) => state.audioCall);

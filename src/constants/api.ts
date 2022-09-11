@@ -1,6 +1,7 @@
 import { ServerError, TagId } from '../types';
 
 export const BASE_URL = 'https://rs-lang-1.herokuapp.com';
+export const BASE_MEDIA_URL = 'https://github.com/rolling-scopes-school/react-rslang-be/raw/main/';
 
 export const ENDPOINTS = {
   signin: '/signin',

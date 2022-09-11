@@ -18,5 +18,3 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const FROM_MAIN = 'main';
 export const FROM_TEXTBOOK = 'textbook';
-
-export const GAME_ROUND_TIME = 5;

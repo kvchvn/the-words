@@ -1,3 +1,4 @@
+import useAudioCallGame from './useAudioCallGame';
 import useCurrentWord from './useCurrentWord';
 import useDifficulty from './useDifficulty';
 import useGame from './useGame';
@@ -22,4 +23,5 @@ export {
   useSignUp,
   useSignIn,
   useGame,
+  useAudioCallGame,
 };
