@@ -17,9 +17,8 @@ function SprintGamePage() {
   const { updateSprintData } = useSprintGame();
   const {
     gameData: { originalWord, isGameOver },
-    translatedWord,
     updateWordStatistics,
-    playSound,
+    playRoundSound,
     toNextWord,
     finishGame,
   } = useGame(entry, updateSprintData);
@@ -30,12 +29,10 @@ function SprintGamePage() {
       <div>
         <SprintRound
           originalWord={originalWord}
-          translatedWord={translatedWord}
           isGameOver={isGameOver}
-          playSound={playSound}
+          playRoundSound={playRoundSound}
           showNextWord={toNextWord}
           updateWordStatistics={updateWordStatistics}
-          finishGame={finishGame}
         />
       </div>
     </>

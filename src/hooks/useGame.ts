@@ -25,7 +25,6 @@ import {
   useLazyGetAggregatedWordsQuery,
   useLazyGetWordsQuery,
   usePageSelector,
-  useSprintDataSelector,
   useUpdateUserWordMutation,
   useUserSelector,
 } from '../redux';
@@ -44,7 +43,6 @@ const useGame = (
   const group = useGroupSelector();
   const gameData = useGameDataSelector();
   const isGameStarted = useIsGameStartedSelector();
-  const { translatedWord } = useSprintDataSelector();
 
   const navigate = useNavigate();
 
@@ -68,7 +66,7 @@ const useGame = (
     [getAggregatedWords, getWords, user]
   );
 
-  const playSound = (isTruthyAnswer: boolean) => {
+  const playRoundSound = (isTruthyAnswer: boolean) => {
     const src = isTruthyAnswer ? rightAnswerSound : wrongAnswerSound;
     return playAudio(src);
   };
@@ -131,9 +129,11 @@ const useGame = (
         if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
           if (!lastSeveralAnswers.includes(true)) {
             // it means that all last answers are falsy, and the word should mark as hard
+            alert(`${originalWord.word} теперь в разделе "${HARD_WORD}"`);
             setWordDifficultyAs(HARD_WORD);
           } else if (!lastSeveralAnswers.includes(false)) {
             // all last answers are true, and the word is easy for the user
+            alert(`${originalWord.word} теперь в разделе "${EASY_WORD}"`);
             setWordDifficultyAs(EASY_WORD);
           } else {
             updateOptional();
@@ -195,10 +195,9 @@ const useGame = (
 
   return {
     gameData,
-    translatedWord,
     user,
     toNextWord,
-    playSound,
+    playRoundSound,
     updateWordStatistics,
     finishGame,
   };

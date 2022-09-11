@@ -1,31 +1,26 @@
 import React, { useCallback, useEffect } from 'react';
 
-import { GAME_ROUND_TIME } from '../../constants';
-import { useAppDispatch } from '../../redux';
+import { useAppDispatch, useSprintDataSelector } from '../../redux';
 import { saveAnswer } from '../../redux/slices/gameSlice';
 import { AggregatedWord, WordResult } from '../../types';
-import Timer from '../Timer';
 
 interface SprintRoundProps {
   originalWord: WordResult;
-  translatedWord: WordResult;
   isGameOver: boolean;
-  playSound: (isTruthyAnswer: boolean) => Promise<unknown>;
+  playRoundSound: (isTruthyAnswer: boolean) => Promise<unknown>;
   updateWordStatistics: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
   showNextWord: () => void;
-  finishGame: () => void;
 }
 
 function SprintRound({
   originalWord,
-  translatedWord,
   isGameOver,
-  playSound,
+  playRoundSound,
   updateWordStatistics,
   showNextWord,
-  finishGame,
 }: SprintRoundProps) {
   const dispatch = useAppDispatch();
+  const { translatedWord } = useSprintDataSelector();
 
   const goToNextRound = useCallback(
     (userAnswer: boolean) => {
@@ -33,14 +28,14 @@ function SprintRound({
         const rightAnswer = originalWord.id === translatedWord.id;
         const isTruthyAnswer = rightAnswer === userAnswer;
 
-        playSound(isTruthyAnswer).then(() => {
+        playRoundSound(isTruthyAnswer).then(() => {
           updateWordStatistics(originalWord, isTruthyAnswer);
           showNextWord();
           dispatch(saveAnswer({ word: originalWord, isTruthyAnswer }));
         });
       }
     },
-    [originalWord, translatedWord, dispatch, playSound, updateWordStatistics, showNextWord]
+    [originalWord, translatedWord, dispatch, playRoundSound, updateWordStatistics, showNextWord]
   );
 
   useEffect(() => {
@@ -63,7 +58,6 @@ function SprintRound({
 
   return originalWord && translatedWord ? (
     <section>
-      <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
       <h4>{originalWord.word}</h4>
       <h4>{translatedWord.wordTranslate}</h4>
       <div>

@@ -4,18 +4,15 @@ import { STARTED_WORD_INDEX } from '../constants';
 import { useAppDispatch, useUserSelector } from '../redux';
 import { setWord, setWords } from '../redux/slices/gameSlice';
 import { setTranslatedWord } from '../redux/slices/sprintGameSlice';
-import { AggregatedWord, AggregatedWords, UpdateGameDataFn, Word, WordsPage } from '../types';
+import { AggregatedWord, UpdateGameDataFn, Word, WordsPage } from '../types';
 import { getRandomBetween } from '../utils';
 
 const useSprintGame = () => {
   const user = useUserSelector();
   const dispatch = useAppDispatch();
 
-  const getRandomWord = (
-    wordsList: WordsPage | AggregatedWords,
-    currentIndex: number
-  ): Word | AggregatedWord => {
-    // it's made in order to "true" answers are encountering more times
+  const getRandomWord = (wordsList: WordsPage, currentIndex: number): Word => {
+    // it's made in order to "true" answers will be encountering more times
     const RANGE_WIDTH = 1;
     const minIndex = currentIndex - RANGE_WIDTH;
     const maxIndex = currentIndex + RANGE_WIDTH;
