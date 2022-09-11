@@ -6,3 +6,19 @@ export const GAME_TYPES: Pick<RouterPaths, 'sprintGame' | 'audioCallGame'> = {
   sprintGame: 'sprintGame',
   audioCallGame: 'audioCallGame',
 };
+
+export const MEANING_ANSWERS_AMOUNT = 3;
+
+export const AUDIOCALL_ANSWERS_ARRAY_LENGTH = 4;
+
+export const AUDIOCALL_DO_NOT_KNOW_ANSWER = 'do not know';
+
+export const GAME_ROUND_TIME = 20;
+
+export const ROUND_SCORE = 20;
+
+export const MIN_COMBO = 1;
+
+export const MIN_PROGRESS_TO_COMBO = 0;
+
+export const MAX_PROGRESS_TO_COMBO = 3;
