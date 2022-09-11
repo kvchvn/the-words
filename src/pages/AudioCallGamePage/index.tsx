@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import AudioCallRound from '../../components/AudioCallRound';
 import PageTitle from '../../components/PageTitle';
+import Score from '../../components/Score';
 import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
 import { useAudioCallGame, useGame } from '../../hooks';
@@ -28,6 +29,7 @@ function AudioCallGamePage() {
       <PageTitle>Аудиовызов</PageTitle>
       <div>
         <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
+        <Score />
         <AudioCallRound
           originalWord={originalWord}
           isGameOver={isGameOver}

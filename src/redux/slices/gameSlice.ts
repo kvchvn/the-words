@@ -13,6 +13,7 @@ interface GameSliceState {
   results: {
     totalAnswers: number;
     rightAnswers: number;
+    answers: Array<boolean>;
     rightAnswersList: Array<Word>;
     wrongAnswersList: Array<Word>;
   };
@@ -28,6 +29,7 @@ const initialState: GameSliceState = {
   results: {
     totalAnswers: 0,
     rightAnswers: 0,
+    answers: [],
     rightAnswersList: [],
     wrongAnswersList: [],
   },
@@ -64,8 +66,10 @@ const gameSlice = createSlice({
       if (isTruthyAnswer) {
         state.results.rightAnswers++;
         state.results.rightAnswersList.push(word);
+        state.results.answers.push(true);
       } else {
         state.results.wrongAnswersList.push(word);
+        state.results.answers.push(false);
       }
       state.results.totalAnswers++;
     },
