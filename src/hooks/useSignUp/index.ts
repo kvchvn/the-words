@@ -8,7 +8,8 @@ import { getUserFriendlyErrorMessage } from '../../utils';
 import signUpValidationSchema from './validationSchema';
 
 const useSignUp = (initialValues: SignUpFields) => {
-  const [createUser, { data: userData, isLoading, isError, error }] = useCreateUserMutation();
+  const [createUser, { data: userData, isLoading, isError, error, isSuccess }] =
+    useCreateUserMutation();
 
   const formik = useFormik({
     initialValues,
@@ -25,7 +26,10 @@ const useSignUp = (initialValues: SignUpFields) => {
       alert(getUserFriendlyErrorMessage(error, 'authorization'));
       resetForm();
     }
-  }, [isError, error, resetForm]);
+    if (isSuccess) {
+      alert(`Регистрация прошла успешно`);
+    }
+  }, [isError, isSuccess, error, resetForm]);
 
   return { userData, isLoading, formik };
 };
