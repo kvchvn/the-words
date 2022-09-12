@@ -10,6 +10,7 @@ import useSignOut from './useSignOut';
 import useSignUp from './useSignUp';
 import useToggle from './useToggle';
 import useWords from './useWords';
+import useWordStatistics from './useWordStatistics';
 
 export {
   usePagination,
@@ -24,4 +25,5 @@ export {
   useSignIn,
   useGame,
   useAudioCallGame,
+  useWordStatistics,
 };

@@ -8,29 +8,23 @@ import {
   EASY_WORD,
   FROM_MAIN,
   FROM_TEXTBOOK,
-  HARD_WORD,
   MAX_PAGE,
-  MEANING_ANSWERS_AMOUNT,
   ROUTER_PATHS,
   STARTED_WORD_INDEX,
-  TAG_ID,
-  WORD_WITHOUT_DIFFICULTY,
 } from '../constants';
 import {
   useAppDispatch,
-  useCreateUserWordMutation,
   useGameDataSelector,
   useGroupSelector,
   useIsGameStartedSelector,
   useLazyGetAggregatedWordsQuery,
   useLazyGetWordsQuery,
   usePageSelector,
-  useUpdateUserWordMutation,
   useUserSelector,
 } from '../redux';
 import { endGame } from '../redux/slices/gameSlice';
 import { goToNextPage } from '../redux/slices/wordsListSlice';
-import { AggregatedWord, UpdateGameDataFn, Word, WordDifficulty, WordOptional } from '../types';
+import { UpdateGameDataFn } from '../types';
 import { getUserFriendlyErrorMessage } from '../utils';
 import { playAudio } from '../utils/common';
 
@@ -50,8 +44,6 @@ const useGame = (
 
   const [getAggregatedWords] = useLazyGetAggregatedWordsQuery();
   const [getWords] = useLazyGetWordsQuery();
-  const [createUserWord] = useCreateUserWordMutation();
-  const [updateUserWord] = useUpdateUserWordMutation();
 
   const finishGame = () => dispatch(endGame());
 
@@ -70,87 +62,6 @@ const useGame = (
     const src = isTruthyAnswer ? rightAnswerSound : wrongAnswerSound;
     return playAudio(src);
   };
-
-  const updateWordStatistics = useCallback(
-    (originalWord: Word | AggregatedWord, isTruthyAnswer: boolean) => {
-      if (user) {
-        const { userId } = user;
-        const { id: wordId } = originalWord;
-        const tagId = TAG_ID.game;
-        const difficulty = 'difficulty' in originalWord ? originalWord.difficulty : undefined;
-        const optional = 'optional' in originalWord ? originalWord.optional : undefined;
-
-        let rightAnswers = 0;
-        let totalAnswers = 0;
-        let answersList: Array<boolean> = [];
-
-        if (optional) {
-          rightAnswers = optional.statistics.rightAnswers;
-          totalAnswers = optional.statistics.totalAnswers;
-          answersList = optional.statistics.answersList;
-        }
-
-        if (isTruthyAnswer) {
-          // if userAnswer is true
-          rightAnswers = rightAnswers + 1;
-          answersList = [...answersList, true];
-        } else {
-          answersList = [...answersList, false];
-        }
-        totalAnswers = totalAnswers + 1;
-
-        // updated values
-        const statistics = { rightAnswers, totalAnswers, answersList };
-        const lastSeveralAnswers = answersList.slice(-MEANING_ANSWERS_AMOUNT);
-
-        const setWordDifficultyAs = (newDifficulty: WordDifficulty) => {
-          const updatedOptional = { ...(optional as WordOptional), statistics };
-          updateUserWord({
-            userId,
-            wordId,
-            difficulty: newDifficulty,
-            optional: updatedOptional,
-            tagId,
-          });
-        };
-
-        const updateOptional = () => {
-          // just update statistics without difficulty changing
-          const updatedOptional = { ...(optional as WordOptional), statistics };
-          updateUserWord({ userId, wordId, optional: updatedOptional, tagId });
-        };
-
-        if (difficulty === EASY_WORD && !isTruthyAnswer) {
-          // reset difficulty, if the user will answer wrong to an easy word
-          setWordDifficultyAs(WORD_WITHOUT_DIFFICULTY);
-          return;
-        }
-
-        if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
-          if (!lastSeveralAnswers.includes(true)) {
-            // it means that all last answers are falsy, and the word should mark as hard
-            alert(`${originalWord.word} теперь в разделе "${HARD_WORD}"`);
-            setWordDifficultyAs(HARD_WORD);
-          } else if (!lastSeveralAnswers.includes(false)) {
-            // all last answers are true, and the word is easy for the user
-            alert(`${originalWord.word} теперь в разделе "${EASY_WORD}"`);
-            setWordDifficultyAs(EASY_WORD);
-          } else {
-            updateOptional();
-          }
-        } else {
-          if (optional || difficulty) {
-            updateOptional();
-          } else {
-            // if the user plays with the word at the first time
-            const optional = { statistics };
-            createUserWord({ userId, wordId, optional, tagId });
-          }
-        }
-      }
-    },
-    [createUserWord, updateUserWord, user]
-  );
 
   const toNextWord = () => {
     const { notEasyWords, wordIndex, allWords } = gameData;
@@ -198,7 +109,6 @@ const useGame = (
     user,
     toNextWord,
     playRoundSound,
-    updateWordStatistics,
     finishGame,
   };
 };

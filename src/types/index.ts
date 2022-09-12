@@ -7,7 +7,7 @@ import {
   SignUpResponse,
 } from './authorization';
 import { RouterPaths, Theme } from './common';
-import { UpdateGameDataFn, UpdateGameDataParams } from './games';
+import { GameType, UpdateGameDataFn, UpdateGameDataParams } from './games';
 import {
   AggregatedWord,
   AggregatedWordResponse,
@@ -19,6 +19,7 @@ import {
   WordResult,
   WordsPage,
   WordsResult,
+  WordStatistics,
 } from './words';
 
 export {
@@ -45,4 +46,6 @@ export {
   UpdateGameDataParams,
   WordOptional,
   TagId,
+  WordStatistics,
+  GameType,
 };
