@@ -12,7 +12,7 @@ interface AudioCallRoundProps {
   originalWord: WordResult;
   isGameOver: boolean;
   playRoundSound: (isTruthyAnswer: boolean) => Promise<unknown>;
-  updateWordStatistics: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
+  updateWordStatistic: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
   showNextWord: () => void;
 }
 
@@ -20,7 +20,7 @@ function AudioCallRound({
   originalWord,
   isGameOver,
   playRoundSound,
-  updateWordStatistics,
+  updateWordStatistic,
   showNextWord,
 }: AudioCallRoundProps) {
   const { wordsArray } = useAudioCallDataSelector();
@@ -37,13 +37,13 @@ function AudioCallRound({
         }
 
         playRoundSound(isTruthyAnswer).then(() => {
-          updateWordStatistics(originalWord, isTruthyAnswer);
+          updateWordStatistic(originalWord, isTruthyAnswer);
           showNextWord();
           dispatch(saveAnswer({ word: originalWord, isTruthyAnswer }));
         });
       }
     },
-    [originalWord, wordsArray.length, dispatch, playRoundSound, updateWordStatistics, showNextWord]
+    [originalWord, wordsArray.length, dispatch, playRoundSound, updateWordStatistic, showNextWord]
   );
 
   const handleClick = useCallback(() => {

@@ -7,7 +7,7 @@ import PageTitle from '../../components/PageTitle';
 import Score from '../../components/Score';
 import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
-import { useAudioCallGame, useGame, useWordStatistics } from '../../hooks';
+import { useAudioCallGame, useGame, useWordStatistic } from '../../hooks';
 
 interface AudioCallGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK;
@@ -22,7 +22,7 @@ function AudioCallGamePage() {
     toNextWord,
     finishGame,
   } = useGame(entry, updateAudioCallData);
-  const { updateWordStatistics } = useWordStatistics('AUDIOCALL');
+  const { updateWordStatistic } = useWordStatistic('AUDIOCALL');
 
   return (
     <>
@@ -35,7 +35,7 @@ function AudioCallGamePage() {
           isGameOver={isGameOver}
           playRoundSound={playRoundSound}
           showNextWord={toNextWord}
-          updateWordStatistics={updateWordStatistics}
+          updateWordStatistic={updateWordStatistic}
         />
       </div>
     </>

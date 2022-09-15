@@ -11,13 +11,14 @@ import {
 import { useCreateUserWordMutation, useUpdateUserWordMutation, useUserSelector } from '../redux';
 import { AggregatedWord, GameType, Word, WordDifficulty } from '../types';
 
-const useWordStatistics = (gameType: GameType) => {
+const useWordStatistic = (gameType: GameType) => {
+  const { type: typeOfGame } = useUserStatisticPerGameSelector();
   const user = useUserSelector();
 
   const [createUserWord] = useCreateUserWordMutation();
   const [updateUserWord] = useUpdateUserWordMutation();
 
-  const updateWordStatistics = useCallback(
+  const updateWordStatistic = useCallback(
     (originalWord: Word | AggregatedWord, isTruthyAnswer: boolean) => {
       if (user) {
         const { userId } = user;
@@ -133,7 +134,7 @@ const useWordStatistics = (gameType: GameType) => {
     [createUserWord, updateUserWord, user, gameType]
   );
 
-  return { updateWordStatistics };
+  return { updateWordStatistic };
 };
 
-export default useWordStatistics;
+export default useWordStatistic;
