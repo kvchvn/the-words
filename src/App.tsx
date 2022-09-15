@@ -25,7 +25,7 @@ function App() {
         <Route path={ROUTER_PATHS.audioCallGame} element={<AudioCallGamePage />} />
         <Route path={ROUTER_PATHS.gameResults} element={<GameResultsPage />} />
         <Route path={ROUTER_PATHS.gameWelcome} element={<GameWelcomePage />} />
-        <Route path={ROUTER_PATHS.statistics} element={<StatisticPage />} />
+        <Route path={ROUTER_PATHS.statistic} element={<StatisticPage />} />
       </Route>
     </Routes>
   );

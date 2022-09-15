@@ -1,4 +1,4 @@
-import { DEFAULT_STATISTICS, TAG_ID, WORD_WITHOUT_DIFFICULTY } from '../constants';
+import { DEFAULT_STATISTIC, TAG_ID, WORD_WITHOUT_DIFFICULTY } from '../constants';
 import { useCreateUserWordMutation, useUpdateUserWordMutation, useUserSelector } from '../redux';
 import { AggregatedWord, MainSignInResponse, Word, WordDifficulty } from '../types';
 
@@ -11,16 +11,16 @@ const useDifficulty = (wordData: Word | AggregatedWord) => {
     const userId = (user as MainSignInResponse).userId;
     const wordId = wordData.id;
     const tagId = TAG_ID.difficulty;
-    let optional = { statistics: { ...DEFAULT_STATISTICS } };
+    let optional = { statistic: { ...DEFAULT_STATISTIC } };
 
     if ('optional' in wordData && wordData.optional) {
-      const total = wordData.optional.statistics.total;
+      const total = wordData.optional.statistic.total;
       const { rightAnswers, totalAnswers } = total;
-      const sprint = wordData.optional.statistics.sprint;
-      const audiocall = wordData.optional.statistics.audiocall;
+      const sprint = wordData.optional.statistic.sprint;
+      const audiocall = wordData.optional.statistic.audiocall;
       // reset answersList if a user changes a word's difficulty
       optional = {
-        statistics: {
+        statistic: {
           total: { rightAnswers, totalAnswers, answersList: [] },
           sprint,
           audiocall,

@@ -4,7 +4,7 @@ import { useCurrentWord } from '../../hooks';
 import { AggregatedWord } from '../../types';
 import Loading from '../Loading';
 import WordCardButtons from '../WordCardButtons';
-import WordCardStatistics from '../WordCardStatistics';
+import WordCardStatistics from '../WordCardStatistic';
 
 interface WordCardProps {
   closeModal: () => void;

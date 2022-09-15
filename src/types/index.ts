@@ -20,7 +20,7 @@ import {
   WordResult,
   WordsPage,
   WordsResult,
-  WordStatistics,
+  WordStatistic,
 } from './words';
 
 export {
@@ -47,7 +47,7 @@ export {
   UpdateGameDataParams,
   WordOptional,
   TagId,
-  WordStatistics,
+  WordStatistic,
   GameType,
   UserStatistic,
   GameStatistic,

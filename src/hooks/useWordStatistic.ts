@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import {
-  DEFAULT_STATISTICS,
+  DEFAULT_STATISTIC,
   EASY_WORD,
   HARD_WORD,
   MEANING_ANSWERS_AMOUNT,
@@ -39,7 +39,7 @@ const useWordStatistic = (gameType: GameType) => {
           dispatch(setGameType(gameType));
         }
 
-        const defaultStatistics = { ...DEFAULT_STATISTICS };
+        const defaultStatistics = { ...DEFAULT_STATISTIC };
         let { rightAnswers, totalAnswers, answersList } = defaultStatistics.total;
         let {
           sprint: { rightAnswers: sprintRightAnswers, totalAnswers: sprintTotalAnswers },
@@ -47,13 +47,13 @@ const useWordStatistic = (gameType: GameType) => {
         } = defaultStatistics;
 
         if (optional) {
-          rightAnswers = optional.statistics.total.rightAnswers;
-          totalAnswers = optional.statistics.total.totalAnswers;
-          answersList = optional.statistics.total.answersList;
-          sprintRightAnswers = optional.statistics.sprint.rightAnswers;
-          sprintTotalAnswers = optional.statistics.sprint.totalAnswers;
-          audiocallRightAnswers = optional.statistics.audiocall.rightAnswers;
-          audiocallTotalAnswers = optional.statistics.audiocall.totalAnswers;
+          rightAnswers = optional.statistic.total.rightAnswers;
+          totalAnswers = optional.statistic.total.totalAnswers;
+          answersList = optional.statistic.total.answersList;
+          sprintRightAnswers = optional.statistic.sprint.rightAnswers;
+          sprintTotalAnswers = optional.statistic.sprint.totalAnswers;
+          audiocallRightAnswers = optional.statistic.audiocall.rightAnswers;
+          audiocallTotalAnswers = optional.statistic.audiocall.totalAnswers;
         } else {
           // for gathering user's statistics
           dispatch(addNewWord());
@@ -98,7 +98,7 @@ const useWordStatistic = (gameType: GameType) => {
         const lastSeveralAnswers = answersList.slice(-MEANING_ANSWERS_AMOUNT);
 
         const updatedOptional = {
-          statistics: {
+          statistic: {
             total: totalStatistics,
             sprint: sprintStatistics,
             audiocall: audiocallStatistics,

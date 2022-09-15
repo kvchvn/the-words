@@ -23,7 +23,7 @@ export const MIN_PROGRESS_TO_COMBO = 0;
 
 export const MAX_PROGRESS_TO_COMBO = 3;
 
-export const DEFAULT_STATISTICS: WordOptional['statistics'] = {
+export const DEFAULT_STATISTIC: WordOptional['statistic'] = {
   total: {
     rightAnswers: 0,
     totalAnswers: 0,

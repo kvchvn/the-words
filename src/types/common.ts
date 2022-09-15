@@ -12,5 +12,5 @@ export interface RouterPaths {
   audioCallGame: string;
   gameResults: string;
   gameWelcome: string;
-  statistics: string;
+  statistic: string;
 }
