@@ -8,12 +8,20 @@ import {
   TAG_ID,
   WORD_WITHOUT_DIFFICULTY,
 } from '../constants';
-import { useCreateUserWordMutation, useUpdateUserWordMutation, useUserSelector } from '../redux';
+import {
+  useAppDispatch,
+  useCreateUserWordMutation,
+  useUpdateUserWordMutation,
+  useUserSelector,
+  useUserStatisticPerGameSelector,
+} from '../redux';
+import { addLearnedWord, addNewWord, setGameType } from '../redux/slices/statisticSlice';
 import { AggregatedWord, GameType, Word, WordDifficulty } from '../types';
 
 const useWordStatistic = (gameType: GameType) => {
   const { type: typeOfGame } = useUserStatisticPerGameSelector();
   const user = useUserSelector();
+  const dispatch = useAppDispatch();
 
   const [createUserWord] = useCreateUserWordMutation();
   const [updateUserWord] = useUpdateUserWordMutation();
@@ -26,6 +34,10 @@ const useWordStatistic = (gameType: GameType) => {
         const tagId = TAG_ID.game;
         const difficulty = 'difficulty' in originalWord ? originalWord.difficulty : undefined;
         const optional = 'optional' in originalWord ? originalWord.optional : undefined;
+
+        if (!typeOfGame) {
+          dispatch(setGameType(gameType));
+        }
 
         const defaultStatistics = { ...DEFAULT_STATISTICS };
         let { rightAnswers, totalAnswers, answersList } = defaultStatistics.total;
@@ -42,6 +54,9 @@ const useWordStatistic = (gameType: GameType) => {
           sprintTotalAnswers = optional.statistics.sprint.totalAnswers;
           audiocallRightAnswers = optional.statistics.audiocall.rightAnswers;
           audiocallTotalAnswers = optional.statistics.audiocall.totalAnswers;
+        } else {
+          // for gathering user's statistics
+          dispatch(addNewWord());
         }
 
         if (isTruthyAnswer) {
@@ -118,6 +133,8 @@ const useWordStatistic = (gameType: GameType) => {
             // all last answers are true, and the word is easy for the user
             alert(`${originalWord.word} теперь в разделе "${EASY_WORD}"`);
             setWordDifficultyAs(EASY_WORD);
+            // for gathering user's statistics
+            dispatch(addLearnedWord());
           } else {
             updateOptional();
           }
@@ -131,7 +148,7 @@ const useWordStatistic = (gameType: GameType) => {
         }
       }
     },
-    [createUserWord, updateUserWord, user, gameType]
+    [createUserWord, updateUserWord, user, gameType, dispatch, typeOfGame]
   );
 
   return { updateWordStatistic };

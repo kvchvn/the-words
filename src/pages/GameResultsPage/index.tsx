@@ -6,14 +6,19 @@ import { v4 as uuid } from 'uuid';
 import finishGameSound from '../../assets/sounds/finish.mp3';
 import PageTitle from '../../components/PageTitle';
 import { ROUTER_PATHS } from '../../constants';
+import { useUserStatistic } from '../../hooks';
 import { useAppDispatch, useGameResultsSelector, useIsGameOverSelector } from '../../redux';
 import { resetGame } from '../../redux/slices/gameSlice';
+import { resetGameStatistic } from '../../redux/slices/statisticSlice';
 import { playAudio } from '../../utils/common';
 
 function GameResultsPage() {
+  const { updateUserStatistic } = useUserStatistic();
+
   const { totalAnswers, rightAnswers, rightAnswersList, wrongAnswersList } =
     useGameResultsSelector();
   const isGameOver = useIsGameOverSelector();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -21,6 +26,8 @@ function GameResultsPage() {
 
   const resetGameData = (routerPath: string) => {
     navigate(routerPath);
+    updateUserStatistic();
+    dispatch(resetGameStatistic());
     dispatch(resetGame());
   };
 
