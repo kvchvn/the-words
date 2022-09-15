@@ -8,6 +8,7 @@ import {
 } from './authorization';
 import { RouterPaths, Theme } from './common';
 import { GameType, UpdateGameDataFn, UpdateGameDataParams } from './games';
+import { GameStatistic, UserStatistic, WeekdayStatistic, WeeklyStatistic } from './statistic';
 import {
   AggregatedWord,
   AggregatedWordResponse,
@@ -48,4 +49,8 @@ export {
   TagId,
   WordStatistics,
   GameType,
+  UserStatistic,
+  GameStatistic,
+  WeekdayStatistic,
+  WeeklyStatistic,
 };
