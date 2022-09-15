@@ -8,6 +8,7 @@ export const ROUTER_PATHS: RouterPaths = {
   audioCallGame: 'audiocall',
   gameResults: 'game_results',
   gameWelcome: 'game_welcome',
+  statistics: 'statistics',
 };
 
 export const LOCAL_STORAGE_KEYS = {

@@ -26,6 +26,7 @@ function Header() {
         >
           Аудиовызов
         </Link>
+        {user && <Link to={ROUTER_PATHS.statistics}>Статистика</Link>}
         <Link to={ROUTER_PATHS.authorization}>{user ? user.name : 'Авторизация'}</Link>
       </nav>
     </div>

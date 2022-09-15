@@ -12,6 +12,7 @@ const SprintGamePage = lazy(() => import('./pages/SprintGamePage'));
 const AudioCallGamePage = lazy(() => import('./pages/AudioCallGamePage'));
 const GameResultsPage = lazy(() => import('./pages/GameResultsPage'));
 const GameWelcomePage = lazy(() => import('./pages/GameWelcomePage'));
+const StatisticPage = lazy(() => import('./pages/StatisticPage'));
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path={ROUTER_PATHS.audioCallGame} element={<AudioCallGamePage />} />
         <Route path={ROUTER_PATHS.gameResults} element={<GameResultsPage />} />
         <Route path={ROUTER_PATHS.gameWelcome} element={<GameWelcomePage />} />
+        <Route path={ROUTER_PATHS.statistics} element={<StatisticPage />} />
       </Route>
     </Routes>
   );
