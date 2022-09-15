@@ -28,7 +28,7 @@ const useUserStatistic = () => {
 
   const updateWeeklyStatistic = (
     weeklyStatistic: WeeklyStatistic,
-    updStatistic: WeekdayStatistic
+    dayStatistic: WeekdayStatistic
   ) => {
     let initialWeeklyStatistic = { ...weeklyStatistic };
 
@@ -42,7 +42,7 @@ const useUserStatistic = () => {
       initialWeeklyStatistic = { ...DEFAULT_USER_WEEKLY_STATISTIC };
     }
 
-    const updatedDayStatistic = { ...updStatistic };
+    const updatedDayStatistic = { ...dayStatistic };
     return { ...initialWeeklyStatistic, [day]: updatedDayStatistic };
   };
 
@@ -62,18 +62,18 @@ const useUserStatistic = () => {
         }
       }
 
-      let { learnedWords } = initialStatistic;
-      const { optional } = initialStatistic;
       const {
-        day,
-        daily: { sprint, audiocall },
-        weekly,
-      } = optional;
+        learnedWords,
+        optional: {
+          day,
+          daily: { sprint, audiocall },
+          weekly,
+        },
+      } = initialStatistic;
 
       const updatedSprint = { ...sprint };
       const updatedAudiocall = { ...audiocall };
-
-      learnedWords += learnedWordsPerGame;
+      const updatedLearnedWords = learnedWords + learnedWordsPerGame;
 
       switch (gameType) {
         case 'SPRINT':
@@ -92,13 +92,13 @@ const useUserStatistic = () => {
       const totalAnswers = updatedSprint.totalAnswers + updatedAudiocall.totalAnswers;
 
       const updatedWeekly = updateWeeklyStatistic(weekly, {
-        learnedWords,
+        learnedWords: updatedLearnedWords,
         rightAnswers,
         totalAnswers,
       });
 
       const updatedStatistic: UserStatistic = {
-        learnedWords,
+        learnedWords: updatedLearnedWords,
         optional: {
           day,
           daily: { sprint: updatedSprint, audiocall: updatedAudiocall },
