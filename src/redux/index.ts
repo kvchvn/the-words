@@ -11,6 +11,7 @@ import {
   usePageSelector,
   useSprintDataSelector,
   useUserSelector,
+  useUserStatisticPerGameSelector,
   useWordIdSelector,
 } from './selectors';
 import {
@@ -18,10 +19,12 @@ import {
   useCreateUserWordMutation,
   useLazyGetAggregatedWordQuery,
   useLazyGetAggregatedWordsQuery,
+  useLazyGetStatisticQuery,
   useLazyGetWordQuery,
   useLazyGetWordsQuery,
   useRemoveUserWordMutation,
   useSignInUserMutation,
+  useUpdateStatisticMutation,
   useUpdateUserWordMutation,
 } from './slices/apiSlice';
 import { removeUserData, setUserData } from './slices/userSlice';
@@ -43,6 +46,8 @@ export {
   useRemoveUserWordMutation,
   useLazyGetAggregatedWordsQuery,
   useLazyGetAggregatedWordQuery,
+  useLazyGetStatisticQuery,
+  useUpdateStatisticMutation,
   setUserData,
   removeUserData,
   useGroupSelector,
@@ -55,4 +60,5 @@ export {
   useIsGameStartedSelector,
   useIsGameOverSelector,
   useAudioCallDataSelector,
+  useUserStatisticPerGameSelector,
 };

@@ -1,12 +1,13 @@
-import { getUserFriendlyErrorMessage, prepareParams } from './api';
+import { getErrorStatus, getUserFriendlyErrorMessage, prepareParams } from './api';
 import {
-  getFromLocalStorage,
-  setToLocalStorage,
-  removeFromLocalStorage,
   clearLocalStorage,
   disableScrolling,
   enableScrolling,
+  getDateByWeekday,
+  getFromLocalStorage,
   getRandomBetween,
+  removeFromLocalStorage,
+  setToLocalStorage,
 } from './common';
 
 export {
@@ -19,4 +20,6 @@ export {
   enableScrolling,
   prepareParams,
   getRandomBetween,
+  getErrorStatus,
+  getDateByWeekday,
 };

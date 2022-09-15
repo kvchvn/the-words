@@ -39,3 +39,15 @@ export const playAudio = (src: string, playbackRate = 1) => {
     };
   });
 };
+
+export const getDateByWeekday = (dayIndex: number) => {
+  const date = new Date();
+  const currentDate = date.getDate();
+  let currentDay = date.getDay();
+  if (currentDay === 0) {
+    // correction so that weekday's indexes will be from 1 to 7
+    currentDay = 7;
+  }
+  const gap = dayIndex - currentDay;
+  return new Date(date.setDate(currentDate + gap));
+};
