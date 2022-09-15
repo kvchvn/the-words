@@ -22,3 +22,6 @@ export const useSprintDataSelector = () => useSelector((state: RootState) => sta
 export const useGameResultsSelector = () => useSelector((state: RootState) => state.game.results);
 
 export const useAudioCallDataSelector = () => useSelector((state: RootState) => state.audioCall);
+
+export const useUserStatisticPerGameSelector = () =>
+  useSelector((state: RootState) => state.statistic.perGame);

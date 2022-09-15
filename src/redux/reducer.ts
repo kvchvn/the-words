@@ -4,6 +4,7 @@ import apiSlice from './slices/apiSlice';
 import audioCallGameReducer from './slices/audioCallGameSlice';
 import gameReducer from './slices/gameSlice';
 import sprintGameReducer from './slices/sprintGameSlice';
+import statisticsReducer from './slices/statisticSlice';
 import userReducer from './slices/userSlice';
 import wordsListSliceReducer from './slices/wordsListSlice';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   game: gameReducer,
   sprint: sprintGameReducer,
   audioCall: audioCallGameReducer,
+  statistic: statisticsReducer,
 });
 
 export default rootReducer;
