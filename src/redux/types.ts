@@ -1,5 +1,5 @@
 import { TAG_ID } from '../constants';
-import { TagId, WordDifficulty, WordOptional } from '../types';
+import { TagId, UserStatistic, WordDifficulty, WordOptional } from '../types';
 
 export interface GetWordsQueryArgs {
   group: number;
@@ -24,4 +24,9 @@ export interface GetAggregatedWordsArgs {
 
 export interface GetAggregatedWordArgs extends Pick<GetAggregatedWordsArgs, 'userId'> {
   wordId: string;
+}
+
+export interface UpdateUserStatisticArgs {
+  userId: string;
+  updatedStatistic: Partial<UserStatistic>;
 }

@@ -7,7 +7,7 @@ import Score from '../../components/Score';
 import SprintRound from '../../components/SprintRound';
 import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
-import { useGame } from '../../hooks';
+import { useGame, useWordStatistic } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
 
 interface SprintGamePageLocation {
@@ -19,11 +19,11 @@ function SprintGamePage() {
   const { updateSprintData } = useSprintGame();
   const {
     gameData: { originalWord, isGameOver },
-    updateWordStatistics,
     playRoundSound,
     toNextWord,
     finishGame,
   } = useGame(entry, updateSprintData);
+  const { updateWordStatistic } = useWordStatistic('SPRINT');
 
   return (
     <>
@@ -36,7 +36,7 @@ function SprintGamePage() {
           isGameOver={isGameOver}
           playRoundSound={playRoundSound}
           showNextWord={toNextWord}
-          updateWordStatistics={updateWordStatistics}
+          updateWordStatistic={updateWordStatistic}
         />
       </div>
     </>

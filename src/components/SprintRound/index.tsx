@@ -8,7 +8,7 @@ interface SprintRoundProps {
   originalWord: WordResult;
   isGameOver: boolean;
   playRoundSound: (isTruthyAnswer: boolean) => Promise<unknown>;
-  updateWordStatistics: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
+  updateWordStatistic: (originalWord: AggregatedWord, isTruthyAnswer: boolean) => void;
   showNextWord: () => void;
 }
 
@@ -16,7 +16,7 @@ function SprintRound({
   originalWord,
   isGameOver,
   playRoundSound,
-  updateWordStatistics,
+  updateWordStatistic,
   showNextWord,
 }: SprintRoundProps) {
   const dispatch = useAppDispatch();
@@ -29,13 +29,13 @@ function SprintRound({
         const isTruthyAnswer = rightAnswer === userAnswer;
 
         playRoundSound(isTruthyAnswer).then(() => {
-          updateWordStatistics(originalWord, isTruthyAnswer);
+          updateWordStatistic(originalWord, isTruthyAnswer);
           showNextWord();
           dispatch(saveAnswer({ word: originalWord, isTruthyAnswer }));
         });
       }
     },
-    [originalWord, translatedWord, dispatch, playRoundSound, updateWordStatistics, showNextWord]
+    [originalWord, translatedWord, dispatch, playRoundSound, updateWordStatistic, showNextWord]
   );
 
   useEffect(() => {

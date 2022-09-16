@@ -1,8 +1,8 @@
-import { TAG_ID, WORD_WITHOUT_DIFFICULTY } from '../constants';
+import { DEFAULT_STATISTIC, TAG_ID, WORD_WITHOUT_DIFFICULTY } from '../constants';
 import { useCreateUserWordMutation, useUpdateUserWordMutation, useUserSelector } from '../redux';
-import { MainSignInResponse, Word, WordDifficulty, WordOptional } from '../types';
+import { AggregatedWord, MainSignInResponse, Word, WordDifficulty } from '../types';
 
-const useDifficulty = (wordData: Word) => {
+const useDifficulty = (wordData: Word | AggregatedWord) => {
   const user = useUserSelector();
   const [createUserWord] = useCreateUserWordMutation();
   const [updateUserWord] = useUpdateUserWordMutation();
@@ -11,13 +11,22 @@ const useDifficulty = (wordData: Word) => {
     const userId = (user as MainSignInResponse).userId;
     const wordId = wordData.id;
     const tagId = TAG_ID.difficulty;
-    const defaultOptional: WordOptional = {
-      statistics: {
-        rightAnswers: 0,
-        totalAnswers: 0,
-        answersList: [],
-      },
-    };
+    let optional = { statistic: { ...DEFAULT_STATISTIC } };
+
+    if ('optional' in wordData && wordData.optional) {
+      const total = wordData.optional.statistic.total;
+      const { rightAnswers, totalAnswers } = total;
+      const sprint = wordData.optional.statistic.sprint;
+      const audiocall = wordData.optional.statistic.audiocall;
+      // reset answersList if a user changes a word's difficulty
+      optional = {
+        statistic: {
+          total: { rightAnswers, totalAnswers, answersList: [] },
+          sprint,
+          audiocall,
+        },
+      };
+    }
 
     if (!current) {
       await createUserWord({ difficulty: desired, userId, wordId, tagId });
@@ -29,12 +38,12 @@ const useDifficulty = (wordData: Word) => {
         userId,
         wordId,
         difficulty: WORD_WITHOUT_DIFFICULTY,
-        optional: defaultOptional,
+        optional,
         tagId,
       });
       return;
     }
-    await updateUserWord({ difficulty: desired, userId, wordId, optional: defaultOptional, tagId });
+    await updateUserWord({ difficulty: desired, userId, wordId, optional, tagId });
   };
 
   return { toggleDifficulty, user };

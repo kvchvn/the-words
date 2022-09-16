@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEYS } from '../constants';
+import { LAST_WEEK_DAY_INDEX, LOCAL_STORAGE_KEYS } from '../constants';
 
 export const getFromLocalStorage = <T>(key: keyof typeof LOCAL_STORAGE_KEYS) => {
   const value = localStorage.getItem(key);
@@ -38,4 +38,16 @@ export const playAudio = (src: string, playbackRate = 1) => {
       resolve(undefined);
     };
   });
+};
+
+export const getDateByWeekday = (dayIndex: number) => {
+  const date = new Date();
+  const currentDate = date.getDate();
+  let currentDay = date.getDay();
+  if (currentDay === 0) {
+    // correction so that weekday's indexes will be from 1 to 7
+    currentDay = LAST_WEEK_DAY_INDEX;
+  }
+  const gap = dayIndex - currentDay;
+  return new Date(date.setDate(currentDate + gap));
 };

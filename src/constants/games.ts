@@ -1,4 +1,4 @@
-import { RouterPaths } from '../types';
+import { RouterPaths, WordOptional } from '../types';
 
 export const STARTED_WORD_INDEX = 0;
 
@@ -22,3 +22,19 @@ export const MIN_COMBO = 1;
 export const MIN_PROGRESS_TO_COMBO = 0;
 
 export const MAX_PROGRESS_TO_COMBO = 3;
+
+export const DEFAULT_STATISTIC: WordOptional['statistic'] = {
+  total: {
+    rightAnswers: 0,
+    totalAnswers: 0,
+    answersList: [],
+  },
+  sprint: {
+    rightAnswers: 0,
+    totalAnswers: 0,
+  },
+  audiocall: {
+    rightAnswers: 0,
+    totalAnswers: 0,
+  },
+};

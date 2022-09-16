@@ -19,11 +19,17 @@ export interface Word {
 
 export type WordDifficulty = typeof HARD_WORD | typeof EASY_WORD | typeof WORD_WITHOUT_DIFFICULTY;
 
+export interface WordStatistic {
+  rightAnswers: number;
+  totalAnswers: number;
+  answersList: Array<boolean>;
+}
+
 export interface WordOptional {
-  statistics: {
-    rightAnswers: number;
-    totalAnswers: number;
-    answersList: Array<boolean>;
+  statistic: {
+    total: WordStatistic;
+    sprint: Omit<WordStatistic, 'answersList'>;
+    audiocall: Omit<WordStatistic, 'answersList'>;
   };
 }
 

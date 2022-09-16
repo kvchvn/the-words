@@ -10,6 +10,7 @@ import {
   SignInResponse,
   SignUpFields,
   SignUpResponse,
+  UserStatistic,
   Word,
   WordsPage,
 } from '../../types';
@@ -19,6 +20,7 @@ import {
   GetAggregatedWordArgs,
   GetAggregatedWordsArgs,
   GetWordsQueryArgs,
+  UpdateUserStatisticArgs,
 } from '../types';
 import baseQueryWithReauth from './baseQueryWithReauth';
 
@@ -107,6 +109,16 @@ const apiSlice = createApi({
       }),
       invalidatesTags: ['UserWord'],
     }),
+    getStatistic: builder.query<UserStatistic, string>({
+      query: (userId) => `${ENDPOINTS.users}/${userId}${ENDPOINTS.statistics}`,
+    }),
+    updateStatistic: builder.mutation<void, UpdateUserStatisticArgs>({
+      query: ({ userId, updatedStatistic: { learnedWords, optional } }) => ({
+        url: `${ENDPOINTS.users}/${userId}${ENDPOINTS.statistics}`,
+        method: 'PUT',
+        body: { learnedWords, optional },
+      }),
+    }),
   }),
 });
 
@@ -121,4 +133,6 @@ export const {
   useLazyGetAggregatedWordsQuery,
   useLazyGetAggregatedWordQuery,
   useLazyGetWordQuery,
+  useLazyGetStatisticQuery,
+  useUpdateStatisticMutation,
 } = apiSlice;

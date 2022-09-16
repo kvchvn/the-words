@@ -7,3 +7,5 @@ export interface UpdateGameDataParams {
 }
 
 export type UpdateGameDataFn = (options: UpdateGameDataParams) => void;
+
+export type GameType = 'SPRINT' | 'AUDIOCALL';

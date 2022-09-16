@@ -4,6 +4,7 @@ import { useCurrentWord } from '../../hooks';
 import { AggregatedWord } from '../../types';
 import Loading from '../Loading';
 import WordCardButtons from '../WordCardButtons';
+import WordCardStatistics from '../WordCardStatistic';
 
 interface WordCardProps {
   closeModal: () => void;
@@ -16,6 +17,7 @@ function WordCard({ closeModal }: WordCardProps) {
     <div>
       <h1>{wordData.word}</h1>
       {user && <h2>difficulty: {(wordData as AggregatedWord).difficulty || 'None'}</h2>}
+      {user && <WordCardStatistics wordData={wordData} />}
       {user && (
         <WordCardButtons word={wordData} difficulty={(wordData as AggregatedWord).difficulty} />
       )}
