@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_USER_STATISTIC, DEFAULT_USER_WEEKLY_STATISTIC } from '../constants';
+import {
+  DEFAULT_USER_DAILY_STATISTIC,
+  DEFAULT_USER_STATISTIC,
+  DEFAULT_USER_WEEKLY_STATISTIC,
+} from '../constants';
 import {
   useGameResultsSelector,
   useLazyGetStatisticQuery,
@@ -56,9 +60,14 @@ const useUserStatistic = () => {
       let initialStatistic = { ...DEFAULT_USER_STATISTIC };
 
       if (currentStatistic) {
-        const { day } = initialStatistic.optional;
+        const { day, weekly } = currentStatistic.optional;
         if (day === presentDate) {
           initialStatistic = { ...currentStatistic };
+        } else {
+          initialStatistic = {
+            ...currentStatistic,
+            optional: { day, weekly, daily: DEFAULT_USER_DAILY_STATISTIC },
+          };
         }
       }
 

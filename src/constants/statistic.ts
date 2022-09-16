@@ -44,22 +44,24 @@ export const DEFAULT_USER_WEEKLY_STATISTIC: WeeklyStatistic = {
   },
 };
 
+export const DEFAULT_USER_DAILY_STATISTIC = {
+  sprint: {
+    newWords: 0,
+    rightAnswers: 0,
+    totalAnswers: 0,
+  },
+  audiocall: {
+    newWords: 0,
+    rightAnswers: 0,
+    totalAnswers: 0,
+  },
+};
+
 export const DEFAULT_USER_STATISTIC: UserStatistic = {
   learnedWords: 0,
   optional: {
     day: new Date().getDate(),
-    daily: {
-      sprint: {
-        newWords: 0,
-        rightAnswers: 0,
-        totalAnswers: 0,
-      },
-      audiocall: {
-        newWords: 0,
-        rightAnswers: 0,
-        totalAnswers: 0,
-      },
-    },
+    daily: DEFAULT_USER_DAILY_STATISTIC,
     weekly: DEFAULT_USER_WEEKLY_STATISTIC,
   },
 };
