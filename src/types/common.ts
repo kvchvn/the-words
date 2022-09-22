@@ -2,6 +2,13 @@ export interface Theme {
   fontFamily: {
     primary: string;
   };
+  color: {
+    blue: string;
+    darkblue: string;
+    gray: string;
+    white: string;
+    coral: string;
+  };
 }
 
 export interface RouterPaths {
