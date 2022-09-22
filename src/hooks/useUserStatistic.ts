@@ -140,14 +140,20 @@ const useUserStatistic = () => {
           const { optional } = currentStatistic;
           let { weekly } = optional;
 
-          if (present >= weekly.finishDate) {
+          let updatedOptional = { ...optional, weekly };
+
+          if (Number(present) >= Date.parse(weekly.finishDate)) {
             weekly = { ...DEFAULT_USER_WEEKLY_STATISTIC };
           }
 
-          const updatedOptional = { ...optional, weekly };
-
           if (currentStatistic.optional.day !== presentDate) {
             // reset statistic
+            updatedOptional = {
+              ...optional,
+              weekly,
+              day: presentDate,
+              daily: DEFAULT_USER_DAILY_STATISTIC,
+            };
             const updatedStatistic = { ...DEFAULT_USER_STATISTIC, optional: updatedOptional };
             await updateStatistic({
               userId,

@@ -11,8 +11,8 @@ export interface WeekdayStatistic {
 }
 
 export interface WeeklyStatistic {
-  startDate: Date;
-  finishDate: Date;
+  startDate: string;
+  finishDate: string;
   mon: WeekdayStatistic;
   tue: WeekdayStatistic;
   wed: WeekdayStatistic;
