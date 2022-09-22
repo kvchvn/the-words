@@ -25,8 +25,7 @@ function GameResultsPage() {
   const [isButtonsHidden, setIsButtonsHidden] = useState(true);
 
   const resetGameData = (routerPath: string) => {
-    navigate(routerPath);
-    updateUserStatistic();
+    updateUserStatistic().then(() => navigate(routerPath));
     dispatch(resetGameStatistic());
     dispatch(resetGame());
   };
@@ -44,6 +43,7 @@ function GameResultsPage() {
 
   const goToMainPage = () => resetGameData(ROUTER_PATHS.main);
   const goToTextbook = () => resetGameData(`/${ROUTER_PATHS.textbook}`);
+  const goToStatistic = () => resetGameData(`/${ROUTER_PATHS.statistic}`);
 
   return (
     <>
@@ -77,6 +77,9 @@ function GameResultsPage() {
           </button>
           <button type="button" onClick={goToTextbook}>
             К учебнику
+          </button>
+          <button type="button" onClick={goToStatistic}>
+            К статистике
           </button>
         </div>
       )}

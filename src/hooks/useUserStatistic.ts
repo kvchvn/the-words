@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import {
   DEFAULT_USER_DAILY_STATISTIC,
   DEFAULT_USER_STATISTIC,
   DEFAULT_USER_WEEKLY_STATISTIC,
+  ROUTER_PATHS,
 } from '../constants';
 import {
   useGameResultsSelector,
@@ -26,6 +29,7 @@ const useUserStatistic = () => {
   const { rightAnswers: rightAnswersPerGame, totalAnswers: totalAnswersPerGame } =
     useGameResultsSelector();
   const user = useUserSelector();
+  const navigate = useNavigate();
 
   const [getStatistic] = useLazyGetStatisticQuery();
   const [updateStatistic] = useUpdateStatisticMutation();
@@ -42,7 +46,7 @@ const useUserStatistic = () => {
     const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     const day = days[presentDay] as keyof WeeklyStatistic;
 
-    if (present >= finishDate) {
+    if (Number(present) >= Date.parse(finishDate)) {
       initialWeeklyStatistic = { ...DEFAULT_USER_WEEKLY_STATISTIC };
     }
 
@@ -115,7 +119,7 @@ const useUserStatistic = () => {
         },
       };
 
-      updateStatistic({ userId, updatedStatistic });
+      await updateStatistic({ userId, updatedStatistic });
     }
   }, [
     gameType,
@@ -127,6 +131,12 @@ const useUserStatistic = () => {
     rightAnswersPerGame,
     totalAnswersPerGame,
   ]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate(ROUTER_PATHS.main);
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const displayUserStatistic = async (): Promise<UserStatistic | null> => {
