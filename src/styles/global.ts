@@ -14,6 +14,9 @@ const GlobalStyles = createGlobalStyle`
       font-size: ${({ theme }: ThemeProps<unknown>) => theme.size.xxl};
     }
   }
+  body {
+    overflow-x: hidden;
+  }
 `;
 
 export default GlobalStyles;
