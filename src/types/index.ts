@@ -6,7 +6,7 @@ import {
   SignUpFields,
   SignUpResponse,
 } from './authorization';
-import { RouterPaths, Theme } from './common';
+import { RouterPaths, Theme, ThemeProps } from './common';
 import { GameType, UpdateGameDataFn, UpdateGameDataParams } from './games';
 import { GameStatistic, UserStatistic, WeekdayStatistic, WeeklyStatistic } from './statistic';
 import {
@@ -53,4 +53,5 @@ export {
   GameStatistic,
   WeekdayStatistic,
   WeeklyStatistic,
+  ThemeProps,
 };

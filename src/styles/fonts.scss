@@ -1,5 +1,17 @@
 @font-face {
-  font-family: 'Roboto Regular';
-  src: local('Roboto Regular'), local('Roboto-Regular'),
-    url('../assets/fonts/Roboto-Regular.ttf'), url('../assets/fonts/Roboto-Regular.woff2');
+  font-family: 'Jura Regular';
+  src: local('Jura Regular'), local('Jura-Regular'),
+    url('../assets/fonts/Jura-Regular.ttf'), url('../assets/fonts/Jura-Regular.woff2');
+}
+
+@font-face {
+  font-family: 'PermanentMarker-Regular';
+  src: local('PermanentMarker Regular'), local('PermanentMarker-Regular'),
+    url('../assets/fonts/PermanentMarker-Regular.ttf'), url('../assets/fonts/PermanentMarker-Regular.woff2');
+}
+
+@font-face {
+  font-family: 'RoundedMplus1c Regular';
+  src: local('RoundedMplus1c Regular'), local('RoundedMplus1c-Regular'),
+  url('../assets/fonts/RoundedMplus1c-Regular.ttf'), url('../assets/fonts/RoundedMplus1c-Regular.woff2');
 }
