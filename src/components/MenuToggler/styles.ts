@@ -21,12 +21,12 @@ export const StyledCheckbox = styled.input.attrs({ type: 'checkbox', id: 'menu' 
 
   &:checked ~ label > .burger-line_top {
     width: calc(1.3 * 100%);
-    transform: translate(-0.25rem, 0.77rem) rotateZ(45deg);
+    transform: translate(-0.25rem, 0.73rem) rotateZ(45deg);
   }
 
   &:checked ~ label > .burger-line_bottom {
     width: calc(1.3 * 100%);
-    transform: translate(-0.25rem, -0.77rem) rotateZ(-45deg);
+    transform: translate(-0.25rem, -0.73rem) rotateZ(-45deg);
   }
 `;
 
@@ -51,7 +51,7 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
     height: 15%;
     border-radius: 4px;
     background: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
-    transition: transform 0.5s, width 0.5s;
+    transition: transform 0.5s, width 0.25s;
   }
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
