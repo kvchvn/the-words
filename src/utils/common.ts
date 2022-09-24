@@ -49,5 +49,5 @@ export const getDateByWeekday = (dayIndex: number) => {
     currentDay = LAST_WEEK_DAY_INDEX;
   }
   const gap = dayIndex - currentDay;
-  return new Date(date.setDate(currentDate + gap));
+  return String(new Date(date.setDate(currentDate + gap)));
 };
