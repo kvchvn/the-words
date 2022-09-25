@@ -6,8 +6,11 @@ import { StyledWrapper } from '../../styles/components';
 import { ThemeProps } from '../../types';
 
 export const StyledHeader = styled.header`
+  position: fixed;
+  width: 100vw;
   height: 4rem;
   background: ${({ theme }: ThemeProps<unknown>) => theme.color.darkblue};
+  z-index: 100;
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     padding-bottom: 1rem;
