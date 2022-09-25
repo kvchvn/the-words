@@ -54,6 +54,18 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
     transition: transform 0.5s, width 0.25s;
   }
 
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.mobileL}) {
+    right: 2rem;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {
+    right: 3rem;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
+    right: 4rem;
+  }
+
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     display: none;
   }

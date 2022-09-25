@@ -1,4 +1,4 @@
-import { LAST_WEEK_DAY_INDEX, LOCAL_STORAGE_KEYS } from '../constants';
+import { LOCAL_STORAGE_KEYS } from '../constants';
 
 export const getFromLocalStorage = <T>(key: keyof typeof LOCAL_STORAGE_KEYS) => {
   const value = localStorage.getItem(key);
@@ -46,7 +46,7 @@ export const getDateByWeekday = (dayIndex: number) => {
   let currentDay = date.getDay();
   if (currentDay === 0) {
     // correction so that weekday's indexes will be from 1 to 7
-    currentDay = LAST_WEEK_DAY_INDEX;
+    currentDay = 7;
   }
   const gap = dayIndex - currentDay;
   return String(new Date(date.setDate(currentDate + gap)));
