@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { StyledPageTitle } from '../../styles/components';
+
 function MainPage() {
-  return <h1>It`s Main Page</h1>;
+  return <StyledPageTitle>It`s Main Page</StyledPageTitle>;
 }
 
 export default MainPage;

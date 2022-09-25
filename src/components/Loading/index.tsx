@@ -1,7 +1,11 @@
 import React from 'react';
 
-function Loading() {
-  return <h2>Loading...</h2>;
+import { StyledLoading, StyledLoadingProps } from './styles';
+
+type LoadingProps = StyledLoadingProps;
+
+function Loading({ size }: LoadingProps) {
+  return <StyledLoading size={size} />;
 }
 
 export default Loading;

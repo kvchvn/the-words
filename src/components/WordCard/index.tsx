@@ -29,7 +29,7 @@ function WordCard({ closeModal }: WordCardProps) {
     <p>Ой... Мы не нашли информацию об этом слове</p>
   );
 
-  return isLoading ? <Loading /> : UI;
+  return isLoading ? <Loading size="SMALL" /> : UI;
 }
 
 export default WordCard;

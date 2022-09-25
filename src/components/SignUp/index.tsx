@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSignUp } from '../../hooks';
 import { SignUpFields } from '../../types';
 import Loading from '../Loading';
+import { StyledForm } from './styles';
 
 interface SignUpProps {
   goToSignIn: () => void;
@@ -29,25 +30,27 @@ function SignUp({ goToSignIn }: SignUpProps) {
 
   return (
     <>
-      {isLoading && <Loading />}
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Имя" value={values.name} onChange={handleChange} />
-        {errors.name && touched.name ? <span>{errors.name}</span> : null}
-        <input name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
-        {errors.email && touched.email ? <span>{errors.email}</span> : null}
-        <input
-          name="password"
-          type="password"
-          placeholder="Пароль"
-          value={values.password}
-          onChange={handleChange}
-        />
-        {errors.password && touched.password ? <span>{errors.password}</span> : null}
-        <button type="submit">Зарегистрироваться</button>
-        <p>
-          Уже есть аккаунт? <span onClick={goToSignIn}>Войти</span>
-        </p>
-      </form>
+      <StyledForm onSubmit={handleSubmit}>
+        <div>
+          <input name="name" placeholder="Имя" value={values.name} onChange={handleChange} />
+          {errors.name && touched.name ? <span>{errors.name}</span> : null}
+        </div>
+        <div>
+          <input name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
+          {errors.email && touched.email ? <span>{errors.email}</span> : null}
+        </div>
+        <div>
+          <input
+            name="password"
+            type="password"
+            placeholder="Пароль"
+            value={values.password}
+            onChange={handleChange}
+          />
+          {errors.password && touched.password ? <span>{errors.password}</span> : null}
+        </div>
+        <button type="submit">{isLoading ? <Loading size="SMALL" /> : 'Зарегистрироваться'}</button>
+      </StyledForm>
     </>
   );
 }

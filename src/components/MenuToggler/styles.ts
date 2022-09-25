@@ -32,7 +32,7 @@ export const StyledCheckbox = styled.input.attrs({ type: 'checkbox', id: 'menu' 
 
 export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
   padding: 0.5rem;
-  position: absolute;
+  position: fixed;
   top: 0.5rem;
   right: 1rem;
   display: flex;
@@ -43,7 +43,7 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
   border: 2px solid ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
   border-radius: 5px;
   overflow: hidden;
-  z-index: 100;
+  z-index: 101;
 
   & > .burger-line {
     display: block;
@@ -52,6 +52,18 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
     border-radius: 4px;
     background: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
     transition: transform 0.5s, width 0.25s;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.mobileL}) {
+    right: 2rem;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {
+    right: 3rem;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
+    right: 4rem;
   }
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {

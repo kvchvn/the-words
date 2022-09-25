@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import GroupSelect from '../../components/GroupSelect';
 import PageSelect from '../../components/PageSelect';
-import PageTitle from '../../components/PageTitle';
 import WordsList from '../../components/WordsList';
 import {
   FROM_TEXTBOOK,
@@ -16,6 +15,7 @@ import {
   MIN_PAGE,
   ROUTER_PATHS,
 } from '../../constants';
+import { StyledPageTitle } from '../../styles/components';
 
 function TextbookPage() {
   const [isGamesDisabled, setIsGamesDisabled] = useState(false);
@@ -24,7 +24,7 @@ function TextbookPage() {
 
   return (
     <>
-      <PageTitle>Учебник</PageTitle>
+      <StyledPageTitle>Учебник</StyledPageTitle>
       <hr />
       <GroupSelect
         firstGroup={MIN_GROUP}
