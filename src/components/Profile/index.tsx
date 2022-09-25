@@ -8,7 +8,7 @@ import {
   StyledButton,
   StyledContentBox,
   StyledGreetingTitle,
-  StyledImage,
+  StyledParallax,
   StyledQuoteBox,
   StyledSection,
   StyledUserIcon,
@@ -25,7 +25,7 @@ function Profile({ user }: ProfileProps) {
     <StyledSection>
       <StyledWrapper>
         <StyledArticle>
-          <StyledImage />
+          <StyledParallax />
           <span />
           <StyledContentBox>
             <StyledUserIcon />

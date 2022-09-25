@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import room from '../../assets/img/room.jpg';
+import room from '../../assets/img/room.webp';
 import exit from '../../assets/svg/exit.svg';
 import user from '../../assets/svg/user.svg';
 import { ThemeProps } from '../../types';
@@ -22,27 +22,33 @@ export const StyledArticle = styled.article`
     flex-direction: row-reverse;
     justify-content: center;
     gap: 1rem;
+    height: 500px;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopM}) {
+    height: 600px;
   }
 `;
 
-export const StyledImage = styled.img.attrs({ src: room })`
-  margin: auto 0 0 0;
-  object-fit: fill;
-  height: calc(100vw / 1.5);
+export const StyledParallax = styled.div`
+  background: url(${room}) no-repeat 50% 50% / cover fixed;
+  height: 400px;
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
     width: 65%;
-    height: calc(65% / 1.5);
+    height: 100%;
+    background-size: cover;
+    background-attachment: unset;
   }
 
   & + span {
     position: absolute;
-    top: calc(50vw / 1.5);
+    top: 100px;
     left: 0;
     display: block;
     width: 100%;
-    height: calc(50vw / 1.5);
-    background: linear-gradient(transparent, transparent, white, white);
+    height: 300px;
+    background: linear-gradient(transparent, white);
     z-index: 5;
 
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
