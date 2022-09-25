@@ -3,12 +3,9 @@ import React from 'react';
 import { useSignIn } from '../../hooks';
 import { SignInFields } from '../../types';
 import Loading from '../Loading';
+import { StyledForm } from '../SignUp/styles';
 
-interface SignInProps {
-  goToSignUp: () => void;
-}
-
-function SignIn({ goToSignUp }: SignInProps) {
+function SignIn() {
   const initialValues: SignInFields = {
     email: '',
     password: '',
@@ -21,21 +18,21 @@ function SignIn({ goToSignUp }: SignInProps) {
 
   return (
     <>
-      {isLoading && <Loading />}
-      <form onSubmit={handleSubmit}>
-        <input name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
-        <input
-          name="password"
-          type="password"
-          placeholder="Пароль"
-          value={values.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Войти</button>
-        <p>
-          Еще нет аккаунта? <span onClick={goToSignUp}>Зарегистрироваться</span>
-        </p>
-      </form>
+      <StyledForm onSubmit={handleSubmit}>
+        <div>
+          <input name="email" placeholder="E-mail" value={values.email} onChange={handleChange} />
+        </div>
+        <div>
+          <input
+            name="password"
+            type="password"
+            placeholder="Пароль"
+            value={values.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit">{isLoading ? <Loading size="SMALL" /> : 'Войти'}</button>
+      </StyledForm>
     </>
   );
 }
