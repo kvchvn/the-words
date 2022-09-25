@@ -1,18 +1,20 @@
 import React from 'react';
 
 import Authorization from '../../components/Authorization';
-import PageTitle from '../../components/PageTitle';
 import Profile from '../../components/Profile';
 import { useUserSelector } from '../../redux';
+import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 
 function AuthorizationPage() {
   const user = useUserSelector();
 
   return (
-    <section>
-      <PageTitle>{user ? 'Профиль' : 'Авторизация'}</PageTitle>
+    <>
+      <StyledPageTitle>
+        <StyledWrapper>{user ? 'Профиль' : 'Авторизация'}</StyledWrapper>
+      </StyledPageTitle>
       {user ? <Profile user={user} /> : <Authorization />}
-    </section>
+    </>
   );
 }
 
