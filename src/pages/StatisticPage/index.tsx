@@ -14,7 +14,7 @@ function StatisticPage() {
       <WeekStatistic statistic={statistic} />
     </article>
   ) : (
-    <Loading />
+    <Loading size="SMALL" />
   );
 }
 

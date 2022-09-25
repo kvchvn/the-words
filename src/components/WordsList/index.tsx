@@ -46,7 +46,7 @@ function WordsList({ toggleGames }: WordsListProps) {
   return (
     <>
       <div>
-        {isLoading && <Loading />}
+        {isLoading && <Loading size="SMALL" />}
         {wordsResult && (
           <ul>
             {wordsResult.map((word) => (
