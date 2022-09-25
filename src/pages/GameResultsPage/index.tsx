@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 import finishGameSound from '../../assets/sounds/finish.mp3';
-import PageTitle from '../../components/PageTitle';
 import { ROUTER_PATHS } from '../../constants';
 import { useUserStatistic } from '../../hooks';
 import { useAppDispatch, useGameResultsSelector, useIsGameOverSelector } from '../../redux';
 import { resetGame } from '../../redux/slices/gameSlice';
 import { resetGameStatistic } from '../../redux/slices/statisticSlice';
+import { StyledPageTitle } from '../../styles/components';
 import { playAudio } from '../../utils/common';
 
 function GameResultsPage() {
@@ -47,7 +47,7 @@ function GameResultsPage() {
 
   return (
     <>
-      <PageTitle>Результаты игры</PageTitle>
+      <StyledPageTitle>Результаты игры</StyledPageTitle>
       <p>
         Правильных ответов: {rightAnswers} из {totalAnswers}
       </p>

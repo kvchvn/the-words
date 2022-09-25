@@ -2,13 +2,13 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import PageTitle from '../../components/PageTitle';
 import Score from '../../components/Score';
 import SprintRound from '../../components/SprintRound';
 import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
 import { useGame, useWordStatistic } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
+import { StyledPageTitle } from '../../styles/components';
 
 interface SprintGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK | null;
@@ -27,7 +27,7 @@ function SprintGamePage() {
 
   return (
     <>
-      <PageTitle>Спринт</PageTitle>
+      <StyledPageTitle>Спринт</StyledPageTitle>
       <div>
         <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
         <Score />
