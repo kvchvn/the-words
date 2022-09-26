@@ -4,6 +4,8 @@ import { v4 as uuid } from 'uuid';
 
 import { DELTA } from '../../constants';
 import { useGrouping } from '../../hooks';
+import { Theme } from '../../types';
+import { StyledButton, StyledGroupBox } from './styles';
 
 interface GroupSelectProps {
   firstGroup: number;
@@ -19,13 +21,20 @@ function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: Grou
   });
 
   return (
-    <article>
+    <StyledGroupBox>
       {groupsArray.map((group) => (
-        <button type="button" key={uuid()} value={group} onClick={selectGroup}>
-          {currentGroup === group ? `__${group + DELTA}__` : group + DELTA}
-        </button>
+        <StyledButton
+          type="button"
+          key={uuid()}
+          value={group}
+          onClick={selectGroup}
+          chosen={currentGroup === group}
+          groupNum={String(group) as keyof Theme['groupColor']}
+        >
+          {group + DELTA}
+        </StyledButton>
       ))}
-    </article>
+    </StyledGroupBox>
   );
 }
 
