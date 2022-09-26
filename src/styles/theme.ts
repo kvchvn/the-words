@@ -12,6 +12,15 @@ const baseTheme: Theme = {
     coral: '#df4c73',
     orange: '#ffa500',
   },
+  groupColor: {
+    '0': '#9fe7f5',
+    '1': '#0193abc3',
+    '2': '#429ebd',
+    '3': '#004a59',
+    '4': '#f6a278',
+    '5': '#f16744',
+    '6': '#f7ad19',
+  },
   size: {
     xs: '12px',
     s: '14px',
