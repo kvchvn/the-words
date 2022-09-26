@@ -2,6 +2,7 @@ import React from 'react';
 
 import { DELTA } from '../../constants';
 import { usePagination } from '../../hooks';
+import { StyledPageBox } from './styles';
 
 interface PageSelectProps {
   firstPage: number;
@@ -16,21 +17,21 @@ function PageSelect({ firstPage, lastPage }: PageSelectProps) {
     });
 
   return (
-    <article>
-      <button type="button" disabled={currentPage === firstPage} onClick={selectFirstPage}>
-        First: {firstPage + DELTA}
+    <StyledPageBox>
+      <button disabled={currentPage === firstPage} onClick={selectFirstPage}>
+        {firstPage + DELTA}
       </button>
-      <button type="button" disabled={currentPage === firstPage} onClick={selectPrevPage}>
-        Prev
+      <button disabled={currentPage === firstPage} onClick={selectPrevPage}>
+        &#60;
       </button>
       <span>{currentPage + DELTA}</span>
-      <button type="button" disabled={currentPage === lastPage} onClick={selectNextPage}>
-        Next
+      <button disabled={currentPage === lastPage} onClick={selectNextPage}>
+        &#62;
       </button>
-      <button type="button" disabled={currentPage === lastPage} onClick={selectLastPage}>
-        Last: {lastPage + DELTA}
+      <button disabled={currentPage === lastPage} onClick={selectLastPage}>
+        {lastPage + DELTA}
       </button>
-    </article>
+    </StyledPageBox>
   );
 }
 
