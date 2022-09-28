@@ -26,24 +26,22 @@ const useDifficulty = (wordData: Word | AggregatedWord) => {
           audiocall,
         },
       };
-    }
 
-    if (!current) {
-      await createUserWord({ difficulty: desired, userId, wordId, tagId });
+      if (current === desired) {
+        // removeUserWord doesn't use to save statistics data
+        await updateUserWord({
+          userId,
+          wordId,
+          difficulty: WORD_WITHOUT_DIFFICULTY,
+          optional,
+          tagId,
+        });
+        return;
+      }
+      await updateUserWord({ userId, wordId, difficulty: desired, optional, tagId });
       return;
     }
-    if (current === desired) {
-      // removeUserWord doesn't use to save statistics data
-      await updateUserWord({
-        userId,
-        wordId,
-        difficulty: WORD_WITHOUT_DIFFICULTY,
-        optional,
-        tagId,
-      });
-      return;
-    }
-    await updateUserWord({ difficulty: desired, userId, wordId, optional, tagId });
+    await createUserWord({ userId, wordId, difficulty: desired, tagId });
   };
 
   return { toggleDifficulty, user };
