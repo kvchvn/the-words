@@ -7,6 +7,7 @@ export const StyledPageBox = styled.article`
   display: flex;
   justify-content: center;
   gap: 1rem;
+  width: 100%;
 
   & > button,
   & > span {
