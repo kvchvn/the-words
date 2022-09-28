@@ -21,6 +21,11 @@ const baseTheme: Theme = {
     '5': '#f16744',
     '6': '#f7ad19',
   },
+  difficultyColor: {
+    none: '#859eb9',
+    hard: '#daa520',
+    easy: 'rgba(1,147,171,0.53)',
+  },
   size: {
     xs: '12px',
     s: '14px',

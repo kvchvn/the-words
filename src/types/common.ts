@@ -21,6 +21,11 @@ export interface Theme {
     '5': string;
     '6': string;
   };
+  difficultyColor: {
+    none: string;
+    hard: string;
+    easy: string;
+  };
   size: {
     xs: string;
     s: string;
