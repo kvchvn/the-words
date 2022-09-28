@@ -18,7 +18,18 @@ const rotate = keyframes`
 
 export const StyledLoading = styled.span`
   position: relative;
-  margin: 0 auto;
+  margin-top: ${({ size }: ThemeProps<StyledLoadingProps>) => {
+    switch (size) {
+      case 'SMALL':
+        return '0';
+      case 'MEDIUM':
+        return '5rem';
+      case 'LARGE':
+        return '20vh';
+    }
+  }};
+  margin-left: auto;
+  margin-right: auto;
   display: block;
   animation: 1.5s ${rotate} 0.25s infinite;
   width: ${({ size }: ThemeProps<StyledLoadingProps>) => {
