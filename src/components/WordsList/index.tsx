@@ -74,7 +74,7 @@ function WordsList({ toggleGames }: WordsListProps) {
             )}
             {isModalOpen && (
               <Modal closeModal={closeModal}>
-                <WordCard closeModal={closeModal} />
+                <WordCard />
               </Modal>
             )}
           </>
