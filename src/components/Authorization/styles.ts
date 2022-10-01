@@ -20,12 +20,15 @@ export const StyledSection = styled.section`
 `;
 
 export const StyledImage = styled.img.attrs({ src: welcome })`
+  margin-bottom: 2rem;
+  flex-shrink: 0;
   object-fit: fill;
   width: 100%;
   height: 66%;
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
     width: 60%;
+    margin-bottom: 0;
   }
 `;
 
