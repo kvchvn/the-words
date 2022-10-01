@@ -3,6 +3,7 @@ import React from 'react';
 import { EASY_WORD, HARD_WORD } from '../../constants';
 import { useDifficulty } from '../../hooks';
 import { AggregatedWord, Word, WordDifficulty } from '../../types';
+import { StyledButton, StyledButtonsBox } from './styles';
 
 interface WordCardButtonsProps {
   word: Word | AggregatedWord;
@@ -10,23 +11,21 @@ interface WordCardButtonsProps {
 }
 
 function WordCardButtons({ word, difficulty }: WordCardButtonsProps) {
-  const { user, toggleDifficulty } = useDifficulty(word);
+  const { toggleDifficulty } = useDifficulty(word);
 
   const toggleHardDifficulty = () => toggleDifficulty(difficulty, HARD_WORD);
 
   const toggleEasyDifficulty = () => toggleDifficulty(difficulty, EASY_WORD);
 
   return (
-    user && (
-      <div>
-        <button type="button" onClick={toggleHardDifficulty}>
-          Add to {HARD_WORD}
-        </button>
-        <button type="button" onClick={toggleEasyDifficulty}>
-          Add to {EASY_WORD}
-        </button>
-      </div>
-    )
+    <StyledButtonsBox>
+      <StyledButton mode={HARD_WORD} onClick={toggleHardDifficulty}>
+        {difficulty === HARD_WORD ? 'Удалить из сложных' : 'Добавить в сложные'}
+      </StyledButton>
+      <StyledButton mode={EASY_WORD} onClick={toggleEasyDifficulty}>
+        {difficulty === EASY_WORD ? 'Удалить из изученных' : 'Добавить в изученные'}
+      </StyledButton>
+    </StyledButtonsBox>
   );
 }
 
