@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useMemo } from 'react';
+import React, { ReactNode, useEffect, useMemo, useRef } from 'react';
 
 import ReactDOM from 'react-dom';
 
-import { StyledOverlay, StyledModal } from './theme';
+import { StyledButtonClose, StyledModal, StyledOverlay } from './styles';
 
 interface ModalProps {
   children: ReactNode;
@@ -11,13 +11,21 @@ interface ModalProps {
 
 function Modal({ children, closeModal }: ModalProps) {
   const root = useMemo(() => document.createElement('div'), []);
+  const appRoot = useRef(document.getElementById('root'));
+  const appRootOpacity = '0.4';
 
   useEffect(() => {
     document.body.appendChild(root);
+    if (appRoot.current) {
+      appRoot.current.style.opacity = appRootOpacity;
+    }
   }, [root]);
 
   const handleClose = () => {
     closeModal();
+    if (appRoot.current) {
+      appRoot.current.style.opacity = '';
+    }
     document.body.removeChild(root);
   };
 
@@ -25,7 +33,12 @@ function Modal({ children, closeModal }: ModalProps) {
 
   return ReactDOM.createPortal(
     <StyledOverlay onClick={handleClose}>
-      <StyledModal onClick={preventClose}>{children}</StyledModal>
+      <StyledModal onClick={preventClose}>
+        <>
+          {children}
+          <StyledButtonClose onClick={handleClose} />
+        </>
+      </StyledModal>
     </StyledOverlay>,
     root
   );
