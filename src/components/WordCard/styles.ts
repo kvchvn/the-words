@@ -11,12 +11,15 @@ export const StyledSection = styled.section`
   text-align: center;
 
   & > img {
+    color: white;
     margin: 0 auto;
-    width: 7rem;
-    height: 7rem;
+    line-height: 7rem;
+    min-width: 7rem;
+    min-height: 7rem;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid ${({ theme }: ThemeProps<unknown>) => theme.color.darkblue};
+    background-color: ${({ theme }: ThemeProps<unknown>) => theme.color.darkblue};
   }
 `;
 
