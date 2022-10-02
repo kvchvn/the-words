@@ -13,7 +13,7 @@ import {
   MIN_PAGE,
   ROUTER_PATHS,
 } from '../../constants';
-import { StyledPageTitle, StyledWrapper } from '../../styles/components';
+import { InfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
 import {
   StyledAudiocallLink,
   StyledImage,
@@ -41,6 +41,8 @@ function TextbookPage() {
           />
           <StyledImage />
           <StyledNav>
+            <h3>Мини-игры</h3>
+            {isGamesDisabled && <InfoText>Все слова на странице изучены.</InfoText>}
             <StyledSprintLink
               to={`/${ROUTER_PATHS.gameWelcome}`}
               state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
