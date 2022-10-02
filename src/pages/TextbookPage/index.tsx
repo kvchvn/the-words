@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
 import GroupSelect from '../../components/GroupSelect';
 import PageSelect from '../../components/PageSelect';
 import WordsList from '../../components/WordsList';
@@ -15,7 +13,14 @@ import {
   MIN_PAGE,
   ROUTER_PATHS,
 } from '../../constants';
-import { StyledPageTitle } from '../../styles/components';
+import { InfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
+import {
+  StyledAudiocallLink,
+  StyledImage,
+  StyledNav,
+  StyledSection,
+  StyledSprintLink,
+} from './styles';
 
 function TextbookPage() {
   const [isGamesDisabled, setIsGamesDisabled] = useState(false);
@@ -24,31 +29,37 @@ function TextbookPage() {
 
   return (
     <>
-      <StyledPageTitle>Учебник</StyledPageTitle>
-      <hr />
-      <GroupSelect
-        firstGroup={MIN_GROUP}
-        lastGroupForUsers={MAX_GROUP_FOR_USERS}
-        lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
-      />
-      <hr />
-      <PageSelect firstPage={MIN_PAGE} lastPage={MAX_PAGE} />
-      <hr />
-      <WordsList toggleGames={toggleGames} />
-      <nav>
-        <Link
-          to={`/${ROUTER_PATHS.gameWelcome}`}
-          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
-        >
-          <button disabled={isGamesDisabled}>Спринт</button>
-        </Link>
-        <Link
-          to={`/${ROUTER_PATHS.gameWelcome}`}
-          state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.audioCallGame }}
-        >
-          <button disabled={isGamesDisabled}>Аудиовызов</button>
-        </Link>
-      </nav>
+      <StyledPageTitle>
+        <StyledWrapper>Учебник</StyledWrapper>
+      </StyledPageTitle>
+      <StyledSection>
+        <StyledWrapper>
+          <GroupSelect
+            firstGroup={MIN_GROUP}
+            lastGroupForUsers={MAX_GROUP_FOR_USERS}
+            lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
+          />
+          <StyledImage />
+          <StyledNav>
+            <h3>Мини-игры</h3>
+            {isGamesDisabled && <InfoText>Все слова на странице изучены.</InfoText>}
+            <StyledSprintLink
+              to={`/${ROUTER_PATHS.gameWelcome}`}
+              state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
+            >
+              <button disabled={isGamesDisabled}>Спринт</button>
+            </StyledSprintLink>
+            <StyledAudiocallLink
+              to={`/${ROUTER_PATHS.gameWelcome}`}
+              state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.audioCallGame }}
+            >
+              <button disabled={isGamesDisabled}>Аудиовызов</button>
+            </StyledAudiocallLink>
+          </StyledNav>
+          <PageSelect firstPage={MIN_PAGE} lastPage={MAX_PAGE} />
+        </StyledWrapper>
+        <WordsList toggleGames={toggleGames} />
+      </StyledSection>
     </>
   );
 }

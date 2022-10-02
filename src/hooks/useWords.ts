@@ -2,17 +2,19 @@ import { useEffect } from 'react';
 
 import { HARD_WORD, MAX_GROUP_FOR_USERS, WORDS_PER_PAGE as wordsPerPage } from '../constants';
 import {
-  useLazyGetWordsQuery,
   useGroupSelector,
   useLazyGetAggregatedWordsQuery,
+  useLazyGetWordsQuery,
   usePageSelector,
   useUserSelector,
 } from '../redux';
-import { WordsResult } from '../types';
+import { MainSignInResponse, WordsResult } from '../types';
 
 interface UseWordsReturnType {
   wordsResult: WordsResult;
   isLoading: boolean;
+  group: number;
+  user: MainSignInResponse | null;
 }
 
 const useWords = (): UseWordsReturnType => {
@@ -42,7 +44,7 @@ const useWords = (): UseWordsReturnType => {
 
   const wordsResult = aggregatedWords || words;
 
-  return { wordsResult, isLoading };
+  return { wordsResult, isLoading, group, user };
 };
 
 export default useWords;

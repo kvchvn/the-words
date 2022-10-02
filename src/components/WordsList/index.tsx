@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect } from 'react';
 
-import { EASY_WORD } from '../../constants';
+import { EASY_WORD, MAX_GROUP } from '../../constants';
 import { useModal, useWords } from '../../hooks';
 import { useAppDispatch } from '../../redux';
 import { setCurrentWordId, unsetCurrentWordId } from '../../redux/slices/wordsListSlice';
+import { StyledWrapper } from '../../styles/components';
 import { AggregatedWord } from '../../types';
 import Loading from '../Loading';
 import Modal from '../Modal';
 import WordCard from '../WordCard';
 import WordItem from '../WordItem';
+import { StyledArticle, StyledLegendItem, StyledLegendList, StyledList } from './styles';
 
 interface WordsListProps {
   toggleGames: (disable: boolean) => void;
@@ -16,7 +18,7 @@ interface WordsListProps {
 
 function WordsList({ toggleGames }: WordsListProps) {
   const dispatch = useAppDispatch();
-  const { wordsResult, isLoading } = useWords();
+  const { wordsResult, isLoading, group, user } = useWords();
   const { isModalOpen, handleOpen, handleClose } = useModal();
 
   const closeModal = useCallback(() => {
@@ -44,29 +46,41 @@ function WordsList({ toggleGames }: WordsListProps) {
   }, [toggleGames, wordsResult]);
 
   return (
-    <>
-      <div>
-        {isLoading && <Loading size="SMALL" />}
-        {wordsResult && (
-          <ul>
-            {wordsResult.map((word) => (
-              <WordItem
-                key={word.id}
-                id={word.id}
-                word={word.word}
-                difficulty={(word as AggregatedWord).difficulty}
-                showDetailedData={openModal}
-              />
-            ))}
-          </ul>
+    <StyledArticle>
+      <StyledWrapper>
+        {isLoading ? (
+          <Loading size="MEDIUM" />
+        ) : (
+          <>
+            {wordsResult && (
+              <StyledList>
+                {wordsResult.map((word) => (
+                  <WordItem
+                    key={word.id}
+                    id={word.id}
+                    word={word.word}
+                    difficulty={(word as AggregatedWord).difficulty}
+                    showDetailedData={openModal}
+                  />
+                ))}
+              </StyledList>
+            )}
+            {group !== MAX_GROUP && user && (
+              <StyledLegendList>
+                <StyledLegendItem difficulty="none">Обычные</StyledLegendItem>
+                <StyledLegendItem difficulty="hard">Сложные</StyledLegendItem>
+                <StyledLegendItem difficulty="easy">Изученные</StyledLegendItem>
+              </StyledLegendList>
+            )}
+            {isModalOpen && (
+              <Modal closeModal={closeModal}>
+                <WordCard />
+              </Modal>
+            )}
+          </>
         )}
-      </div>
-      {isModalOpen && (
-        <Modal closeModal={closeModal}>
-          <WordCard closeModal={closeModal} />
-        </Modal>
-      )}
-    </>
+      </StyledWrapper>
+    </StyledArticle>
   );
 }
 

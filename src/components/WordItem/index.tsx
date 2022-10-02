@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { WORD_WITHOUT_DIFFICULTY } from '../../constants';
 import { WordDifficulty } from '../../types';
+import { StyledListElement } from './styles';
 
 interface WordItemProps {
   id: string;
@@ -16,10 +16,9 @@ function WordItem({ id, word, difficulty, showDetailedData }: WordItemProps) {
   };
 
   return (
-    <li onClick={handleClick}>
-      {word} ---{' '}
-      {difficulty && difficulty !== WORD_WITHOUT_DIFFICULTY ? difficulty.toUpperCase() : ''}
-    </li>
+    <StyledListElement difficulty={difficulty} onClick={handleClick}>
+      {word}
+    </StyledListElement>
   );
 }
 

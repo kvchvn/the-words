@@ -12,6 +12,20 @@ export interface Theme {
     coral: string;
     orange: string;
   };
+  groupColor: {
+    '0': string;
+    '1': string;
+    '2': string;
+    '3': string;
+    '4': string;
+    '5': string;
+    '6': string;
+  };
+  difficultyColor: {
+    none: string;
+    hard: string;
+    easy: string;
+  };
   size: {
     xs: string;
     s: string;

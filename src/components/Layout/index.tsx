@@ -16,7 +16,7 @@ function Layout() {
       <MenuToggler forwardRef={menuToggler} />
       <Header menuToggler={menuToggler} />
       <StyledMain>
-        <Suspense fallback={<Loading size="SMALL" />}>
+        <Suspense fallback={<Loading size="LARGE" />}>
           <Outlet />
         </Suspense>
       </StyledMain>

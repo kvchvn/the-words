@@ -1,6 +1,9 @@
 import React from 'react';
 
+import { v4 as uuid } from 'uuid';
+
 import { AggregatedWord } from '../../types';
+import { StyledIcon, StyledIconsBox, StyledList } from './styles';
 
 interface WordCardStatisticProps {
   wordData: AggregatedWord;
@@ -8,26 +11,42 @@ interface WordCardStatisticProps {
 
 function WordCardStatistic({ wordData }: WordCardStatisticProps) {
   return wordData.optional ? (
-    <ul>
+    <StyledList>
       <li>
-        Все игры: {wordData.optional.statistic.total.rightAnswers} правильных ответов из{' '}
-        {wordData.optional.statistic.total.totalAnswers}
+        <h4>
+          {wordData.optional.statistic.total.answersList.length
+            ? 'Последние результаты в играх'
+            : 'Последних результатов в играх нет'}
+        </h4>
+        <StyledIconsBox>
+          {wordData.optional.statistic.total.answersList.map((answer) => (
+            <StyledIcon key={uuid()} answer={answer} />
+          ))}
+        </StyledIconsBox>
       </li>
       <li>
-        Последние результаты в играх:{' '}
-        {wordData.optional.statistic.total.answersList.map((answer) => (answer ? '+' : '-'))}
+        <h4>Правильные ответы</h4>
+        <StyledList>
+          <li>
+            <h5>Во всех играх</h5>
+            {wordData.optional.statistic.total.rightAnswers} из{' '}
+            {wordData.optional.statistic.total.totalAnswers}
+          </li>
+          <li>
+            <h5>Спринт</h5>
+            {wordData.optional.statistic.sprint.rightAnswers} из{' '}
+            {wordData.optional.statistic.sprint.totalAnswers}
+          </li>
+          <li>
+            <h5>Аудиовызов</h5>
+            {wordData.optional.statistic.audiocall.rightAnswers} из{' '}
+            {wordData.optional.statistic.audiocall.totalAnswers}
+          </li>
+        </StyledList>
       </li>
-      <li>
-        Спринт: {wordData.optional.statistic.sprint.rightAnswers} правильных ответов из{' '}
-        {wordData.optional.statistic.sprint.totalAnswers}
-      </li>
-      <li>
-        Аудиовызов: {wordData.optional.statistic.audiocall.rightAnswers} правильных ответов из{' '}
-        {wordData.optional.statistic.audiocall.totalAnswers}
-      </li>
-    </ul>
+    </StyledList>
   ) : (
-    <p>По данному слову статистика пока отсутствует</p>
+    <p>По данному слову статистика отсутствует</p>
   );
 }
 

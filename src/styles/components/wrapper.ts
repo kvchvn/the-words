@@ -26,7 +26,7 @@ const StyledWrapper = styled.div.attrs({ className: 'wrapper' })`
   }
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopM}) {
-    width: calc(100vw - 12rem);
+    width: calc(100vw - 20rem);
   }
 `;
 
