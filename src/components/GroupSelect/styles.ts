@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import exclamation from '../../assets/svg/exclamation.svg';
 import { Theme, ThemeProps } from '../../types';
 
 interface StyledButtonProps {
@@ -16,23 +15,6 @@ export const StyledGroupBox = styled.article`
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     width: 35%;
-  }
-
-  & > p {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    font-size: 0.8rem;
-    border-radius: 0.5rem;
-    background-color: #f3f3f3;
-
-    &::before {
-      content: '';
-      display: block;
-      min-width: 30px;
-      height: 30px;
-      background: url(${exclamation}) no-repeat 50% 50% / contain;
-    }
   }
 
   & > ul {
@@ -51,10 +33,6 @@ export const StyledGroupBox = styled.article`
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  & > h4 {
-    font-size: 1.2rem;
   }
 `;
 
