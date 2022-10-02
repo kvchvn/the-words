@@ -4,10 +4,8 @@ import { v4 as uuid } from 'uuid';
 
 import { DELTA, MAX_GROUP } from '../../constants';
 import { useGrouping } from '../../hooks';
-import { useUserSelector } from '../../redux';
-import { InfoText } from '../../styles/components';
 import { Theme } from '../../types';
-import { StyledButton, StyledGroupBox } from './styles';
+import { StyledButton, StyledList } from './styles';
 
 interface GroupSelectProps {
   firstGroup: number;
@@ -16,7 +14,6 @@ interface GroupSelectProps {
 }
 
 function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: GroupSelectProps) {
-  const user = useUserSelector();
   const { groupsArray, currentGroup, selectGroup } = useGrouping({
     firstGroup,
     lastGroupForUsers,
@@ -24,19 +21,9 @@ function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: Grou
   });
 
   return (
-    <StyledGroupBox>
-      {!user && (
-        <InfoText>
-          Зарегистрируйтесь или войдите, чтобы получить доступ ко всем возможностям.
-        </InfoText>
-      )}
-      <InfoText>
-        В учебнике вы можете узнать подробную информацию о выбранном слове: перевод, произношение.
-        Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также увидеть актуальную
-        статистику ответов в мини-играх.
-      </InfoText>
+    <article>
       <h3>Сложность</h3>
-      <ul>
+      <StyledList>
         {groupsArray.map((group) => (
           <li key={uuid()}>
             <StyledButton
@@ -50,8 +37,8 @@ function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: Grou
             </StyledButton>
           </li>
         ))}
-      </ul>
-    </StyledGroupBox>
+      </StyledList>
+    </article>
   );
 }
 

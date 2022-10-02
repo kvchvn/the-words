@@ -19,6 +19,17 @@ export const StyledSection = styled.section`
   }
 `;
 
+export const StyledBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
+    width: 35%;
+  }
+`;
+
 export const StyledImage = styled.img.attrs({ src: books })`
   display: none;
   width: 60%;
