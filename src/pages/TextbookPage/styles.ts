@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import books from '../../assets/img/books.webp';
 import audiocall from '../../assets/svg/audiocall.svg';
-import exclamation from '../../assets/svg/exclamation.svg';
 import sprint from '../../assets/svg/sprint.svg';
 import { ThemeProps } from '../../types';
 
@@ -18,23 +17,6 @@ export const StyledSection = styled.section`
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 2rem;
-    }
-
-    & > p {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-      background-color: #f3f3f3;
-
-      &::before {
-        content: '';
-        display: block;
-        min-width: 30px;
-        height: 30px;
-        background: url(${exclamation}) no-repeat 50% 50% / contain;
-      }
     }
   }
 `;

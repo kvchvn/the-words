@@ -25,6 +25,11 @@ function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: Grou
   return (
     <StyledGroupBox>
       {!user && <p>Зарегистрируйтесь или войдите, чтобы получить доступ ко всем возможностям.</p>}
+      <p>
+        В учебнике вы можете узнать подробную информацию о выбранном слове: перевод, произношение.
+        Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также увидеть актуальную
+        статистику ответов в мини-играх.
+      </p>
       <h4>Сложность</h4>
       <ul>
         {groupsArray.map((group) => (

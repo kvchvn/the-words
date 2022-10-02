@@ -24,7 +24,7 @@ export const StyledGroupBox = styled.article`
     padding: 1rem;
     font-size: 0.8rem;
     border-radius: 0.5rem;
-    background-color: rgba(139, 0, 0, 0.2);
+    background-color: #f3f3f3;
 
     &::before {
       content: '';
@@ -49,7 +49,7 @@ export const StyledGroupBox = styled.article`
     }
 
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 

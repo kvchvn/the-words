@@ -40,11 +40,6 @@ function TextbookPage() {
             lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
           />
           <StyledImage />
-          <p>
-            В учебнике вы можете узнать подробную информацию о выбранном слове: перевод,
-            произношение. Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также
-            увидеть актуальную статистику ответов в мини-играх.
-          </p>
           <StyledNav>
             <StyledSprintLink
               to={`/${ROUTER_PATHS.gameWelcome}`}
