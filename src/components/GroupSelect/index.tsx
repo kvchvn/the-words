@@ -22,7 +22,6 @@ function GroupSelect({ firstGroup, lastGroupForUsers, lastGroupForGuests }: Grou
 
   return (
     <article>
-      <h3>Сложность</h3>
       <StyledList>
         {groupsArray.map((group) => (
           <li key={uuid()}>

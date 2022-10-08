@@ -48,6 +48,7 @@ function TextbookPage() {
               произношение. Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также
               увидеть актуальную статистику ответов в мини-играх.
             </InfoText>
+            <h3>Сложность</h3>
             <GroupSelect
               firstGroup={MIN_GROUP}
               lastGroupForUsers={MAX_GROUP_FOR_USERS}
