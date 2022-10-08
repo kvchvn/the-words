@@ -15,7 +15,8 @@ export const StyledArticle = styled.article`
   align-items: center;
   gap: 0.5rem;
   background-color: lightgray;
-  border-radius: 0.5rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 `;
 
 export const StyledIcon = styled.span`
