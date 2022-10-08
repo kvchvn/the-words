@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import audiocall from '../../assets/svg/audiocall.svg';
+import sprint from '../../assets/svg/sprint.svg';
 import GroupSelect from '../../components/GroupSelect';
 import {
   DELTA,
@@ -15,7 +17,9 @@ import {
 import { useAppDispatch, useGroupSelector } from '../../redux';
 import { startGame } from '../../redux/slices/gameSlice';
 import { goToGroup } from '../../redux/slices/wordsListSlice';
+import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 import { RouterPaths } from '../../types';
+import { StyledBox, StyledButton, StyledImg, StyledSection } from './styles';
 
 interface GameWelcomePageLocationState {
   state: {
@@ -35,9 +39,37 @@ function GameWelcomePage() {
     state ? state.entry === FROM_MAIN : true
   );
 
+  const showGroupSelection = () => setIsGroupSelection(true);
+
   const hideGroupSelection = () => setIsGroupSelection(false);
 
   const launchGame = () => dispatch(startGame());
+
+  const getGameName = () => {
+    if (state) {
+      const { game } = state;
+      switch (game) {
+        case 'sprintGame':
+          return 'Спринт';
+        case 'audioCallGame':
+          return 'Аудиовызов';
+      }
+    }
+    return '';
+  };
+
+  const getGameImageSrc = () => {
+    if (state) {
+      const { game } = state;
+      switch (game) {
+        case 'sprintGame':
+          return sprint;
+        case 'audioCallGame':
+          return audiocall;
+      }
+    }
+    return '';
+  };
 
   useEffect(() => {
     if (state && state.entry === FROM_MAIN) {
@@ -55,24 +87,35 @@ function GameWelcomePage() {
     return null;
   }
 
-  return isGroupSelection ? (
-    <div>
-      <h4>Выберите уровень сложности</h4>
-      <GroupSelect
-        firstGroup={MIN_GROUP}
-        lastGroupForUsers={MAX_GROUP_FOR_USERS}
-        lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
-      />
-      <button onClick={hideGroupSelection}>Выбрать группу</button>
-    </div>
-  ) : (
-    <>
-      <h5>Вы готовы?</h5>
-      <p>Уровень сложности: {group + DELTA}</p>
-      <Link to={`/${ROUTER_PATHS[state.game]}`} onClick={launchGame} state={state.entry}>
-        Начать игру
-      </Link>
-    </>
+  return (
+    <StyledSection>
+      <StyledPageTitle>
+        <StyledWrapper>{getGameName()}</StyledWrapper>
+      </StyledPageTitle>
+      <StyledImg src={getGameImageSrc()} />
+      <StyledWrapper>
+        {isGroupSelection ? (
+          <>
+            <h3>Выберите уровень сложности</h3>
+            <GroupSelect
+              firstGroup={MIN_GROUP}
+              lastGroupForUsers={MAX_GROUP_FOR_USERS}
+              lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
+            />
+            <StyledButton onClick={hideGroupSelection}>Выбрать группу</StyledButton>
+          </>
+        ) : (
+          <StyledBox>
+            <h4>Уровень сложности: {group + DELTA}</h4>
+            <h3>Вы готовы?</h3>
+            <Link to={`/${ROUTER_PATHS[state.game]}`} onClick={launchGame} state={state.entry}>
+              <StyledButton>Начать игру</StyledButton>
+            </Link>
+            <button onClick={showGroupSelection}>Вернуться назад</button>
+          </StyledBox>
+        )}
+      </StyledWrapper>
+    </StyledSection>
   );
 }
 
