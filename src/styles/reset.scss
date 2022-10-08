@@ -35,6 +35,10 @@ button {
   display: block;
   cursor: pointer;
   border: none;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 input,
