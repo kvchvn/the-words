@@ -8,7 +8,8 @@ import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
 import { useGame, useWordStatistic } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
-import { StyledPageTitle } from '../../styles/components';
+import { StyledWrapper } from '../../styles/components';
+import { StyledBox } from './styles';
 
 interface SprintGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK | null;
@@ -26,20 +27,19 @@ function SprintGamePage() {
   const { updateWordStatistic } = useWordStatistic('SPRINT');
 
   return (
-    <>
-      <StyledPageTitle>Спринт</StyledPageTitle>
-      <div>
+    <StyledWrapper>
+      <StyledBox>
         <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
         <Score />
-        <SprintRound
-          originalWord={originalWord}
-          isGameOver={isGameOver}
-          playRoundSound={playRoundSound}
-          showNextWord={toNextWord}
-          updateWordStatistic={updateWordStatistic}
-        />
-      </div>
-    </>
+      </StyledBox>
+      <SprintRound
+        originalWord={originalWord}
+        isGameOver={isGameOver}
+        playRoundSound={playRoundSound}
+        showNextWord={toNextWord}
+        updateWordStatistic={updateWordStatistic}
+      />
+    </StyledWrapper>
   );
 }
 
