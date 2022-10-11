@@ -5,6 +5,10 @@ import logo from '../../assets/svg/logo.svg';
 import { StyledWrapper } from '../../styles/components';
 import { ThemeProps } from '../../types';
 
+interface StyledHeaderProps {
+  disabled: boolean;
+}
+
 export const StyledHeader = styled.header`
   position: fixed;
   width: 100vw;
@@ -15,6 +19,13 @@ export const StyledHeader = styled.header`
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     padding-bottom: 1rem;
     height: 8rem;
+  }
+
+  & a {
+    opacity: ${({ disabled }: ThemeProps<StyledHeaderProps>) => (disabled ? '0.5' : '1')};
+    pointer-events: ${({ disabled }: ThemeProps<StyledHeaderProps>) =>
+      disabled ? 'none' : 'auto'};
+    cursor: ${({ disabled }: ThemeProps<StyledHeaderProps>) => (disabled ? 'default' : 'pointer')};
   }
 `;
 

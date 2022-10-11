@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { useIsGameStartedSelector } from '../../redux';
+import { useIsGameOverSelector, useIsGameStartedSelector } from '../../redux';
 
 function Footer() {
   const isGameStarted = useIsGameStartedSelector();
-  return !isGameStarted ? <h1>It`s Footer</h1> : null;
+  const isGameOver = useIsGameOverSelector();
+
+  return isGameStarted && !isGameOver ? null : <h1>It`s Footer</h1>;
 }
 
 export default Footer;
