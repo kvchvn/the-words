@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import {
   DEFAULT_USER_DAILY_STATISTIC,
   DEFAULT_USER_STATISTIC,
   DEFAULT_USER_WEEKLY_STATISTIC,
-  ROUTER_PATHS,
 } from '../constants';
 import {
   useGameResultsSelector,
@@ -29,7 +26,6 @@ const useUserStatistic = () => {
   const { rightAnswers: rightAnswersPerGame, totalAnswers: totalAnswersPerGame } =
     useGameResultsSelector();
   const user = useUserSelector();
-  const navigate = useNavigate();
 
   const [getStatistic] = useLazyGetStatisticQuery();
   const [updateStatistic] = useUpdateStatisticMutation();
@@ -131,12 +127,6 @@ const useUserStatistic = () => {
     rightAnswersPerGame,
     totalAnswersPerGame,
   ]);
-
-  useEffect(() => {
-    if (!user) {
-      navigate(ROUTER_PATHS.main);
-    }
-  }, [user, navigate]);
 
   useEffect(() => {
     const displayUserStatistic = async (): Promise<UserStatistic | null> => {
