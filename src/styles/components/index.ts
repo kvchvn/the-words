@@ -1,5 +1,5 @@
-import InfoText from './infoText';
+import StyledInfoText from './infoText';
 import StyledPageTitle from './pageTitle';
 import StyledWrapper from './wrapper';
 
-export { StyledWrapper, StyledPageTitle, InfoText };
+export { StyledWrapper, StyledPageTitle, StyledInfoText };

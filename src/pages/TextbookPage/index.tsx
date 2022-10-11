@@ -14,7 +14,7 @@ import {
   ROUTER_PATHS,
 } from '../../constants';
 import { useUserSelector } from '../../redux';
-import { InfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
+import { StyledInfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
 import {
   StyledAudiocallLink,
   StyledBox,
@@ -39,15 +39,15 @@ function TextbookPage() {
         <StyledWrapper>
           <StyledBox>
             {!user && (
-              <InfoText>
+              <StyledInfoText>
                 Зарегистрируйтесь или войдите, чтобы получить доступ ко всем возможностям.
-              </InfoText>
+              </StyledInfoText>
             )}
-            <InfoText>
+            <StyledInfoText>
               В учебнике вы можете узнать подробную информацию о выбранном слове: перевод,
               произношение. Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также
               увидеть актуальную статистику ответов в мини-играх.
-            </InfoText>
+            </StyledInfoText>
             <h3>Сложность</h3>
             <GroupSelect
               firstGroup={MIN_GROUP}
@@ -58,7 +58,7 @@ function TextbookPage() {
           <StyledImage />
           <StyledNav>
             <h3>Мини-игры</h3>
-            {isGamesDisabled && <InfoText>Все слова на странице изучены.</InfoText>}
+            {isGamesDisabled && <StyledInfoText>Все слова на странице изучены.</StyledInfoText>}
             <StyledSprintLink
               to={`/${ROUTER_PATHS.gameWelcome}`}
               state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}
