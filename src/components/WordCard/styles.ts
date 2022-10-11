@@ -13,9 +13,8 @@ export const StyledSection = styled.section`
   & > img {
     color: white;
     margin: 0 auto;
-    line-height: 7rem;
-    min-width: 7rem;
-    min-height: 7rem;
+    width: 7rem;
+    height: 7rem;
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid ${({ theme }: ThemeProps<unknown>) => theme.color.darkblue};
