@@ -7,6 +7,7 @@ import {
   ROUND_SCORE,
 } from '../../constants';
 import { useGameResultsSelector } from '../../redux';
+import { StyledArticle, StyledBox, StyledCombo, StyledProgressLine } from './styles';
 
 function Score() {
   const [score, setScore] = useState({
@@ -44,14 +45,16 @@ function Score() {
   }, [answers]);
 
   return (
-    <article>
-      <h3>Множитель: {score.combo}</h3>
-      <h4>
-        Прогресс: [{score.progressToCombo}, {MAX_PROGRESS_TO_COMBO}]
-      </h4>
-      <h4>Правильных ответов: {rightAnswers}</h4>
-      <h4>Всего очков: {score.value}</h4>
-    </article>
+    <StyledArticle>
+      <StyledBox>
+        <StyledProgressLine current={score.progressToCombo} max={MAX_PROGRESS_TO_COMBO}>
+          <span />
+        </StyledProgressLine>
+        <StyledCombo>x{score.combo}</StyledCombo>
+      </StyledBox>
+      <p>Правильных ответов: {rightAnswers}</p>
+      <h4>{score.value}</h4>
+    </StyledArticle>
   );
 }
 

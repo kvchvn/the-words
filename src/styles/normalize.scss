@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: black;
 }
 
 body {
@@ -35,6 +36,11 @@ button {
   display: block;
   cursor: pointer;
   border: none;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 }
 
 input,

@@ -13,9 +13,11 @@ import {
   MIN_PAGE,
   ROUTER_PATHS,
 } from '../../constants';
-import { InfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
+import { useUserSelector } from '../../redux';
+import { StyledInfoText, StyledPageTitle, StyledWrapper } from '../../styles/components';
 import {
   StyledAudiocallLink,
+  StyledBox,
   StyledImage,
   StyledNav,
   StyledSection,
@@ -23,6 +25,7 @@ import {
 } from './styles';
 
 function TextbookPage() {
+  const user = useUserSelector();
   const [isGamesDisabled, setIsGamesDisabled] = useState(false);
 
   const toggleGames = useCallback((disable: boolean) => setIsGamesDisabled(disable), []);
@@ -34,15 +37,28 @@ function TextbookPage() {
       </StyledPageTitle>
       <StyledSection>
         <StyledWrapper>
-          <GroupSelect
-            firstGroup={MIN_GROUP}
-            lastGroupForUsers={MAX_GROUP_FOR_USERS}
-            lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
-          />
+          <StyledBox>
+            {!user && (
+              <StyledInfoText>
+                Зарегистрируйтесь или войдите, чтобы получить доступ ко всем возможностям.
+              </StyledInfoText>
+            )}
+            <StyledInfoText>
+              В учебнике вы можете узнать подробную информацию о выбранном слове: перевод,
+              произношение. Добавить слово в &quot;Сложные&quot; или &quot;Изученные&quot;. А также
+              увидеть актуальную статистику ответов в мини-играх.
+            </StyledInfoText>
+            <h3>Сложность</h3>
+            <GroupSelect
+              firstGroup={MIN_GROUP}
+              lastGroupForUsers={MAX_GROUP_FOR_USERS}
+              lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
+            />
+          </StyledBox>
           <StyledImage />
           <StyledNav>
             <h3>Мини-игры</h3>
-            {isGamesDisabled && <InfoText>Все слова на странице изучены.</InfoText>}
+            {isGamesDisabled && <StyledInfoText>Все слова на странице изучены.</StyledInfoText>}
             <StyledSprintLink
               to={`/${ROUTER_PATHS.gameWelcome}`}
               state={{ entry: FROM_TEXTBOOK, game: GAME_TYPES.sprintGame }}

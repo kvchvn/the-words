@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 import exclamation from '../../assets/svg/exclamation.svg';
 
-const InfoText = styled.p`
+const StyledInfoText = styled.p`
   display: flex;
   gap: 1rem;
   padding: 1rem;
+  text-align: left;
   font-size: 0.8rem;
   border-radius: 0.5rem;
   background-color: #f3f3f3;
@@ -19,4 +20,4 @@ const InfoText = styled.p`
   }
 `;
 
-export default InfoText;
+export default StyledInfoText;

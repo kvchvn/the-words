@@ -7,32 +7,21 @@ interface StyledButtonProps {
   groupNum: keyof Theme['groupColor'];
 }
 
-export const StyledGroupBox = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 1rem;
+export const StyledList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
 
-  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
-    width: 35%;
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.mobileL}) {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  & > ul {
-    display: grid;
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
+    gap: 1rem;
+  }
+
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-
-    @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.mobileL}) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
-      gap: 1rem;
-    }
-
-    @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 `;
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_TYPES, ROUTER_PATHS } from '../../constants';
-import { useIsGameStartedSelector, useUserSelector } from '../../redux';
+import { useIsGameOverSelector, useIsGameStartedSelector, useUserSelector } from '../../redux';
 import { RouterPaths } from '../../types';
 import {
   StyledHeader,
@@ -28,6 +28,7 @@ interface LocationState {
 function Header({ menuToggler }: HeaderProps) {
   const user = useUserSelector();
   const isGameStarted = useIsGameStartedSelector();
+  const isGameOver = useIsGameOverSelector();
   const { state } = useLocation() as LocationState;
 
   const handleClick = (e: React.MouseEvent) => {
@@ -45,8 +46,8 @@ function Header({ menuToggler }: HeaderProps) {
     }
   };
 
-  return isGameStarted ? null : (
-    <StyledHeader>
+  return isGameStarted && !isGameOver ? null : (
+    <StyledHeader disabled={isGameOver}>
       <StyledHeaderWrapper>
         <StyledLogoWrapper>
           <StyledLogoLink to={ROUTER_PATHS.main} />

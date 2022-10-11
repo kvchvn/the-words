@@ -3,6 +3,8 @@ import React, { useCallback, useEffect } from 'react';
 import { useAppDispatch, useSprintDataSelector } from '../../redux';
 import { saveAnswer } from '../../redux/slices/gameSlice';
 import { AggregatedWord, WordResult } from '../../types';
+import Loading from '../Loading';
+import { StyledButton, StyledButtonsBox, StyledSection, StyledWordsBox } from './styles';
 
 interface SprintRoundProps {
   originalWord: WordResult;
@@ -57,20 +59,22 @@ function SprintRound({
   }, [goToNextRound, isGameOver]);
 
   return originalWord && translatedWord ? (
-    <section>
-      <h4>{originalWord.word}</h4>
-      <h4>{translatedWord.wordTranslate}</h4>
-      <div>
-        <button disabled={isGameOver} type="button" onClick={goToNextRound.bind(null, true)}>
+    <StyledSection>
+      <StyledWordsBox>
+        <h3>{originalWord.word}</h3>
+        <h3>{translatedWord.wordTranslate}</h3>
+      </StyledWordsBox>
+      <StyledButtonsBox>
+        <StyledButton mode="TRUE" disabled={isGameOver} onClick={goToNextRound.bind(null, true)}>
           Правда
-        </button>
-        <button disabled={isGameOver} type="button" onClick={goToNextRound.bind(null, false)}>
+        </StyledButton>
+        <StyledButton mode="FALSE" disabled={isGameOver} onClick={goToNextRound.bind(null, false)}>
           Неправда
-        </button>
-      </div>
-    </section>
+        </StyledButton>
+      </StyledButtonsBox>
+    </StyledSection>
   ) : (
-    <p>Loading</p>
+    <Loading size="LARGE" />
   );
 }
 

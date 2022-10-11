@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTER_PATHS } from '../../constants';
+import { StyledArticle, StyledBox, StyledButton, StyledIcon, StyledTime } from './styles';
 
 interface TimerProps {
   range: number;
@@ -24,14 +25,17 @@ function Timer({ range, finishGame }: TimerProps) {
   }, [time, finishGame]);
 
   return (
-    <section>
-      <p>{time !== 0 ? `Time: ${time}` : 'Время вышло!'}</p>
+    <StyledArticle>
+      <StyledBox>
+        <StyledIcon />
+        <StyledTime time={time}>{time !== 0 ? time : 'Время вышло!'}</StyledTime>
+      </StyledBox>
       {time === 0 && (
-        <button type="button" onClick={goToResults}>
-          Результат
-        </button>
+        <StyledButton type="button" onClick={goToResults}>
+          <span>Результат</span>
+        </StyledButton>
       )}
-    </section>
+    </StyledArticle>
   );
 }
 
