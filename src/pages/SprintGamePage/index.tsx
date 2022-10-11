@@ -8,7 +8,7 @@ import Timer from '../../components/Timer';
 import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
 import { useGame, useWordStatistic } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
-import { StyledWrapper } from '../../styles/components';
+import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 import { StyledBox } from './styles';
 
 interface SprintGamePageLocation {
@@ -28,6 +28,7 @@ function SprintGamePage() {
 
   return (
     <StyledWrapper>
+      <StyledPageTitle>Спринт</StyledPageTitle>
       <StyledBox>
         <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
         <Score />
