@@ -1,4 +1,4 @@
-import { RouterPaths, WordOptional } from '../types';
+import { GameCongratulations, RouterPaths, WordOptional } from '../types';
 
 export const STARTED_WORD_INDEX = 0;
 
@@ -36,5 +36,28 @@ export const DEFAULT_STATISTIC: WordOptional['statistic'] = {
   audiocall: {
     rightAnswers: 0,
     totalAnswers: 0,
+  },
+};
+
+export const GAME_RESULTS_CONGRATULATIONS: GameCongratulations = {
+  veryBad: {
+    rate: 0.1,
+    message: 'Попытайтесь еще раз',
+  },
+  bad: {
+    rate: 0.4,
+    message: 'Ничего страшного. Дальше - лучше',
+  },
+  normal: {
+    rate: 0.6,
+    message: 'Хороший результат, но не расслабляйтесь',
+  },
+  good: {
+    rate: 0.8,
+    message: 'Очень хорошо! Вы молодец!',
+  },
+  veryGood: {
+    rate: 1,
+    message: 'Просто невероятно! Perfect!',
   },
 };

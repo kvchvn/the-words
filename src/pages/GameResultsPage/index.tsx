@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import finishGameSound from '../../assets/sounds/finish.mp3';
 import Modal from '../../components/Modal';
 import WordCard from '../../components/WordCard';
-import { ROUTER_PATHS } from '../../constants';
+import { GAME_RESULTS_CONGRATULATIONS, ROUTER_PATHS } from '../../constants';
 import { useModal, useUserStatistic } from '../../hooks';
 import {
   useAppDispatch,
@@ -51,6 +51,23 @@ function GameResultsPage() {
     dispatch(resetGame());
   };
 
+  const getCongratulations = () => {
+    const successRate = rightAnswers / totalAnswers;
+    let displayedMessage = '';
+    const resultsData = Object.values(GAME_RESULTS_CONGRATULATIONS) as Array<{
+      rate: number;
+      message: string;
+    }>;
+
+    resultsData.forEach(({ rate, message }) => {
+      if (successRate <= rate && !displayedMessage) {
+        displayedMessage = message;
+      }
+    });
+
+    return displayedMessage;
+  };
+
   useEffect(() => {
     // if user wants to open page directly
     if (!isGameOver) {
@@ -71,48 +88,57 @@ function GameResultsPage() {
       <StyledWrapper>
         <StyledPageTitle>Результаты игры</StyledPageTitle>
         <StyledSection>
-          <h3>
+          <h4>
             {rightAnswers} из {totalAnswers} правильных ответов
-          </h3>
-          <article>
-            <h4>{rightAnswersList.length ? 'Правильные ответы' : 'Правильных ответов нет'}</h4>
-            <StyledBox>
-              <ul>
-                {rightAnswersList.map((word) => (
-                  <li onClick={openModal.bind(null, word.id)} key={uuid()}>
-                    {word.word}
-                  </li>
-                ))}
-              </ul>
-              <ul>
-                {rightAnswersList.map((word) => (
-                  <li onClick={openModal.bind(null, word.id)} key={uuid()}>
-                    {word.wordTranslate}
-                  </li>
-                ))}
-              </ul>
-            </StyledBox>
-          </article>
-          <article>
-            <h4>{wrongAnswersList.length ? 'Неправильные ответы' : 'Неправильных ответов нет'}</h4>
-            <StyledBox>
-              <ul>
-                {wrongAnswersList.map((word) => (
-                  <li onClick={openModal.bind(null, word.id)} key={uuid()}>
-                    {word.word}
-                  </li>
-                ))}
-              </ul>
-              <ul>
-                {wrongAnswersList.map((word) => (
-                  <li onClick={openModal.bind(null, word.id)} key={uuid()}>
-                    {word.wordTranslate}
-                  </li>
-                ))}
-              </ul>
-            </StyledBox>
-          </article>
-          <StyledInfoText>Нажмите на слово для подробной информации.</StyledInfoText>
+          </h4>
+          <h3>{getCongratulations()}</h3>
+          {!totalAnswers ? null : (
+            <>
+              <article>
+                <h4>{rightAnswersList.length ? 'Правильные ответы' : 'Правильных ответов нет'}</h4>
+                <StyledBox>
+                  <ul>
+                    {rightAnswersList.map((word) => (
+                      <li onClick={openModal.bind(null, word.id)} key={uuid()}>
+                        {word.word}
+                      </li>
+                    ))}
+                  </ul>
+                  <ul>
+                    {rightAnswersList.map((word) => (
+                      <li onClick={openModal.bind(null, word.id)} key={uuid()}>
+                        {word.wordTranslate}
+                      </li>
+                    ))}
+                  </ul>
+                </StyledBox>
+              </article>
+              <article>
+                <h4>
+                  {wrongAnswersList.length ? 'Неправильные ответы' : 'Неправильных ответов нет'}
+                </h4>
+                <StyledBox>
+                  <ul>
+                    {wrongAnswersList.map((word) => (
+                      <li onClick={openModal.bind(null, word.id)} key={uuid()}>
+                        {word.word}
+                      </li>
+                    ))}
+                  </ul>
+                  <ul>
+                    {wrongAnswersList.map((word) => (
+                      <li onClick={openModal.bind(null, word.id)} key={uuid()}>
+                        {word.wordTranslate}
+                      </li>
+                    ))}
+                  </ul>
+                </StyledBox>
+              </article>
+            </>
+          )}
+          {totalAnswers ? (
+            <StyledInfoText>Нажмите на слово для подробной информации.</StyledInfoText>
+          ) : null}
           {!isButtonsHidden && (
             <StyledButtonsBox>
               <button type="button" onClick={goToMainPage}>

@@ -7,7 +7,7 @@ import {
   SignUpResponse,
 } from './authorization';
 import { RouterPaths, Theme, ThemeProps } from './common';
-import { GameType, UpdateGameDataFn, UpdateGameDataParams } from './games';
+import { GameCongratulations, GameType, UpdateGameDataFn, UpdateGameDataParams } from './games';
 import { GameStatistic, UserStatistic, WeekdayStatistic, WeeklyStatistic } from './statistic';
 import {
   AggregatedWord,
@@ -54,4 +54,5 @@ export {
   WeekdayStatistic,
   WeeklyStatistic,
   ThemeProps,
+  GameCongratulations,
 };
