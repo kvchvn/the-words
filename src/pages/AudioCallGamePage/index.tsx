@@ -3,11 +3,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import AudioCallRound from '../../components/AudioCallRound';
-import Score from '../../components/Score';
-import Timer from '../../components/Timer';
-import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
+import GameBoard from '../../components/GameBoard';
+import { FROM_MAIN, FROM_TEXTBOOK } from '../../constants';
 import { useAudioCallGame, useGame, useWordStatistic } from '../../hooks';
-import { StyledPageTitle } from '../../styles/components';
+import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 
 interface AudioCallGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK;
@@ -25,20 +24,17 @@ function AudioCallGamePage() {
   const { updateWordStatistic } = useWordStatistic('AUDIOCALL');
 
   return (
-    <>
+    <StyledWrapper>
       <StyledPageTitle>Аудиовызов</StyledPageTitle>
-      <div>
-        <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
-        <Score />
-        <AudioCallRound
-          originalWord={originalWord}
-          isGameOver={isGameOver}
-          playRoundSound={playRoundSound}
-          showNextWord={toNextWord}
-          updateWordStatistic={updateWordStatistic}
-        />
-      </div>
-    </>
+      <GameBoard finishGame={finishGame} />
+      <AudioCallRound
+        originalWord={originalWord}
+        isGameOver={isGameOver}
+        playRoundSound={playRoundSound}
+        showNextWord={toNextWord}
+        updateWordStatistic={updateWordStatistic}
+      />
+    </StyledWrapper>
   );
 }
 
