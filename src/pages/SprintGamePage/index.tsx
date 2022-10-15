@@ -2,14 +2,12 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import Score from '../../components/Score';
+import GameBoard from '../../components/GameBoard';
 import SprintRound from '../../components/SprintRound';
-import Timer from '../../components/Timer';
-import { FROM_MAIN, FROM_TEXTBOOK, GAME_ROUND_TIME } from '../../constants';
+import { FROM_MAIN, FROM_TEXTBOOK } from '../../constants';
 import { useGame, useWordStatistic } from '../../hooks';
 import useSprintGame from '../../hooks/useSprintGame';
 import { StyledPageTitle, StyledWrapper } from '../../styles/components';
-import { StyledBox } from './styles';
 
 interface SprintGamePageLocation {
   state: typeof FROM_MAIN | typeof FROM_TEXTBOOK | null;
@@ -29,10 +27,7 @@ function SprintGamePage() {
   return (
     <StyledWrapper>
       <StyledPageTitle>Спринт</StyledPageTitle>
-      <StyledBox>
-        <Timer range={GAME_ROUND_TIME} finishGame={finishGame} />
-        <Score />
-      </StyledBox>
+      <GameBoard finishGame={finishGame} />
       <SprintRound
         originalWord={originalWord}
         isGameOver={isGameOver}

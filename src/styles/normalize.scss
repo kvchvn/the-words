@@ -1,3 +1,12 @@
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -30,6 +39,7 @@ a {
 
 img {
   display: block;
+  animation: appearance 1s;
 }
 
 button {
