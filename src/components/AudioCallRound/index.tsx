@@ -1,12 +1,22 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { v4 as uuid } from 'uuid';
 
-import { AUDIOCALL_DO_NOT_KNOW_ANSWER, BASE_MEDIA_URL } from '../../constants';
+import { BASE_MEDIA_URL } from '../../constants';
 import { useAppDispatch, useAudioCallDataSelector } from '../../redux';
 import { saveAnswer } from '../../redux/slices/gameSlice';
 import { AggregatedWord, Word, WordResult } from '../../types';
 import { playAudio } from '../../utils/common';
+import Loading from '../Loading';
+import {
+  StyledBox,
+  StyledButtonPlay,
+  StyledImage,
+  StyledItem,
+  StyledItemProps,
+  StyledList,
+  StyledSection,
+} from './styles';
 
 interface AudioCallRoundProps {
   originalWord: WordResult;
@@ -16,6 +26,11 @@ interface AudioCallRoundProps {
   showNextWord: () => void;
 }
 
+interface AudioCallRoundState {
+  isAnswered: boolean;
+  answerId: string | null;
+}
+
 function AudioCallRound({
   originalWord,
   isGameOver,
@@ -23,60 +38,88 @@ function AudioCallRound({
   updateWordStatistic,
   showNextWord,
 }: AudioCallRoundProps) {
+  const [{ isAnswered, answerId }, setAnswer] = useState<AudioCallRoundState>({
+    isAnswered: false,
+    answerId: null,
+  });
+
   const { wordsArray } = useAudioCallDataSelector();
   const dispatch = useAppDispatch();
 
-  const goToNextRound = useCallback(
-    (userAnswer: Word | typeof AUDIOCALL_DO_NOT_KNOW_ANSWER) => {
+  const handleClick = useCallback(
+    (userAnswerId: string | null) => {
+      if (isAnswered) return;
+
       if (originalWord && wordsArray.length) {
         let isTruthyAnswer: boolean;
-        if (userAnswer === AUDIOCALL_DO_NOT_KNOW_ANSWER) {
+        if (!userAnswerId) {
           isTruthyAnswer = false;
         } else {
-          isTruthyAnswer = originalWord.id === userAnswer.id;
+          isTruthyAnswer = originalWord.id === userAnswerId;
         }
 
+        setAnswer((prevState) => ({ ...prevState, isAnswered: true, answerId: userAnswerId }));
         playRoundSound(isTruthyAnswer).then(() => {
           updateWordStatistic(originalWord, isTruthyAnswer);
-          showNextWord();
           dispatch(saveAnswer({ word: originalWord, isTruthyAnswer }));
         });
       }
     },
-    [originalWord, wordsArray.length, dispatch, playRoundSound, updateWordStatistic, showNextWord]
+    [originalWord, wordsArray.length, dispatch, playRoundSound, updateWordStatistic, isAnswered]
   );
 
-  const handleClick = useCallback(() => {
+  const handleNextButtonClick = useCallback(() => {
+    if (!isAnswered) {
+      setAnswer((prevState) => ({ ...prevState, isAnswered: true, answerId: null }));
+    } else {
+      setAnswer((prevState) => ({ ...prevState, isAnswered: false }));
+      showNextWord();
+    }
+  }, [isAnswered, showNextWord]);
+
+  const handleAudioButtonClick = useCallback(() => {
     if (originalWord) {
       const src = `${BASE_MEDIA_URL}${originalWord.audio}`;
       playAudio(src);
     }
   }, [originalWord]);
 
+  const setStyledItemMode = (wordId: string): StyledItemProps['mode'] => {
+    if (isAnswered) {
+      if (wordId === (originalWord as Word).id) {
+        return 'RIGHT';
+      }
+      if (answerId && answerId === wordId && answerId !== (originalWord as Word).id) {
+        return 'WRONG';
+      }
+    }
+    return 'COMMON';
+  };
+
   useEffect(() => {
-    handleClick();
-  }, [handleClick]);
+    handleAudioButtonClick();
+  }, [handleAudioButtonClick]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const { code, key } = event;
 
       if (code === 'Digit5' || key === '5') {
-        goToNextRound(AUDIOCALL_DO_NOT_KNOW_ANSWER);
+        handleNextButtonClick();
         return;
       }
 
       if (code === 'Digit1' || key === '1') {
-        goToNextRound(wordsArray[0]);
+        handleClick(wordsArray[0].id);
       }
       if (code === 'Digit2' || key === '2') {
-        goToNextRound(wordsArray[1]);
+        handleClick(wordsArray[1].id);
       }
       if (code === 'Digit3' || key === '3') {
-        goToNextRound(wordsArray[2]);
+        handleClick(wordsArray[2].id);
       }
       if (code === 'Digit4' || key === '4') {
-        goToNextRound(wordsArray[3]);
+        handleClick(wordsArray[3].id);
       }
     };
 
@@ -85,31 +128,35 @@ function AudioCallRound({
     }
 
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [goToNextRound, isGameOver, wordsArray]);
+  }, [isGameOver, wordsArray, handleClick, handleNextButtonClick]);
 
   return originalWord && wordsArray.length ? (
-    <section>
-      <button onClick={handleClick}>Play</button>
-      <ul>
+    <StyledSection>
+      <StyledBox>
+        {isAnswered ? (
+          <StyledImage src={`${BASE_MEDIA_URL}${originalWord.image}`} />
+        ) : (
+          <StyledButtonPlay onClick={handleAudioButtonClick} />
+        )}
+        <p>{isAnswered ? originalWord.word : ''}</p>
+      </StyledBox>
+      <StyledList>
         {wordsArray.map((word) => (
-          <li key={uuid()}>
-            <button onClick={goToNextRound.bind(null, word)} disabled={isGameOver}>
+          <StyledItem mode={setStyledItemMode(word.id)} key={uuid()}>
+            <button onClick={handleClick.bind(null, word.id)} disabled={isGameOver || isAnswered}>
               {word.wordTranslate}
             </button>
-          </li>
+          </StyledItem>
         ))}
-        <li>
-          <button
-            onClick={goToNextRound.bind(null, AUDIOCALL_DO_NOT_KNOW_ANSWER)}
-            disabled={isGameOver}
-          >
-            Не знаю
+        <StyledItem mode="DO_NOT_KNOW">
+          <button onClick={handleNextButtonClick} disabled={isGameOver}>
+            {isAnswered ? 'Следующее слово' : 'Не знаю'}
           </button>
-        </li>
-      </ul>
-    </section>
+        </StyledItem>
+      </StyledList>
+    </StyledSection>
   ) : (
-    <p>Loading</p>
+    <Loading size="MEDIUM" />
   );
 }
 
