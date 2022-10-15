@@ -52,8 +52,11 @@ function GameResultsPage() {
   };
 
   const getCongratulations = () => {
-    const successRate = rightAnswers / totalAnswers;
+    let successRate = 0;
     let displayedMessage = '';
+    if (rightAnswers !== 0 && totalAnswers !== 0) {
+      successRate = rightAnswers / totalAnswers;
+    }
     const resultsData = Object.values(GAME_RESULTS_CONGRATULATIONS) as Array<{
       rate: number;
       message: string;
@@ -88,14 +91,14 @@ function GameResultsPage() {
       <StyledWrapper>
         <StyledPageTitle>Результаты игры</StyledPageTitle>
         <StyledSection>
-          <h4>
+          <p>
             {rightAnswers} из {totalAnswers} правильных ответов
-          </h4>
+          </p>
           <h3>{getCongratulations()}</h3>
           {!totalAnswers ? null : (
             <>
               <article>
-                <h4>{rightAnswersList.length ? 'Правильные ответы' : 'Правильных ответов нет'}</h4>
+                <h5>{rightAnswersList.length ? 'Правильные ответы' : 'Правильных ответов нет'}</h5>
                 <StyledBox>
                   <ul>
                     {rightAnswersList.map((word) => (
@@ -114,9 +117,9 @@ function GameResultsPage() {
                 </StyledBox>
               </article>
               <article>
-                <h4>
+                <h5>
                   {wrongAnswersList.length ? 'Неправильные ответы' : 'Неправильных ответов нет'}
-                </h4>
+                </h5>
                 <StyledBox>
                   <ul>
                     {wrongAnswersList.map((word) => (
