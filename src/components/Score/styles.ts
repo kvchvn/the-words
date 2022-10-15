@@ -16,6 +16,12 @@ export const StyledArticle = styled.div`
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
 
+  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
+    width: 50%;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 0;
+  }
+
   & > h4 {
     text-align: right;
     font-size: 1.3rem;
