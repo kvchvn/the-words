@@ -36,8 +36,8 @@ const baseTheme: Theme = {
   },
   device: {
     mobileM: '320px',
-    mobileL: '480px',
-    tabletM: '800px',
+    mobileL: '450px',
+    tabletM: '700px',
     tabletL: '1000px',
     laptopS: '1200px',
     laptopM: '1400px',
