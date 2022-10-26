@@ -50,13 +50,14 @@ export const StyledLogoLink = styled(Link)`
   background: url(${logo}) no-repeat 50% 50% / contain;
 `;
 
-export const StyledHeaderTitle = styled.h1`
+export const StyledHeaderTitle = styled.h2`
   position: relative;
   line-height: 4rem;
-  font-family: 'PermanentMarker-Regular', 'Jura Regular', sans-serif;
+  font-family: 'Pacifico Regular', 'Jura Regular', sans-serif;
   font-size: 2.5rem;
+  font-weight: 400;
   color: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   background: inherit;
 
   @media (max-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {
