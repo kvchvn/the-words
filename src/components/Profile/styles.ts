@@ -90,11 +90,6 @@ export const StyledQuoteBox = styled.div`
   padding: 1rem;
   background-color: lightgray;
 
-  & > q {
-    font-family: 'Pacifico Regular', 'RoundedMplus1c Regular', sans-serif;
-    font-size: 1.2rem;
-  }
-
   & > p {
     text-align: right;
   }
