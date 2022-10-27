@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { DELTA } from '../../constants';
+import { DELTA, MAX_GROUP_FOR_USERS } from '../../constants';
 import { usePagination } from '../../hooks';
+import { useGroupSelector } from '../../redux';
 import { StyledPageBox } from './styles';
 
 interface PageSelectProps {
@@ -10,13 +11,14 @@ interface PageSelectProps {
 }
 
 function PageSelect({ firstPage, lastPage }: PageSelectProps) {
+  const group = useGroupSelector();
   const { currentPage, selectFirstPage, selectLastPage, selectNextPage, selectPrevPage } =
     usePagination({
       firstPage,
       lastPage,
     });
 
-  return (
+  return group === MAX_GROUP_FOR_USERS ? null : (
     <StyledPageBox>
       <button disabled={currentPage === firstPage} onClick={selectFirstPage}>
         {firstPage + DELTA}
