@@ -125,11 +125,11 @@ const useWordStatistic = (gameType: GameType) => {
         }
 
         if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
-          if (!lastSeveralAnswers.includes(true)) {
+          if (!lastSeveralAnswers.includes(true) && difficulty !== HARD_WORD) {
             // it means that all last answers are falsy, and the word should mark as hard
             alert(`${originalWord.word} теперь в разделе "${HARD_WORD}"`);
             setWordDifficultyAs(HARD_WORD);
-          } else if (!lastSeveralAnswers.includes(false)) {
+          } else if (!lastSeveralAnswers.includes(false) && difficulty !== EASY_WORD) {
             // all last answers are true, and the word is easy for the user
             alert(`${originalWord.word} теперь в разделе "${EASY_WORD}"`);
             setWordDifficultyAs(EASY_WORD);
