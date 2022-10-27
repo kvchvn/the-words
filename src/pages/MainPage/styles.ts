@@ -28,10 +28,7 @@ export const StyledArticle = styled.article`
 `;
 
 export const StyledTitle = styled(StyledPageTitle)`
-  font-family: 'Pacifico Regular', 'RoundedMplus1c Regular', sans-serif;
   max-width: 20rem;
-  font-weight: 400;
-  letter-spacing: 2px;
   z-index: 10;
 `;
 
@@ -157,9 +154,15 @@ export const StyledDetailsBox = styled.section`
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {
     flex-direction: row;
-    gap: 1rem;
-    align-items: flex-start;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  & > h3 {
+    margin-top: 2rem;
+    width: 100%;
   }
 
   & > details {

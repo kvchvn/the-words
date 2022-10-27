@@ -1,7 +1,7 @@
 import React from 'react';
 
 import difficulty from '../../assets/svg/difficulty.svg';
-import game from '../../assets/svg/game.svg';
+import gamepad from '../../assets/svg/gamepad.svg';
 import profile from '../../assets/svg/profile.svg';
 import textbook from '../../assets/svg/textbook.svg';
 import { FROM_MAIN, GAME_TYPES, ROUTER_PATHS } from '../../constants';
@@ -34,7 +34,7 @@ function MainPage() {
               3600 наиболее употребляемых слов с переводом, транскрипцией и произношением
             </StyledItem>
             <StyledItem imgSrc={difficulty}>6 уровней сложности</StyledItem>
-            <StyledItem imgSrc={game}>Изучение с помощью мини-игр</StyledItem>
+            <StyledItem imgSrc={gamepad}>Изучение с помощью мини-игр</StyledItem>
             <StyledItem imgSrc={profile}>Личный кабинет с отслеживанием прогресса</StyledItem>
           </StyledList>
           <StyledBox>
@@ -64,8 +64,9 @@ function MainPage() {
           </StyledBox>
         </StyledArticle>
         <StyledDetailsBox>
+          <h3>О приложении</h3>
           <details>
-            <summary>Для пользователей</summary>
+            <summary>Пользователям</summary>
             <p>
               Это приложение не позволит вам полноценно выучить английский язык, а только поможет с
               запоминанием слов.
@@ -76,7 +77,7 @@ function MainPage() {
             </p>
           </details>
           <details>
-            <summary>Для разработчиков</summary>
+            <summary>Разработчикам</summary>
             <p>
               Приложение выполнено в качестве pet-проекта в соответствии с{' '}
               <a
