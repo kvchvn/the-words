@@ -37,7 +37,7 @@ export const StyledButtonClose = styled.button`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 2rem;
+  height: 2rem;
   background: url(${black_cross}) no-repeat 50% 50% / contain;
 `;

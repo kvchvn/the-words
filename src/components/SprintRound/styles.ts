@@ -27,6 +27,7 @@ export const StyledWordsBox = styled.div`
 
 export const StyledButtonsBox = styled.div`
   display: flex;
+  gap: 1rem;
 `;
 
 export const StyledButton = styled.button`
@@ -38,21 +39,10 @@ export const StyledButton = styled.button`
     mode === 'TRUE' ? theme.color.darkblue : theme.color.milk};
   color: ${({ mode, theme }: ThemeProps<StyledButtonProps>) =>
     mode === 'TRUE' ? theme.color.milk : theme.color.darkblue};
-  border: 3px solid
-    ${({ mode, theme }: ThemeProps<StyledButtonProps>) =>
-      mode === 'FALSE' ? theme.color.darkblue : 'none'};
+  border: 3px solid ${({ theme }: ThemeProps<StyledButtonProps>) => theme.color.darkblue};
+  border-radius: 0.5rem;
 
   &:disabled {
     opacity: 0.5;
-  }
-
-  &:first-child {
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem;
-  }
-
-  &:last-child {
-    border-bottom-right-radius: 1rem;
-    border-top-right-radius: 1rem;
   }
 `;

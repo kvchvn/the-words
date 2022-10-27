@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import audiocall from '../../assets/svg/audiocall.svg';
-import sprint from '../../assets/svg/sprint.svg';
+import audiocall from '../../assets/img/audiocall.webp';
+import sprint from '../../assets/img/sprint.webp';
 import GroupSelect from '../../components/GroupSelect';
 import {
   DELTA,
