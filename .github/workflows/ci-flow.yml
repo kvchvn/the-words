@@ -1,0 +1,27 @@
+name: CI-actions
+
+on: push
+
+jobs:
+  build-test:
+    name: App building and testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-versions: [14.x, 16.x, 18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint:fix
+      - run: npm run test
+      - run: npm run build
+
+
+
+
+
