@@ -3,8 +3,8 @@ name: CI-actions
 on:
   pull_request:
     branches:
-      develop
-      main
+      - develop
+      - master
 
 jobs:
   build-test:
