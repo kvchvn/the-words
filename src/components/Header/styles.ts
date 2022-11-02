@@ -14,7 +14,7 @@ export const StyledHeader = styled.header`
   width: 100vw;
   height: 4rem;
   background: ${({ theme }: ThemeProps<unknown>) => theme.color.darkblue};
-  z-index: 100;
+  z-index: 300;
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     padding-bottom: 1rem;
