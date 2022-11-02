@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from 'react';
 import '@testing-library/jest-dom';
+
+import React, { lazy, Suspense } from 'react';
 
 import { act, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -27,8 +28,11 @@ describe('check App', () => {
       );
     });
 
-    expect(await screen.findByText('the words')).toBeInTheDocument();
-    expect(await screen.findByRole('navigation')).toBeInTheDocument();
+    const logoTextElements = await screen.findAllByText('the words');
+    const navs = await screen.findAllByRole('navigation');
+
+    expect(logoTextElements.length).toBeGreaterThan(0);
+    expect(navs.length).toBeGreaterThan(0);
     expect(await screen.findByRole('main')).toBeInTheDocument();
   });
 });
