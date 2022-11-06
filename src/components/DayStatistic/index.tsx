@@ -1,13 +1,23 @@
 import React from 'react';
 
+import { MONTHS_RU } from '../../constants';
 import { UserStatistic } from '../../types';
+import DayStatisticDetails from '../DayStatisticDetails';
+import {
+  StyledAudiocallBox,
+  StyledContainer,
+  StyledSection,
+  StyledSprintBox,
+  StyledSubtitleBox,
+  StyledToday,
+} from './styles';
 
 interface DayStatisticProps {
   statistic: UserStatistic;
 }
 
 function DayStatistic({ statistic }: DayStatisticProps) {
-  const month = new Date().getMonth() + 1;
+  const month = new Date().getMonth();
   const date = new Date().getDate();
   const {
     learnedWords,
@@ -17,27 +27,27 @@ function DayStatistic({ statistic }: DayStatisticProps) {
   } = statistic;
 
   return (
-    <section>
-      <h2>{} Статистика за день:</h2>
-      <h3>
-        {date}.{month < 10 ? `0${month}` : month}
-      </h3>
-      Всего выученных слов: {learnedWords}
-      <hr />
-      <h4>Спринт</h4>
-      <ul>
-        <li>Новых слов: {sprint.newWords}</li>
-        <li>Правильных ответов: {sprint.rightAnswers}</li>
-        <li>Всего ответов: {sprint.totalAnswers}</li>
-      </ul>
-      <hr />
-      <h4>Аудиовызов</h4>
-      <ul>
-        <li>Новых слов: {audiocall.newWords}</li>
-        <li>Правильных ответов: {audiocall.rightAnswers}</li>
-        <li>Всего ответов: {audiocall.totalAnswers}</li>
-      </ul>
-    </section>
+    <StyledSection>
+      <StyledSubtitleBox>
+        <h2>Сегодня</h2>
+        <StyledToday>
+          {date} {MONTHS_RU[month]}
+        </StyledToday>
+        <p>
+          Слов выучено - <strong>{learnedWords}</strong>
+        </p>
+      </StyledSubtitleBox>
+      <StyledContainer>
+        <StyledSprintBox>
+          <h4>Спринт</h4>
+          <DayStatisticDetails statistic={sprint} />
+        </StyledSprintBox>
+        <StyledAudiocallBox>
+          <h4>Аудиовызов</h4>
+          <DayStatisticDetails statistic={audiocall} />
+        </StyledAudiocallBox>
+      </StyledContainer>
+    </StyledSection>
   );
 }
 
