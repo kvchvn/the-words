@@ -8,7 +8,6 @@ const baseTheme: Theme = {
     blue: '#286fb4',
     darkblue: '#13436b',
     gray: '#859eb9',
-    milk: '#fffff6',
     coral: '#df4c73',
     orange: '#ffa500',
   },

@@ -56,7 +56,7 @@ export const StyledHeaderTitle = styled.h2`
   font-family: 'Pacifico Regular', 'Jura Regular', sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
-  color: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+  color: white;
   letter-spacing: 3px;
   background: inherit;
 
@@ -96,7 +96,7 @@ export const StyledNav = styled.nav`
     width: 70%;
     min-width: 200px;
     max-width: 300px;
-    color: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+    color: white;
     letter-spacing: 1px;
     border-radius: 0.25rem;
     text-align: center;

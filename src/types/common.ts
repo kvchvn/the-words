@@ -8,7 +8,6 @@ export interface Theme {
     blue: string;
     darkblue: string;
     gray: string;
-    milk: string;
     coral: string;
     orange: string;
   };
