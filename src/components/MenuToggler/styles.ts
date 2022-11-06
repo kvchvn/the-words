@@ -43,7 +43,7 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
   border: 2px solid white;
   border-radius: 5px;
   overflow: hidden;
-  z-index: 101;
+  z-index: 301;
 
   & > .burger-line {
     display: block;
