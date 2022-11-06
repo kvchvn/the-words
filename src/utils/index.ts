@@ -8,6 +8,7 @@ import {
   getRandomBetween,
   removeFromLocalStorage,
   setToLocalStorage,
+  toUpperCaseFirstLetter,
 } from './common';
 
 export {
@@ -22,4 +23,5 @@ export {
   getRandomBetween,
   getErrorStatus,
   getDateByWeekday,
+  toUpperCaseFirstLetter,
 };

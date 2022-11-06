@@ -51,3 +51,7 @@ export const getDateByWeekday = (dayIndex: number) => {
   const gap = dayIndex - currentDay;
   return String(new Date(date.setDate(currentDate + gap)));
 };
+
+export const toUpperCaseFirstLetter = (str: string) => {
+  return str.slice(0, 1).toUpperCase() + str.slice(1);
+};
