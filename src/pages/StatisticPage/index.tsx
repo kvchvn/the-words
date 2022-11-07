@@ -8,6 +8,7 @@ import WeekStatistic from '../../components/WeekStatistic';
 import { ROUTER_PATHS } from '../../constants';
 import { useUserStatistic } from '../../hooks';
 import { useUserSelector } from '../../redux';
+import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 
 function StatisticPage() {
   const { statistic } = useUserStatistic();
@@ -21,12 +22,13 @@ function StatisticPage() {
   }, [user, navigate]);
 
   return statistic ? (
-    <article>
+    <StyledWrapper>
+      <StyledPageTitle>Статистика</StyledPageTitle>
       <DayStatistic statistic={statistic} />
       <WeekStatistic statistic={statistic} />
-    </article>
+    </StyledWrapper>
   ) : (
-    <Loading size="SMALL" />
+    <Loading size="LARGE" />
   );
 }
 

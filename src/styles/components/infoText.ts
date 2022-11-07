@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import exclamation from '../../assets/svg/exclamation.svg';
+import exclamation from '../../assets/svg/info.svg';
 
 const StyledInfoText = styled.p`
   display: flex;

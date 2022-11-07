@@ -16,7 +16,7 @@ export const StyledPageBox = styled.article`
     line-height: 2.5rem;
     border-radius: 50%;
     font-weight: 700;
-    color: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+    color: white;
     background-color: ${({ theme }: ThemeProps<unknown>) => theme.color.blue};
     transition: box-shadow 0.25s;
   }

@@ -4,6 +4,8 @@ import { getDateByWeekday } from '../utils';
 export const FIRST_WEEK_DAY_INDEX = 1;
 export const LAST_WEEK_DAY_INDEX = 7;
 
+export const WEEKDAYS_ORDERED = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
 export const DEFAULT_USER_WEEKLY_STATISTIC: WeeklyStatistic = {
   startDate: getDateByWeekday(FIRST_WEEK_DAY_INDEX),
   finishDate: getDateByWeekday(LAST_WEEK_DAY_INDEX),
@@ -65,3 +67,20 @@ export const DEFAULT_USER_STATISTIC: UserStatistic = {
     weekly: DEFAULT_USER_WEEKLY_STATISTIC,
   },
 };
+
+export const WEEKDAYS_RU = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+
+export const MONTHS_RU = [
+  'января',
+  'февраля',
+  'марта',
+  'апреля',
+  'мая',
+  'июня',
+  'июля',
+  'августа',
+  'сентября',
+  'октября',
+  'ноября',
+  'декабря',
+];

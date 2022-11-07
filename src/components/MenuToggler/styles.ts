@@ -40,17 +40,17 @@ export const StyledLabel = styled.label.attrs({ htmlFor: 'menu' })`
   justify-content: space-between;
   width: 3rem;
   height: 3rem;
-  border: 2px solid ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+  border: 2px solid white;
   border-radius: 5px;
   overflow: hidden;
-  z-index: 101;
+  z-index: 301;
 
   & > .burger-line {
     display: block;
     width: 100%;
     height: 15%;
     border-radius: 4px;
-    background: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+    background: white;
     transition: transform 0.5s, width 0.25s;
   }
 

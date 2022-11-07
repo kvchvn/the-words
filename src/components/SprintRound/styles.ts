@@ -36,9 +36,9 @@ export const StyledButton = styled.button`
   letter-spacing: 1px;
   font-size: 1.1rem;
   background-color: ${({ mode, theme }: ThemeProps<StyledButtonProps>) =>
-    mode === 'TRUE' ? theme.color.darkblue : theme.color.milk};
+    mode === 'TRUE' ? theme.color.darkblue : 'white'};
   color: ${({ mode, theme }: ThemeProps<StyledButtonProps>) =>
-    mode === 'TRUE' ? theme.color.milk : theme.color.darkblue};
+    mode === 'TRUE' ? 'white' : theme.color.darkblue};
   border: 3px solid ${({ theme }: ThemeProps<StyledButtonProps>) => theme.color.darkblue};
   border-radius: 0.5rem;
 

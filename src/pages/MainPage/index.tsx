@@ -5,22 +5,25 @@ import gamepad from '../../assets/svg/gamepad.svg';
 import profile from '../../assets/svg/profile.svg';
 import textbook from '../../assets/svg/textbook.svg';
 import { FROM_MAIN, GAME_TYPES, ROUTER_PATHS } from '../../constants';
+import { useUserSelector } from '../../redux';
 import { StyledWrapper } from '../../styles/components';
 import {
-  StyledTitle,
-  StyledTitleBox,
+  StyledArticle,
+  StyledBox,
+  StyledDetailsBox,
+  StyledItem,
+  StyledLink,
+  StyledLinkToGames,
+  StyledLinkToTextbook,
   StyledList,
   StyledSection,
-  StyledLink,
-  StyledBox,
-  StyledLinkToTextbook,
-  StyledLinkToGames,
-  StyledArticle,
-  StyledItem,
-  StyledDetailsBox,
+  StyledTitle,
+  StyledTitleBox,
 } from './styles';
 
 function MainPage() {
+  const user = useUserSelector();
+
   return (
     <StyledWrapper>
       <StyledSection>
@@ -39,11 +42,12 @@ function MainPage() {
           </StyledList>
           <StyledBox>
             <div>
-              <p>Если вы еще не зарегистрированы</p>
-              <StyledLink to={`/${ROUTER_PATHS.authorization}`}>Авторизация</StyledLink>
+              <StyledLink to={`/${ROUTER_PATHS.authorization}`}>
+                {user ? 'Профиль' : 'Авторизация'}
+              </StyledLink>
             </div>
             <div>
-              <p>Также вы можете уже начать изучение</p>
+              <p>Вы можете уже начать изучение</p>
               <StyledLinkToTextbook to={`/${ROUTER_PATHS.textbook}`}>Учебник</StyledLinkToTextbook>
             </div>
             <div>
@@ -94,6 +98,9 @@ function MainPage() {
             </p>
             <p>
               <strong>Библиотеки:</strong> redux-toolkit, rtk-query, styled-components, formik.
+            </p>
+            <p>
+              <strong>CI/CD:</strong> GitHub Actions, netlify continuous deployment
             </p>
           </details>
         </StyledDetailsBox>

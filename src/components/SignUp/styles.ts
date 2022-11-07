@@ -45,7 +45,7 @@ export const StyledForm = styled.form`
     padding: 0.5rem 1rem;
     min-width: 11rem;
     background-color: ${({ theme }: ThemeProps<unknown>) => theme.color.coral};
-    color: ${({ theme }: ThemeProps<unknown>) => theme.color.milk};
+    color: white;
     border-radius: 0.25rem;
   }
 `;
