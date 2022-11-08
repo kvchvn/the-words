@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { ROUTER_PATHS } from '../constants';
 import { setUserData, useAppDispatch, useSignInUserMutation } from '../redux';
@@ -30,7 +31,7 @@ const useSignIn = (initialValues: SignInFields) => {
       navigate(ROUTER_PATHS.main);
     }
     if (isError && error) {
-      alert(getUserFriendlyErrorMessage(error, 'authorization'));
+      toast.warning(getUserFriendlyErrorMessage(error, 'authorization'));
       resetForm();
     }
   }, [userData, isError, error, resetForm, navigate, dispatch]);

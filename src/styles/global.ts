@@ -14,7 +14,6 @@ const GlobalStyles = createGlobalStyle`
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
       font-size: ${({ theme }: ThemeProps<unknown>) => theme.size.xl};
     }
-
   }
 
   #root {

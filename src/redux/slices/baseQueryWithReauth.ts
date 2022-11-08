@@ -4,6 +4,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
+import { toast } from 'react-toastify';
 
 import { RootState } from '..';
 import { BASE_URL as baseUrl, MIN_GROUP, TOKEN_EXPIRED_ERROR } from '../../constants';
@@ -39,7 +40,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     api.dispatch(removeUserData());
     api.dispatch(goToGroup(MIN_GROUP));
     clearLocalStorage();
-    alert('Время ожидания истекло. Вам следует войти заново');
+    toast.warning('Время ожидания истекло. Вам следует войти заново');
   };
   const store = api.getState() as RootState;
 

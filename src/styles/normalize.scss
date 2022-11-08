@@ -1,3 +1,21 @@
+:root {
+  --toastify-font-family: 'RoundedMplus1c Regular', 'Jura Regular', sans-serif;
+  --toastify-toast-width: 30rem;
+  --toastify-toast-max-height: 7rem;
+}
+
+.Toastify__toast-container {
+  max-width: 98vw;
+  bottom: 0.5rem;
+}
+
+.Toastify__toast {
+  padding: 1rem;
+  border: 3px solid black;
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 2px grey;
+}
+
 *,
 *::before,
 *::after {
