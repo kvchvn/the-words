@@ -6,11 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
+import CustomToastContainer from './components/CustomToastContainer';
 import { store } from './redux';
 import GlobalStyles from './styles/global';
-import baseTheme from './styles/theme';
-
 import './styles/index.scss';
+import baseTheme from './styles/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -20,6 +20,7 @@ root.render(
         <ThemeProvider theme={baseTheme}>
           <App />
           <GlobalStyles />
+          <CustomToastContainer />
         </ThemeProvider>
       </BrowserRouter>
     </Provider>

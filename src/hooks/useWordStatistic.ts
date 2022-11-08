@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 
+import { toast } from 'react-toastify';
+
 import {
   DEFAULT_STATISTIC,
   EASY_WORD,
@@ -127,11 +129,15 @@ const useWordStatistic = (gameType: GameType) => {
         if (lastSeveralAnswers.length >= MEANING_ANSWERS_AMOUNT) {
           if (!lastSeveralAnswers.includes(true) && difficulty !== HARD_WORD) {
             // it means that all last answers are falsy, and the word should mark as hard
-            alert(`${originalWord.word} теперь в разделе "${HARD_WORD}"`);
+            toast.success(`${originalWord.word} теперь в разделе "${HARD_WORD}"`, {
+              autoClose: 1000,
+            });
             setWordDifficultyAs(HARD_WORD);
           } else if (!lastSeveralAnswers.includes(false) && difficulty !== EASY_WORD) {
             // all last answers are true, and the word is easy for the user
-            alert(`${originalWord.word} теперь в разделе "${EASY_WORD}"`);
+            toast.success(`${originalWord.word} теперь в разделе "${EASY_WORD}"`, {
+              autoClose: 1000,
+            });
             setWordDifficultyAs(EASY_WORD);
             // for gathering user's statistics
             dispatch(addLearnedWord());

@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import rightAnswerSound from '../assets/sounds/right.mp3';
 import wrongAnswerSound from '../assets/sounds/wrong.mp3';
@@ -70,7 +71,7 @@ const useGame = (
         if (page !== MAX_PAGE) {
           dispatch(goToNextPage());
         } else {
-          alert('Words ran out!');
+          toast.success('Слова закончились!');
           finishGame();
         }
       } else {

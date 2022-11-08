@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { toast } from 'react-toastify';
+
 import {
   DEFAULT_USER_DAILY_STATISTIC,
   DEFAULT_USER_STATISTIC,
@@ -176,7 +178,7 @@ const useUserStatistic = () => {
       })
       .catch((error) => {
         const message = getUserFriendlyErrorMessage(error, 'words');
-        alert(message);
+        toast.warning(message);
       });
   }, [getStatistic, updateStatistic, user]);
 

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 
 import { useCreateUserMutation } from '../../redux';
 import { SignUpFields } from '../../types';
@@ -23,11 +24,11 @@ const useSignUp = (initialValues: SignUpFields) => {
 
   useEffect(() => {
     if (isError && error) {
-      alert(getUserFriendlyErrorMessage(error, 'authorization'));
+      toast.warning(getUserFriendlyErrorMessage(error, 'authorization'));
       resetForm();
     }
     if (isSuccess) {
-      alert(`Регистрация прошла успешно`);
+      toast.success(`Регистрация прошла успешно`);
     }
   }, [isError, isSuccess, error, resetForm]);
 
