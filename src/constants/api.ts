@@ -18,7 +18,7 @@ export const SERVER_ERROR: ServerError = {
   '417': 'Пользователь с таким email уже существует',
   '403': 'Неправильный пароль',
   '404': {
-    authorization: 'Пользователь с таким email не найден',
+    authorization: 'Пользователь с таким e-mail не найден',
     words: 'Слово не найдено',
   },
 };

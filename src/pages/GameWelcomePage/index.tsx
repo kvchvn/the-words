@@ -83,6 +83,10 @@ function GameWelcomePage() {
     }
   }, [navigate, state]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [isGroupSelection]);
+
   if (!state) {
     return null;
   }

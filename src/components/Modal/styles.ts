@@ -25,7 +25,7 @@ export const StyledModal = styled.div`
   overflow: auto;
   z-index: 1000;
   border: 1px solid ${({ theme }: ThemeProps<unknown>) => theme.color.blue};
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   background-color: aliceblue;
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {

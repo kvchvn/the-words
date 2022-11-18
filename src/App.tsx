@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Layout from './components/Layout';
 import { ROUTER_PATHS } from './constants';
+import NotFoundPage from './pages/NotFoundPage';
 
 const MainPage = lazy(() => import('./pages/MainPage'));
 const AuthorizationPage = lazy(() => import('./pages/AuthorizationPage'));
@@ -26,6 +27,7 @@ function App() {
         <Route path={ROUTER_PATHS.gameResults} element={<GameResultsPage />} />
         <Route path={ROUTER_PATHS.gameWelcome} element={<GameWelcomePage />} />
         <Route path={ROUTER_PATHS.statistic} element={<StatisticPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
