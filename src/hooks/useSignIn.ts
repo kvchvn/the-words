@@ -10,7 +10,8 @@ import { MainSignInResponse, SignInFields } from '../types';
 import { getUserFriendlyErrorMessage, setToLocalStorage } from '../utils';
 
 const useSignIn = (initialValues: SignInFields) => {
-  const [signIn, { data: userData, isLoading, isError, error }] = useSignInUserMutation();
+  const [signIn, { data: userData, isLoading, isSuccess, isError, error }] =
+    useSignInUserMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +25,9 @@ const useSignIn = (initialValues: SignInFields) => {
   const { resetForm } = formik;
 
   useEffect(() => {
+    if (isSuccess) {
+      toast.success('Вход выполнен успешно');
+    }
     if (userData) {
       const { message: _, ...mainUserData } = userData;
       setToLocalStorage<MainSignInResponse>('user', mainUserData);
@@ -34,7 +38,7 @@ const useSignIn = (initialValues: SignInFields) => {
       toast.warning(getUserFriendlyErrorMessage(error, 'authorization'));
       resetForm();
     }
-  }, [userData, isError, error, resetForm, navigate, dispatch]);
+  }, [userData, isError, isSuccess, error, resetForm, navigate, dispatch]);
 
   return { isLoading, formik };
 };
