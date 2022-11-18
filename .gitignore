@@ -2,8 +2,6 @@
 
 /.idea
 
-/.github
-
 # dependencies
 /node_modules
 /.pnp
