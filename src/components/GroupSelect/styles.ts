@@ -12,8 +12,16 @@ export const StyledList = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
 
+  & > li:last-child:is(:nth-child(2n + 1)) {
+    grid-column-end: span 2;
+  }
+
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.mobileL}) {
     grid-template-columns: repeat(3, 1fr);
+
+    & > li:last-child:is(:nth-child(2n + 1)) {
+      grid-column-end: span 3;
+    }
   }
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
@@ -22,6 +30,10 @@ export const StyledList = styled.ul`
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     grid-template-columns: repeat(2, 1fr);
+
+    & > li:last-child:is(:nth-child(2n + 1)) {
+      grid-column-end: span 2;
+    }
   }
 `;
 
