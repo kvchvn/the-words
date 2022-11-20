@@ -2,7 +2,7 @@ import { Theme } from '../types';
 
 const baseTheme: Theme = {
   fontFamily: {
-    primary: 'Roboto',
+    primary: 'OpenSans',
   },
   color: {
     blue: '#286fb4',

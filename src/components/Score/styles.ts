@@ -37,7 +37,7 @@ export const StyledBox = styled.div`
 
 export const StyledCombo = styled.p`
   font-size: 1.5rem;
-  font-family: 'PermanentMarker-Regular', 'RoundedMplus1c Regular', sans-serif;
+  font-family: 'Pacifico Regular', 'OpenSans Regular', sans-serif;
   letter-spacing: 2px;
 `;
 
