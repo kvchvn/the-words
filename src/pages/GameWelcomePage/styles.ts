@@ -11,13 +11,6 @@ export const StyledSection = styled.section`
   }
 `;
 
-export const StyledImg = styled.img`
-  margin: 0 auto;
-  width: 90%;
-  max-width: 30rem;
-  object-fit: contain;
-`;
-
 export const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
