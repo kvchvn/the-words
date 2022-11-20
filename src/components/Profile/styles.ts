@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import room from '../../assets/img/room.webp';
 import exit from '../../assets/svg/exit.svg';
 import user from '../../assets/svg/user.svg';
 import { ThemeProps } from '../../types';
@@ -22,34 +21,41 @@ export const StyledArticle = styled.article`
     flex-direction: row-reverse;
     justify-content: center;
     gap: 1rem;
-    height: 500px;
+    height: 25rem;
   }
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopM}) {
-    height: 600px;
+    height: 30rem;
   }
 `;
 
-export const StyledParallax = styled.div`
-  background: url(${room}) no-repeat 50% 50% / cover fixed;
-  height: 400px;
+export const StyledParallaxBox = styled.div`
+  position: relative;
+  height: 35rem;
+  clip-path: inset(0);
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
     width: 65%;
     height: 100%;
-    background-size: cover;
-    background-attachment: unset;
   }
 
-  & + span {
-    position: absolute;
-    top: 100px;
+  & span {
     left: 0;
     display: block;
     width: 100%;
-    height: 300px;
-    background: linear-gradient(transparent, white);
+    height: 15rem;
     z-index: 5;
+
+    &:first-child {
+      position: fixed;
+      background: linear-gradient(white, transparent);
+    }
+
+    &:last-child {
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(transparent, white);
+    }
 
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
       display: none;
@@ -80,7 +86,7 @@ export const StyledUserIcon = styled.span`
 
 export const StyledGreetingTitle = styled.h3`
   font-size: 2rem;
-  font-family: 'Pacifico Regular', 'RoundedMplus1c Regular', sans-serif;
+  font-family: 'Pacifico Regular', 'OpenSans Regular', sans-serif;
   font-weight: 400;
   letter-spacing: 2px;
   text-align: center;
