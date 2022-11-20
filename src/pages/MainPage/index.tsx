@@ -1,9 +1,12 @@
 import React from 'react';
 
+import london from '../../assets/img/london.webp';
+import london_tiny from '../../assets/img/london_tiny.webp';
 import difficulty from '../../assets/svg/difficulty.svg';
 import gamepad from '../../assets/svg/gamepad.svg';
 import profile from '../../assets/svg/profile.svg';
 import textbook from '../../assets/svg/textbook.svg';
+import Image from '../../components/Image';
 import { FROM_MAIN, GAME_TYPES, ROUTER_PATHS } from '../../constants';
 import { useUserSelector } from '../../redux';
 import { StyledWrapper } from '../../styles/components';
@@ -29,7 +32,7 @@ function MainPage() {
       <StyledSection>
         <StyledTitleBox>
           <StyledTitle>Изучай английские слова легко!</StyledTitle>
-          <span />
+          <Image src={london} placeholder={london_tiny} alt="Лондон" type="main" />
         </StyledTitleBox>
         <StyledArticle>
           <StyledList>
