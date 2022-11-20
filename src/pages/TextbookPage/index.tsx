@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 
+import books from '../../assets/img/books.webp';
+import books_tiny from '../../assets/img/books_tiny.webp';
 import GroupSelect from '../../components/GroupSelect';
+import Image from '../../components/Image';
 import PageSelect from '../../components/PageSelect';
 import WordsList from '../../components/WordsList';
 import {
@@ -18,7 +21,6 @@ import { StyledInfoText, StyledPageTitle, StyledWrapper } from '../../styles/com
 import {
   StyledAudiocallLink,
   StyledBox,
-  StyledImage,
   StyledNav,
   StyledSection,
   StyledSprintLink,
@@ -55,7 +57,7 @@ function TextbookPage() {
               lastGroupForGuests={MAX_GROUP_FOR_GUESTS}
             />
           </StyledBox>
-          <StyledImage />
+          <Image src={books} placeholder={books_tiny} alt="Учебники" type="textbook" />
           <StyledNav>
             <h3>Мини-игры</h3>
             {isGamesDisabled && <StyledInfoText>Все слова на странице изучены.</StyledInfoText>}

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import books from '../../assets/img/books.webp';
 import { ThemeProps } from '../../types';
 
 export const StyledSection = styled.section`
@@ -27,18 +26,6 @@ export const StyledBox = styled.div`
 
   @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
     width: 35%;
-  }
-`;
-
-export const StyledImage = styled.img.attrs({ src: books })`
-  display: none;
-  width: 60%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 1rem;
-
-  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopS}) {
-    display: block;
   }
 `;
 
@@ -75,7 +62,7 @@ export const StyledNav = styled.nav`
       height: 100%;
       font-size: 1.2rem;
       letter-spacing: 1px;
-      font-family: 'Pacifico Regular', 'RoundedMplus1c Regular', sans-serif;
+      font-family: 'Pacifico Regular', 'OpenSans Regular', sans-serif;
 
       &:disabled {
         filter: grayscale(0.8);
