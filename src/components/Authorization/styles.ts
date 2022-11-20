@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import welcome from '../../assets/img/welcome.webp';
 import { ThemeProps } from '../../types';
 
 export const StyledSection = styled.section`
@@ -16,19 +15,6 @@ export const StyledSection = styled.section`
       max-width: ${({ theme }: ThemeProps<unknown>) => theme.device.laptopM};
       min-height: 30rem;
     }
-  }
-`;
-
-export const StyledImage = styled.img.attrs({ src: welcome })`
-  margin-bottom: 2rem;
-  flex-shrink: 0;
-  object-fit: fill;
-  width: 100%;
-  height: 66%;
-
-  @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletL}) {
-    width: 60%;
-    margin-bottom: 0;
   }
 `;
 
