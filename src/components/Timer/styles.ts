@@ -41,7 +41,7 @@ export const StyledBox = styled.div`
 
 export const StyledTime = styled.p`
   font-size: 2rem;
-  font-family: 'Jura Regular', 'RoundedMplus1c Regular', sans-serif;
+  font-family: 'Jura Regular', 'OpenSans Regular', sans-serif;
   color: ${({ time }: ThemeProps<StyledTimeProps>) => (time <= 10 ? 'darkred' : 'inherit')};
 `;
 

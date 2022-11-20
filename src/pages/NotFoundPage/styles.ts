@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import not_found from '../../assets/img/not_found.webp';
 import home from '../../assets/svg/home.svg';
 import { flex } from '../../styles/templates';
 
@@ -9,12 +8,6 @@ export const StyledSection = styled.section`
   ${flex({ direction: 'column', align: 'center', justify: 'center', gap: '2rem' })};
   padding-top: 1rem;
   height: 70vh;
-`;
-
-export const StyledImage = styled.img.attrs({ src: not_found })`
-  object-fit: contain;
-  width: 100%;
-  max-width: 15rem;
 `;
 
 export const StyledLink = styled(Link)`

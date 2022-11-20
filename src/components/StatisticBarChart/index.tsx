@@ -32,7 +32,7 @@ function StatisticBarChart({ data, xAxisNames }: StatisticChartProps) {
           stepSize: 1,
           font: {
             size: 16,
-            family: 'RoundedMplus1c Regular',
+            family: 'OpenSans Regular',
           },
         },
         grid: {
@@ -49,7 +49,7 @@ function StatisticBarChart({ data, xAxisNames }: StatisticChartProps) {
           stepSize: 1,
           font: {
             size: 16,
-            family: 'RoundedMplus1c Regular',
+            family: 'OpenSans Regular',
           },
         },
         grid: {

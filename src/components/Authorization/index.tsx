@@ -1,11 +1,14 @@
 import React from 'react';
 
+import welcome from '../../assets/img/welcome.webp';
+import welcome_tiny from '../../assets/img/welcome_tiny.webp';
 import { useToggle } from '../../hooks';
 import { StyledWrapper } from '../../styles/components';
+import Image from '../Image';
 import SectionsToggler from '../SectionsToggler';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
-import { StyledArticle, StyledImage, StyledSection } from './styles';
+import { StyledArticle, StyledSection } from './styles';
 
 function Authorization() {
   const { value: isSignUp, toggleValue } = useToggle();
@@ -13,7 +16,12 @@ function Authorization() {
   return (
     <StyledSection>
       <StyledWrapper>
-        <StyledImage />
+        <Image
+          src={welcome}
+          placeholder={welcome_tiny}
+          alt="Добро пожаловать"
+          type="authorization"
+        />
         <StyledArticle>
           <SectionsToggler
             isFirstChecked={isSignUp}

@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import audiocall from '../../assets/img/audiocall.webp';
+import audiocall_tiny from '../../assets/img/audiocall_tiny.webp';
 import sprint from '../../assets/img/sprint.webp';
+import sprint_tiny from '../../assets/img/sprint_tiny.webp';
 import GroupSelect from '../../components/GroupSelect';
+import Image from '../../components/Image';
 import {
   DELTA,
   FROM_MAIN,
@@ -19,7 +22,7 @@ import { startGame } from '../../redux/slices/gameSlice';
 import { goToGroup } from '../../redux/slices/wordsListSlice';
 import { StyledPageTitle, StyledWrapper } from '../../styles/components';
 import { RouterPaths } from '../../types';
-import { StyledBox, StyledButton, StyledImg, StyledSection } from './styles';
+import { StyledBox, StyledButton, StyledSection } from './styles';
 
 interface GameWelcomePageLocationState {
   state: {
@@ -58,18 +61,29 @@ function GameWelcomePage() {
     return '';
   };
 
-  const getGameImageSrc = () => {
+  const getGameImageData = ({ tiny }: { tiny: boolean } = { tiny: false }) => {
+    let src = '';
+    let alt = '';
     if (state) {
       const { game } = state;
       switch (game) {
         case 'sprintGame':
-          return sprint;
+          src = tiny ? sprint_tiny : sprint;
+          alt = 'Спринт';
+          break;
         case 'audioCallGame':
-          return audiocall;
+          src = tiny ? audiocall_tiny : audiocall;
+          alt = 'Аудиовызов';
+          break;
       }
     }
-    return '';
+    return { src, alt };
   };
+
+  const getGameImageSrc = ({ tiny }: { tiny: boolean } = { tiny: false }) =>
+    getGameImageData({ tiny }).src;
+
+  const getGameImageAlt = () => getGameImageData().alt;
 
   useEffect(() => {
     if (state && state.entry === FROM_MAIN) {
@@ -96,7 +110,12 @@ function GameWelcomePage() {
       <StyledPageTitle>
         <StyledWrapper>{getGameName()}</StyledWrapper>
       </StyledPageTitle>
-      <StyledImg src={getGameImageSrc()} />
+      <Image
+        src={getGameImageSrc()}
+        placeholder={getGameImageSrc({ tiny: true })}
+        alt={getGameImageAlt()}
+        type="welcome"
+      />
       <StyledWrapper>
         {isGroupSelection ? (
           <>

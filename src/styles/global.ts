@@ -5,7 +5,7 @@ import { flex } from './templates';
 
 const GlobalStyles = createGlobalStyle`
   html {
-    font-family: 'RoundedMplus1c Regular', 'Jura Regular', sans-serif;
+    font-family: 'OpenSans Regular', 'Verdana', sans-serif;
 
     @media (min-width: ${({ theme }: ThemeProps<unknown>) => theme.device.tabletM}) {
       font-size: ${({ theme }: ThemeProps<unknown>) => theme.size.l};

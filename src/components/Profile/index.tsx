@@ -1,14 +1,17 @@
 import React from 'react';
 
+import room from '../../assets/img/room.webp';
+import room_tiny from '../../assets/img/room_tiny.webp';
 import { useSignOut } from '../../hooks';
 import { StyledWrapper } from '../../styles/components';
 import { MainSignInResponse } from '../../types';
+import Image from '../Image';
 import {
   StyledArticle,
   StyledButton,
   StyledContentBox,
   StyledGreetingTitle,
-  StyledParallax,
+  StyledParallaxBox,
   StyledQuoteBox,
   StyledSection,
   StyledUserIcon,
@@ -25,8 +28,11 @@ function Profile({ user }: ProfileProps) {
     <StyledSection>
       <StyledWrapper>
         <StyledArticle>
-          <StyledParallax />
-          <span />
+          <StyledParallaxBox>
+            <span />
+            <Image src={room} placeholder={room_tiny} alt="Профиль" type="profile" />
+            <span />
+          </StyledParallaxBox>
           <StyledContentBox>
             <StyledUserIcon />
             <StyledGreetingTitle>Hello, {user.name}</StyledGreetingTitle>

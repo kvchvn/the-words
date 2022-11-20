@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import london from '../../assets/img/london.webp';
 import { StyledPageTitle } from '../../styles/components';
 import { ThemeProps } from '../../types';
 
@@ -40,16 +39,6 @@ export const StyledTitleBox = styled.div`
   max-height: 20rem;
   width: 100%;
   max-width: 40rem;
-
-  & > span {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 70%;
-    height: 100%;
-    background: url(${london}) no-repeat 100% 100% / contain;
-  }
 `;
 
 export const StyledList = styled.ul`

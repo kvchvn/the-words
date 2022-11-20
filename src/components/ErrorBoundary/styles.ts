@@ -34,7 +34,7 @@ export const StyledBox = styled.div`
 
   & > h2 {
     text-align: center;
-    font-family: 'Pacifico Regular', 'RoundedMplus1c Regular', 'sans-serif';
+    font-family: 'Pacifico Regular', 'OpenSans Regular', 'sans-serif';
     font-weight: 400;
     font-size: 2rem;
     letter-spacing: 2px;
@@ -44,7 +44,7 @@ export const StyledBox = styled.div`
     background: none;
     text-align: center;
     padding: 0 0.5rem;
-    font-family: 'RoundedMplus1c Regular', 'sans-serif';
+    font-family: 'OpenSans Regular', 'sans-serif';
     font-size: 1.1rem;
     border-bottom: 2px solid transparent;
     cursor: pointer;
