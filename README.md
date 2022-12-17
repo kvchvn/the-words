@@ -1,3 +1,4 @@
 ### The pet-project for learning new english words.
 
-The app is in development.
+The project is completed.
+Link: https://the-words.netlify.app/
